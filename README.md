@@ -8,4 +8,14 @@ This library can be built in the following way. If the
 used via the git submodule `extern/relic` and automatically compiled statically.
 
     $ mkdir build && cd build
-    
+    $ cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/installation
+    $ make -j $(nproc)
+
+If desired, the build can be installed to the chosen `DCMAKE_INSTALL_PREFIX`.
+In case Relic was built in the previous step, it will also be installed.
+
+    $ make install  # if desired
+
+## Tests
+
+Optional tests can be built by setting `-DENCRYPTO_UTILS

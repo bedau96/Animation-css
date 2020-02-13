@@ -18,4 +18,6 @@ In case Relic was built in the previous step, it will also be installed.
 
 ## Tests
 
-Optional tests can be built by setting `-DENCRYPTO_UTILS
+Optional tests can be built by setting `-DENCRYPTO_UTILS_BUILD_TESTS=On` when running `cmake` (see above). The test binary will be located in `test/` inside the build directory.
+
+

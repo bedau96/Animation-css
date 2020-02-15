@@ -22,4 +22,6 @@ if(GMPXX_FOUND AND NOT TARGET GMP::GMPXX)
 endif()
 
 mark_as_advanced(
-    
+    GMPXX_INCLUDE_DIR
+    GMPXX_LIBRARY
+)

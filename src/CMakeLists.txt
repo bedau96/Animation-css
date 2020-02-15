@@ -1,0 +1,10 @@
+add_library(encrypto_utils
+    ${PROJECT_NAME}/cbitvector.cpp
+    ${PROJECT_NAME}/channel.cpp
+    ${PROJECT_NAME}/circular_queue.cpp
+    ${PROJECT_NAME}/codewords.cpp
+    ${PROJECT_NAME}/connection.cpp
+    ${PROJECT_NAME}/crypto/crypto.cpp
+    ${PROJECT_NAME}/crypto/dgk.cpp
+    ${PROJECT_NAME}/crypto/djn.cpp
+    ${P

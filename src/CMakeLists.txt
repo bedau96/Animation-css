@@ -7,4 +7,12 @@ add_library(encrypto_utils
     ${PROJECT_NAME}/crypto/crypto.cpp
     ${PROJECT_NAME}/crypto/dgk.cpp
     ${PROJECT_NAME}/crypto/djn.cpp
-    ${P
+    ${PROJECT_NAME}/crypto/ecc-pk-crypto.cpp
+    ${PROJECT_NAME}/crypto/gmp-pk-crypto.cpp
+    ${PROJECT_NAME}/crypto/intrin_sequential_enc8.cpp
+    ${PROJECT_NAME}/crypto/TedKrovetzAesNiWrapperC.cpp
+    ${PROJECT_NAME}/parse_options.cpp
+    ${PROJECT_NAME}/powmod.cpp
+    ${PROJECT_NAME}/rcvthread.cpp
+    ${PROJECT_NAME}/sndthread.cpp
+    ${PROJECT_

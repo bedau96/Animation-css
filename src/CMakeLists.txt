@@ -15,4 +15,16 @@ add_library(encrypto_utils
     ${PROJECT_NAME}/powmod.cpp
     ${PROJECT_NAME}/rcvthread.cpp
     ${PROJECT_NAME}/sndthread.cpp
-    ${PROJECT_
+    ${PROJECT_NAME}/socket.cpp
+    ${PROJECT_NAME}/thread.cpp
+    ${PROJECT_NAME}/timer.cpp
+    ${PROJECT_NAME}/utils.cpp
+    ${PROJECT_NAME}/graycode.cpp
+)
+add_library(ENCRYPTO_utils::encrypto_utils ALIAS encrypto_utils)
+
+target_compile_features(encrypto_utils PUBLIC cxx_std_17)
+target_compile_options(encrypto_utils PRIVATE "-Wall" "-Wextra")
+
+configure_file (
+    "${CMAKE

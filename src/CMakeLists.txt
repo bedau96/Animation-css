@@ -39,4 +39,19 @@ target_include_directories(encrypto_utils
 )
 
 
-target_link_libraries(encrypto
+target_link_libraries(encrypto_utils
+    PRIVATE
+        Boost::system
+        Boost::thread
+    PUBLIC
+        GMP::GMP
+        GMP::GMPXX
+        OpenSSL::Crypto
+        RELIC::relic
+)
+
+install(TARGETS encrypto_utils
+        EXPORT "${PROJECT_NAME}Targets"
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        INCLUDES DESTINATI

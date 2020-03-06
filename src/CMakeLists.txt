@@ -54,4 +54,14 @@ install(TARGETS encrypto_utils
         EXPORT "${PROJECT_NAME}Targets"
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
-        INCLUDES DESTINATI
+        INCLUDES DESTINATION include
+)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/"
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.h"
+)
+export(TARGETS encrypto_utils NAMESPACE "${PROJECT_NAME}::" FILE "${PROJECT_NAME}Targets.cmake")
+install(EXPORT "${PROJECT_NAME}Targets"
+        NAMESPACE "${PROJECT_NAME}::"
+        DESTINATION "lib/cmake/${PROJECT_NAME}"
+)

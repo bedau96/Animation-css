@@ -77,4 +77,7 @@ configure_package_config_file("${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config
 install(FILES
 	"${PROJECT_SOURCE_DIR}/cmake/FindGMP.cmake"
     "${PROJECT_SOURCE_DIR}/cmake/FindGMPXX.cmake"
-    "${PROJECT_BI
+    "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    DESTINATION "lib/cmake/${PROJECT_NAME}"
+)
+

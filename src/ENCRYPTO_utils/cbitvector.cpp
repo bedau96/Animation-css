@@ -13,4 +13,19 @@
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
             along with this program. If not, see <http://www.gnu.org/licenses/>.
- \brief		CBitVector I
+ \brief		CBitVector Implementation
+ */
+
+#include "cbitvector.h"
+#include "crypto/crypto.h"
+#include "utils.h"
+#include <algorithm>
+#include <iomanip>
+#include <iostream>
+#include <cstring>
+
+
+namespace {
+
+/** Array which stores the bytes which are reversed. For example, the hexadecimal 0x01 is when reversed becomes 0x80.  */
+constexpr BYTE REVERSE_BYTE_ORDER[256] = { 0x00, 0x80, 0x40, 0xC0, 0x

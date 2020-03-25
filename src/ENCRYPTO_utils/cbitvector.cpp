@@ -45,4 +45,10 @@ constexpr BYTE REVERSE_BYTE_ORDER[256] = { 0x00, 0x80, 0x40, 0xC0, 0x20, 0xA0, 0
 */
 constexpr BYTE RESET_BIT_POSITIONS[9] = { 0x00, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x3F, 0x7F, 0xFF };
 /**
-	This array is used by \link XORBits(BYTE* p, int pos, int 
+	This array is used by \link XORBits(BYTE* p, int pos, int len) \endlink and \link SetBits(BYTE* p, uint64_t pos, uint64_t len) \endlink
+    method for upper bit mask.
+*/
+constexpr BYTE RESET_BIT_POSITIONS_INV[9] = { 0x00, 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0xFE, 0xFF };
+
+/** This array is used by \link GetBits(BYTE* p, int pos, int len) \endlink method for lower bit mask. */
+constexpr BYTE GET_BIT_POSITIONS[9] = { 0xFF, 0xFE, 0xFC, 0x

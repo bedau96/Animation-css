@@ -51,4 +51,10 @@ constexpr BYTE RESET_BIT_POSITIONS[9] = { 0x00, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x
 constexpr BYTE RESET_BIT_POSITIONS_INV[9] = { 0x00, 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0xFE, 0xFF };
 
 /** This array is used by \link GetBits(BYTE* p, int pos, int len) \endlink method for lower bit mask. */
-constexpr BYTE GET_BIT_POSITIONS[9] = { 0xFF, 0xFE, 0xFC, 0x
+constexpr BYTE GET_BIT_POSITIONS[9] = { 0xFF, 0xFE, 0xFC, 0xF8, 0xF0, 0xE0, 0xC0, 0x80, 0x00 };
+
+/** This array is used by \link GetBits(BYTE* p, int pos, int len) \endlink method for upper bit mask. */
+constexpr BYTE GET_BIT_POSITIONS_INV[9] = { 0xFF, 0x7F, 0x3F, 0x1F, 0x0F, 0x07, 0x03, 0x01, 0x00 };
+
+/**
+	This array is used for masking bits and extracting a particular positional bit from the provided byte 

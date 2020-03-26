@@ -57,4 +57,13 @@ constexpr BYTE GET_BIT_POSITIONS[9] = { 0xFF, 0xFE, 0xFC, 0xF8, 0xF0, 0xE0, 0xC0
 constexpr BYTE GET_BIT_POSITIONS_INV[9] = { 0xFF, 0x7F, 0x3F, 0x1F, 0x0F, 0x07, 0x03, 0x01, 0x00 };
 
 /**
-	This array is used for masking bits and extracting a particular positional bit from the provided byte 
+	This array is used for masking bits and extracting a particular positional bit from the provided byte array.
+	This array is used by \link GetBit(int idx) \endlink method.
+*/
+constexpr BYTE MASK_BIT[8] = { 0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1 };
+
+/**
+	This array is used for extracting a particular positional bit from the provided byte array without masking.
+	This array is used by \link GetBitNoMask(int idx) \endlink method.
+*/
+static constexpr BYTE BIT[

@@ -66,4 +66,10 @@ constexpr BYTE MASK_BIT[8] = { 0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1 };
 	This array is used for extracting a particular positional bit from the provided byte array without masking.
 	This array is used by \link GetBitNoMask(int idx) \endlink method.
 */
-static constexpr BYTE BIT[
+static constexpr BYTE BIT[8] = { 0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80 };
+
+/**
+	This array is used for masking bits and setting a particular positional bit from the provided byte array in the CBitVector.
+	This array is used by \link SetBit(int idx, BYTE b) \endlink and \link ANDBit(int idx, BYTE b) \endlink methods.
+*/
+constexpr BYTE CMASK_BIT[8] = { 0x7f, 0xbf, 0xdf

@@ -90,4 +90,12 @@ constexpr BYTE MASK_SET_BIT_C[2][8] = { { 0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2,
 	This array is used for setting a particular positional bit from the provided byte array without masking in the CBitVector.
 	This array is used by \link SetBitNoMask(int idx, BYTE b) \endlink and \link XORBitNoMask(int idx, BYTE b) \endlink methods.
 */
-constexpr BYTE SET_BIT_C[2][8] = { { 0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80 }, { 0, 0, 0, 0
+constexpr BYTE SET_BIT_C[2][8] = { { 0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80 }, { 0, 0, 0, 0, 0, 0, 0, 0 } };
+
+const BYTE SELECT_BIT_POSITIONS[9] = { 0x00, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x3F, 0x7F, 0xFF };
+
+#if (__WORDSIZE==32)
+constexpr REGISTER_SIZE TRANSPOSITION_MASKS[6] =
+{	0x55555555, 0x33333333, 0x0F0F0F0F, 0x00FF00FF, 0x0000FFFF};
+constexpr REGISTER_SIZE TRANSPOSITION_MASKS_INV[6] =
+{	0xAAAAAAAA, 0xCCCCCCCC, 0xF0F0F0F0, 0xFF

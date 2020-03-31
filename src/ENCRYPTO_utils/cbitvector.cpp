@@ -85,3 +85,9 @@ constexpr BYTE C_BIT[8] = { 0xFE, 0xFD, 0xFB, 0xF7, 0xEF, 0xDF, 0xBF, 0x7F };
 	This array is used by \link SetBit(int idx, BYTE b) \endlink and \link XORBit(int idx, BYTE b) \endlink methods.
 */
 constexpr BYTE MASK_SET_BIT_C[2][8] = { { 0x80, 0x40, 0x20, 0x10, 0x8, 0x4, 0x2, 0x1 }, { 0, 0, 0, 0, 0, 0, 0, 0 } };
+
+/**
+	This array is used for setting a particular positional bit from the provided byte array without masking in the CBitVector.
+	This array is used by \link SetBitNoMask(int idx, BYTE b) \endlink and \link XORBitNoMask(int idx, BYTE b) \endlink methods.
+*/
+constexpr BYTE SET_BIT_C[2][8] = { { 0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80 }, { 0, 0, 0, 0

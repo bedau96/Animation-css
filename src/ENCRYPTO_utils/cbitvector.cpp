@@ -117,4 +117,24 @@ template<class T> void GetBytes(T* dst, const T* src, const T* lim) {
 	}
 }
 
-template<class T> void SetBytes(T* dst, const T
+template<class T> void SetBytes(T* dst, const T* src, const T* lim) {
+	while (dst < lim) {
+		*dst++ = *src++;
+	}
+}
+
+//Generic bytewise XOR operation
+template<class T> void XORBytes(T* dst, const T* src, const T* lim) {
+	while (dst != lim) {
+		*dst++ ^= *src++;
+	}
+}
+
+template<class T> void ANDBytes(T* dst, const T* src, const T* lim) {
+	while (dst != lim) {
+		*dst++ &= *src++;
+	}
+}
+
+constexpr BYTE GetArrayBit(const BYTE* p, size_t idx) {
+	r

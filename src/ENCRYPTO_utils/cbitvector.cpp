@@ -103,4 +103,18 @@ constexpr REGISTER_SIZE TRANSPOSITION_MASKS_INV[6] =
 #if (__WORDSIZE==64)
 /** Transposition mask used for Eklund Bit Matrix Transposition.*/
 constexpr REGISTER_SIZE TRANSPOSITION_MASKS[6] = { 0x5555555555555555, 0x3333333333333333, 0x0F0F0F0F0F0F0F0F, 0x00FF00FF00FF00FF, 0x0000FFFF0000FFFF, 0x00000000FFFFFFFF };
-constexpr REGISTER_SIZE TRANSPOSITION_MASKS_INV[6] = { 
+constexpr REGISTER_SIZE TRANSPOSITION_MASKS_INV[6] = { 0xAAAAAAAAAAAAAAAA, 0xCCCCCCCCCCCCCCCC, 0xF0F0F0F0F0F0F0F0, 0xFF00FF00FF00FF00, 0xFFFF0000FFFF0000, 0xFFFFFFFF00000000 };
+#else
+#endif
+#endif
+
+constexpr size_t SHIFTVAL = 3;
+
+
+template<class T> void GetBytes(T* dst, const T* src, const T* lim) {
+	while (dst != lim) {
+		*dst++ = *src++;
+	}
+}
+
+template<class T> void SetBytes(T* dst, const T

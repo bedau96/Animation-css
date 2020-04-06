@@ -137,4 +137,30 @@ template<class T> void ANDBytes(T* dst, const T* src, const T* lim) {
 }
 
 constexpr BYTE GetArrayBit(const BYTE* p, size_t idx) {
-	r
+	return 0 != (p[idx >> 3] & BIT[idx & 0x7]);
+}
+
+} // namespace
+
+
+CBitVector::CBitVector() {
+	Init();
+}
+
+CBitVector::CBitVector(std::size_t bits) {
+	Init();
+	Create(bits);
+}
+
+CBitVector::CBitVector(std::size_t bits, crypto* crypt) {
+	Init();
+	Create(bits, crypt);
+}
+
+void CBitVector::Init() {
+	m_pBits = NULL;
+	m_nByteSize = 0;
+}
+
+CBitVector::~CBitVector(){
+	delCBitVecto

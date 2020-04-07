@@ -163,4 +163,19 @@ void CBitVector::Init() {
 }
 
 CBitVector::~CBitVector(){
-	delCBitVecto
+	delCBitVector();
+};
+
+void CBitVector::delCBitVector() {
+	if (( m_nByteSize > 0 )&& (m_pBits != NULL)) {
+		free(m_pBits);
+	}
+	m_nByteSize = 0;
+	m_pBits = NULL;
+}
+
+/* Fill random values using the pre-defined AES key */
+void CBitVector::FillRand(std::size_t bits, crypto* crypt) {
+	if (bits > m_nByteSize << 3)
+		Create(bits);
+	crypt->gen_rnd(m_pBits, cei

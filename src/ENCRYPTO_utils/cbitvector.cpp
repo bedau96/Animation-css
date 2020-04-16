@@ -196,4 +196,21 @@ void CBitVector::CreateExact(std::size_t bits) {
 	assert(m_pBits != NULL);
 
 	m_nElementLength = 1;
-	m_nNumElements = m_nByte
+	m_nNumElements = m_nByteSize;
+	m_nNumElementsDimB = 1;
+}
+
+void CBitVector::Create(std::size_t bits) {
+	//TODO: check if padding to AES_BITS is still necessary as default
+	CreateExact(ceil_divide(bits, AES_BITS) * AES_BITS);
+}
+
+void CBitVector::CreateBytes(std::size_t bytes) {
+	Create(bytes << 3);
+}
+
+void CBitVector::CreateBytes(std::size_t bytes, crypto* crypt) {
+	Create(bytes << 3, crypt);
+}
+
+vo

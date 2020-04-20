@@ -226,4 +226,15 @@ void CBitVector::Create(std::size_t bits, crypto* crypt) {
 void CBitVector::Create(std::size_t numelements, std::size_t elementlength) {
 	Create(numelements * elementlength);
 	m_nElementLength = elementlength;
-	m_nNumEle
+	m_nNumElements = numelements;
+	m_nNumElementsDimB = 1;
+}
+
+void CBitVector::Create(std::size_t numelements, std::size_t elementlength, crypto* crypt) {
+	Create(numelements * elementlength, crypt);
+	m_nElementLength = elementlength;
+	m_nNumElements = numelements;
+	m_nNumElementsDimB = 1;
+}
+
+void CBitVector::Create(std::size_t numelementsDimA, std::size_t num

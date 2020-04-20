@@ -213,4 +213,17 @@ void CBitVector::CreateBytes(std::size_t bytes, crypto* crypt) {
 	Create(bytes << 3, crypt);
 }
 
-vo
+void CBitVector::CreateZeros(std::size_t bits) {
+	Create(bits);
+	memset(m_pBits, 0, m_nByteSize);
+}
+
+void CBitVector::Create(std::size_t bits, crypto* crypt) {
+	Create(bits);
+	FillRand(bits, crypt);
+}
+
+void CBitVector::Create(std::size_t numelements, std::size_t elementlength) {
+	Create(numelements * elementlength);
+	m_nElementLength = elementlength;
+	m_nNumEle

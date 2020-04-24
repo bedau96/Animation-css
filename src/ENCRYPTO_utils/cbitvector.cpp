@@ -243,4 +243,13 @@ void CBitVector::Create(std::size_t numelementsDimA, std::size_t numelementsDimB
 	m_nNumElements = numelementsDimA;
 	m_nNumElementsDimB = numelementsDimB;
 }
-void CBitVector::Create(std::size_t numelementsDimA, std::size_t numelementsDimB, std::size_t elementlength, crypto* crypt
+void CBitVector::Create(std::size_t numelementsDimA, std::size_t numelementsDimB, std::size_t elementlength, crypto* crypt) {
+	Create(numelementsDimA * numelementsDimB * elementlength, crypt);
+	m_nElementLength = elementlength;
+	m_nNumElements = numelementsDimA;
+	m_nNumElementsDimB = numelementsDimB;
+}
+
+void CBitVector::ResizeinBytes(std::size_t newSizeBytes) {
+	BYTE* tBits = m_pBits;
+	uint64_t tSize = (m_nByteSize<newSizeBytes)? m_nByteSize:newSizeBytes; //fix for o

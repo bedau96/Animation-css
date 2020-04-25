@@ -268,4 +268,22 @@ void CBitVector::Reset() {
 
 void CBitVector::ResetFromTo(std::size_t frombyte, std::size_t tobyte) {
 	assert(frombyte <= tobyte);
-	assert(tobyte < m_nByt
+	assert(tobyte < m_nByteSize);
+	memset(m_pBits + frombyte, 0, tobyte - frombyte);
+}
+
+void CBitVector::SetToOne() {
+	memset(m_pBits, 0xFF, m_nByteSize);
+}
+
+void CBitVector::Invert() {
+	for(std::size_t i = 0; i < m_nByteSize; i++) {
+		m_pBits[i] = ~m_pBits[i];
+	}
+}
+
+std::size_t CBitVector::GetSize() const {
+	return m_nByteSize;
+}
+
+BOOL CBitVector::IsEqua

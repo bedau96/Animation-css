@@ -252,4 +252,20 @@ void CBitVector::Create(std::size_t numelementsDimA, std::size_t numelementsDimB
 
 void CBitVector::ResizeinBytes(std::size_t newSizeBytes) {
 	BYTE* tBits = m_pBits;
-	uint64_t tSize = (m_nByteSize<newSizeBytes)? m_nByteSize:newSizeBytes; //fix for o
+	uint64_t tSize = (m_nByteSize<newSizeBytes)? m_nByteSize:newSizeBytes; //fix for overflow condition in memcpy.
+
+	m_nByteSize = newSizeBytes;
+	m_pBits = (uint8_t*) calloc(m_nByteSize, sizeof(uint8_t));
+
+	memcpy(m_pBits, tBits, tSize);
+
+	free(tBits);
+}
+
+void CBitVector::Reset() {
+	memset(m_pBits, 0, m_nByteSize);
+}
+
+void CBitVector::ResetFromTo(std::size_t frombyte, std::size_t tobyte) {
+	assert(frombyte <= tobyte);
+	assert(tobyte < m_nByt

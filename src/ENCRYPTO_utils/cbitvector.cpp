@@ -286,4 +286,19 @@ std::size_t CBitVector::GetSize() const {
 	return m_nByteSize;
 }
 
-BOOL CBitVector::IsEqua
+BOOL CBitVector::IsEqual(const CBitVector& vec) const {
+	if (vec.GetSize() != m_nByteSize) {
+		return false;
+	}
+
+	const BYTE* ptr = vec.GetArr();
+	for (std::size_t i = 0; i < m_nByteSize; i++) {
+		if (ptr[i] != m_pBits[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+BOOL CBitVector::IsEqual(const CBitVector& vec, std::size_t from, std::size_t to) const {
+	if (vec.GetSize() * 8 < to || m_nByteSize * 8 < to || from > 

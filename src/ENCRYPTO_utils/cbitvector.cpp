@@ -301,4 +301,24 @@ BOOL CBitVector::IsEqual(const CBitVector& vec) const {
 }
 
 BOOL CBitVector::IsEqual(const CBitVector& vec, std::size_t from, std::size_t to) const {
-	if (vec.GetSize() * 8 < to || m_nByteSize * 8 < to || from > 
+	if (vec.GetSize() * 8 < to || m_nByteSize * 8 < to || from > to) {
+		return false;
+	}
+
+	for (std::size_t i = from; i < to; i++) {
+		if (vec.GetBit(i) != GetBit(i)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void CBitVector::SetElementLength(std::size_t elelen) {
+	m_nElementLength = elelen;
+}
+
+std::size_t CBitVector::GetElementLength() const {
+	return m_nElementLength;
+}
+
+void CBitVector::Copy(const CBitVect

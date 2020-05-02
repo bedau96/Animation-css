@@ -321,4 +321,19 @@ std::size_t CBitVector::GetElementLength() const {
 	return m_nElementLength;
 }
 
-void CBitVector::Copy(const CBitVect
+void CBitVector::Copy(const CBitVector& vec) {
+	Copy(vec.GetArr(), 0, vec.GetSize());
+}
+
+void CBitVector::Copy(const CBitVector& vec, std::size_t pos, std::size_t len) {
+	Copy(vec.GetArr(), pos, len);
+}
+
+void CBitVector::Copy(const BYTE* p, std::size_t pos, std::size_t len) {
+	if (pos + len > m_nByteSize) {
+		if (m_pBits)
+			ResizeinBytes(pos + len);
+		else {
+			CreateBytes(pos + len);
+		}
+	}

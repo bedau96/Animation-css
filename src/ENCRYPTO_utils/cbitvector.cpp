@@ -351,4 +351,15 @@ BYTE CBitVector::GetBit(std::size_t idx) const {
 }
 
 void CBitVector::SetBit(std::size_t idx, BYTE b) {
-	assert(idx < (m_
+	assert(idx < (m_nByteSize << 3));
+	m_pBits[idx >> 3] = (m_pBits[idx >> 3] & CMASK_BIT[idx & 0x7]) | MASK_SET_BIT_C[!(b & 0x01)][idx & 0x7];
+}
+
+BYTE CBitVector::GetBitNoMask(std::size_t idx) const {
+	assert(idx < (m_nByteSize << 3));
+	return GetArrayBit(m_pBits, idx);
+}
+
+void CBitVector::SetBitNoMask(std::size_t idx, BYTE b) {
+	assert(idx < (m_nByteSize << 3));
+	m_pBits[idx >> 3] 

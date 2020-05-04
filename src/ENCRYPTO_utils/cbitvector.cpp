@@ -337,3 +337,18 @@ void CBitVector::Copy(const BYTE* p, std::size_t pos, std::size_t len) {
 			CreateBytes(pos + len);
 		}
 	}
+	memcpy(m_pBits + pos, p, len);
+}
+
+void CBitVector::ORByte(std::size_t pos, BYTE p) {
+	assert(pos <= m_nByteSize);
+	m_pBits[pos] |= p;
+}
+
+BYTE CBitVector::GetBit(std::size_t idx) const {
+	assert(idx < (m_nByteSize << 3));
+	return !!(m_pBits[idx >> 3] & MASK_BIT[idx & 0x7]);
+}
+
+void CBitVector::SetBit(std::size_t idx, BYTE b) {
+	assert(idx < (m_

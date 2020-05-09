@@ -391,4 +391,23 @@ void CBitVector::ANDByte(std::size_t idx, BYTE b) {
 }
 
 void CBitVector::GetBits(BYTE* p, std::size_t pos, std::size_t len) const {
-	if (len
+	if (len < 1 || (pos + len) > (m_nByteSize << 3)) {
+		return;
+	}
+	if (len == 1) {
+		*p = GetBitNoMask(pos);
+		return;
+	}
+
+	if (!((pos & 0x07) || (len & 0x07))) {
+		GetBytes(p, pos >> 3, len >> 3);
+		return;
+	}
+
+	int posctr = pos >> 3;
+	int lowermask = pos & 7;
+	int uppermask = 8 - lowermask;
+
+	std::size_t i;
+	for (i = 0; i < len / (sizeof(BYTE) * 8); i++, posctr++) {
+		p

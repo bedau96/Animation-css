@@ -376,4 +376,19 @@ void CBitVector::SetByte(std::size_t idx, BYTE p) {
 }
 
 BYTE CBitVector::GetByte(std::size_t idx) const {
-	assert(idx <
+	assert(idx < m_nByteSize);
+	return m_pBits[idx];
+}
+
+void CBitVector::XORByte(std::size_t idx, BYTE b) {
+	assert(idx < m_nByteSize);
+	m_pBits[idx] ^= b;
+}
+
+void CBitVector::ANDByte(std::size_t idx, BYTE b) {
+	assert(idx < m_nByteSize);
+	m_pBits[idx] &= b;
+}
+
+void CBitVector::GetBits(BYTE* p, std::size_t pos, std::size_t len) const {
+	if (len

@@ -418,4 +418,15 @@ void CBitVector::GetBits(BYTE* p, std::size_t pos, std::size_t len) const {
 		if (remlen <= uppermask) {
 			p[i] = ((m_pBits[posctr] & ((((1 << remlen) - 1) << lowermask))) >> lowermask) & 0xFF;
 		} else {
-			p[i] = ((m_pBits[pos
+			p[i] = ((m_pBits[posctr] & GET_BIT_POSITIONS[lowermask]) >> lowermask) & 0xFF;
+			p[i] |= (m_pBits[posctr + 1] & (((1 << (remlen - uppermask)) - 1))) << uppermask;
+		}
+	}
+}
+
+
+//optimized bytewise for set operation
+void CBitVector::GetBytes(BYTE* p, std::size_t pos, std::size_t len) const {
+	assert(pos+len <= m_nByteSize);
+	BYTE* src = m_pBits + pos;
+	BYTE* dst = p;

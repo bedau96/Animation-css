@@ -410,4 +410,12 @@ void CBitVector::GetBits(BYTE* p, std::size_t pos, std::size_t len) const {
 
 	std::size_t i;
 	for (i = 0; i < len / (sizeof(BYTE) * 8); i++, posctr++) {
-		p
+		p[i] = ((m_pBits[posctr] & GET_BIT_POSITIONS[lowermask]) >> lowermask) & 0xFF;
+		p[i] |= (m_pBits[posctr + 1] & GET_BIT_POSITIONS_INV[uppermask]) << uppermask;
+	}
+	int remlen = len & 0x07;
+	if (remlen) {
+		if (remlen <= uppermask) {
+			p[i] = ((m_pBits[posctr] & ((((1 << remlen) - 1) << lowermask))) >> lowermask) & 0xFF;
+		} else {
+			p[i] = ((m_pBits[pos

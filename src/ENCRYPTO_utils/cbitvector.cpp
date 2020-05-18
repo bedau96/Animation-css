@@ -437,4 +437,21 @@ void CBitVector::GetBytes(BYTE* p, std::size_t pos, std::size_t len) const {
 	::GetBytes(dst, src, dst + (len & ((1 << SHIFTVAL) - 1)));
 }
 //
-//pos
+//pos and len in bits
+void CBitVector::SetBits(const BYTE* p, std::size_t pos, std::size_t len) {
+	if (len < 1 || (pos + len) > (m_nByteSize << 3)){
+		return;
+	}
+
+	if (len == 1) {
+		SetBitNoMask(pos, *p);
+		return;
+	}
+	if (!((pos & 0x07) || (len & 0x07))) {
+
+		SetBytes(p, pos >> 3, len >> 3);
+		return;
+	}
+	std::size_t posctr = pos >> 3;
+	int lowermask = pos & 7;
+	in

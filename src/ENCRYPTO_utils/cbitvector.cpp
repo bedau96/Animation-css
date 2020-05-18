@@ -430,3 +430,11 @@ void CBitVector::GetBytes(BYTE* p, std::size_t pos, std::size_t len) const {
 	assert(pos+len <= m_nByteSize);
 	BYTE* src = m_pBits + pos;
 	BYTE* dst = p;
+	//Do many operations on REGSIZE types first and then (if necessary) use bytewise operations
+	::GetBytes((REGSIZE*) dst, (REGSIZE*) src, ((REGSIZE*) dst) + (len >> SHIFTVAL));
+	dst += ((len >> SHIFTVAL) << SHIFTVAL);
+	src += ((len >> SHIFTVAL) << SHIFTVAL);
+	::GetBytes(dst, src, dst + (len & ((1 << SHIFTVAL) - 1)));
+}
+//
+//pos

@@ -454,4 +454,13 @@ void CBitVector::SetBits(const BYTE* p, std::size_t pos, std::size_t len) {
 	}
 	std::size_t posctr = pos >> 3;
 	int lowermask = pos & 7;
-	in
+	int uppermask = 8 - lowermask;
+
+	std::size_t i;
+	BYTE temp;
+	for (i = 0; i < len / (sizeof(BYTE) * 8); i++, posctr++) {
+		temp = p[i];
+		m_pBits[posctr] = (m_pBits[posctr] & RESET_BIT_POSITIONS[lowermask]) | ((temp << lowermask) & 0xFF);
+		m_pBits[posctr + 1] = (m_pBits[posctr + 1] & RESET_BIT_POSITIONS_INV[uppermask]) | (temp >> uppermask);
+	}
+	int r

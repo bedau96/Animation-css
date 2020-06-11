@@ -463,4 +463,11 @@ void CBitVector::SetBits(const BYTE* p, std::size_t pos, std::size_t len) {
 		m_pBits[posctr] = (m_pBits[posctr] & RESET_BIT_POSITIONS[lowermask]) | ((temp << lowermask) & 0xFF);
 		m_pBits[posctr + 1] = (m_pBits[posctr + 1] & RESET_BIT_POSITIONS_INV[uppermask]) | (temp >> uppermask);
 	}
-	int r
+	int remlen = len & 0x07;
+	if (remlen) {
+		temp = p[i] & RESET_BIT_POSITIONS[remlen];
+		if (remlen <= uppermask) {
+			m_pBits[posctr] = (m_pBits[posctr] & (~(((1 << remlen) - 1) << lowermask))) | ((temp << lowermask) & 0xFF);
+		} else {
+			m_pBits[posctr] = (m_pBits[posctr] & RESET_BIT_POSITIONS[lowermask]) | ((temp << lowermask) & 0xFF);
+			m_pBits[posctr + 1] = (m_pBits[posctr + 

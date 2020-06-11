@@ -470,4 +470,13 @@ void CBitVector::SetBits(const BYTE* p, std::size_t pos, std::size_t len) {
 			m_pBits[posctr] = (m_pBits[posctr] & (~(((1 << remlen) - 1) << lowermask))) | ((temp << lowermask) & 0xFF);
 		} else {
 			m_pBits[posctr] = (m_pBits[posctr] & RESET_BIT_POSITIONS[lowermask]) | ((temp << lowermask) & 0xFF);
-			m_pBits[posctr + 1] = (m_pBits[posctr + 
+			m_pBits[posctr + 1] = (m_pBits[posctr + 1] & (~(((1 << (remlen - uppermask)) - 1)))) | (temp >> uppermask);
+		}
+	}
+}
+
+
+//Set bits given an offset on the bits for p which is not necessarily divisible by 8
+void CBitVector::SetBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len) {
+	for (auto i = pos, j = ppos; j < ppos + len; i++, j++) {
+	

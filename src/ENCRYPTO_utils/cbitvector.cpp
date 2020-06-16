@@ -491,4 +491,13 @@ void CBitVector::SetBytes(const BYTE *src, std::size_t pos, std::size_t len) {
 
 	BYTE *dst = m_pBits + pos;
 
-	//Do many operations on REGSIZE types first and then (if necessary) use bytewise operatio
+	//Do many operations on REGSIZE types first and then (if necessary) use bytewise operations
+	::SetBytes((REGSIZE*) dst, (REGSIZE*) src, ((REGSIZE*) dst) + (len >> SHIFTVAL));
+	dst += ((len >> SHIFTVAL) << SHIFTVAL);
+	src += ((len >> SHIFTVAL) << SHIFTVAL);
+	::SetBytes(dst, src, dst + (len & ((1 << SHIFTVAL) - 1)));
+}
+
+void CBitVector::SetBytesToZero(std::size_t bytepos, std::size_t bytelen) {
+	assert(bytepos + bytelen <= m_nByteSize);
+	memset(m_p

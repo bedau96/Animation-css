@@ -479,4 +479,16 @@ void CBitVector::SetBits(const BYTE* p, std::size_t pos, std::size_t len) {
 //Set bits given an offset on the bits for p which is not necessarily divisible by 8
 void CBitVector::SetBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len) {
 	for (auto i = pos, j = ppos; j < ppos + len; i++, j++) {
-	
+		BYTE source_bit = GetArrayBit(p, j);
+		SetBitNoMask(i, source_bit);
+
+	}
+}
+
+//optimized bytewise for set operation
+void CBitVector::SetBytes(const BYTE *src, std::size_t pos, std::size_t len) {
+	assert(pos + len <= m_nByteSize);
+
+	BYTE *dst = m_pBits + pos;
+
+	//Do many operations on REGSIZE types first and then (if necessary) use bytewise operatio

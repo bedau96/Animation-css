@@ -500,4 +500,17 @@ void CBitVector::SetBytes(const BYTE *src, std::size_t pos, std::size_t len) {
 
 void CBitVector::SetBytesToZero(std::size_t bytepos, std::size_t bytelen) {
 	assert(bytepos + bytelen <= m_nByteSize);
-	memset(m_p
+	memset(m_pBits + bytepos, 0x00, bytelen);
+}
+
+
+void CBitVector::SetBitsToZero(std::size_t bitpos, std::size_t bitlen) {
+	int firstlim = ceil_divide(bitpos, 8);
+	int firstlen = ceil_divide(bitlen - (bitpos % 8), 8);
+	for (int i = bitpos; i < firstlim; i++) {
+		SetBitNoMask(i, 0);
+	}
+	if (bitlen > 7) {
+		memset(m_pBits + firstlim, 0, firstlen);
+	}
+	for (std::size_t i = (f

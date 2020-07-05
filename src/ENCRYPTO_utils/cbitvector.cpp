@@ -530,4 +530,16 @@ void CBitVector::XORBytes(const BYTE* p, std::size_t pos, std::size_t len) {
 	::XORBytes((REGSIZE*) dst, (REGSIZE*) src, ((REGSIZE*) dst) + (len >> SHIFTVAL));
 	dst += ((len >> SHIFTVAL) << SHIFTVAL);
 	src += ((len >> SHIFTVAL) << SHIFTVAL);
-	::XORBytes(
+	::XORBytes(dst, src, dst + (len & ((1 << SHIFTVAL) - 1)));
+}
+
+void CBitVector::XORBytes(const BYTE* p, std::size_t len) {
+	XORBytes(p, 0, len);
+}
+
+void CBitVector::XORVector(const CBitVector &vec, std::size_t pos, std::size_t len) {
+	XORBytes(vec.GetArr(), pos, len);
+}
+
+void CBitVector::XORBits(const BYTE* p, std::size_t pos, std::size_t len) {
+	if (len < 1 || (pos + le

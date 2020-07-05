@@ -522,4 +522,12 @@ void CBitVector::SetBitsToZero(std::size_t bitpos, std::size_t bitlen) {
 void CBitVector::XORBytes(const BYTE* p, std::size_t pos, std::size_t len) {
 	if(pos + len > m_nByteSize)
 	std::cout << "pos = " << pos << ", len = " << len << ", bytesize = " << m_nByteSize << std::endl;
-	assert(po
+	assert(pos + len <= m_nByteSize);
+
+	BYTE* dst = m_pBits + pos;
+	const BYTE* src = p;
+	//Do many operations on REGSIZE types first and then (if necessary) use bytewise operations
+	::XORBytes((REGSIZE*) dst, (REGSIZE*) src, ((REGSIZE*) dst) + (len >> SHIFTVAL));
+	dst += ((len >> SHIFTVAL) << SHIFTVAL);
+	src += ((len >> SHIFTVAL) << SHIFTVAL);
+	::XORBytes(

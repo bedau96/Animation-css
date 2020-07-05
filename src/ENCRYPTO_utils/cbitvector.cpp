@@ -513,4 +513,13 @@ void CBitVector::SetBitsToZero(std::size_t bitpos, std::size_t bitlen) {
 	if (bitlen > 7) {
 		memset(m_pBits + firstlim, 0, firstlen);
 	}
-	for (std::size_t i = (f
+	for (std::size_t i = (firstlim + firstlen) << 8; i < bitpos + bitlen; i++) {
+		SetBitNoMask(i, 0);
+	}
+}
+
+//optimized bytewise XOR operation
+void CBitVector::XORBytes(const BYTE* p, std::size_t pos, std::size_t len) {
+	if(pos + len > m_nByteSize)
+	std::cout << "pos = " << pos << ", len = " << len << ", bytesize = " << m_nByteSize << std::endl;
+	assert(po

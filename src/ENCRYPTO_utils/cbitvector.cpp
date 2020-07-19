@@ -542,4 +542,23 @@ void CBitVector::XORVector(const CBitVector &vec, std::size_t pos, std::size_t l
 }
 
 void CBitVector::XORBits(const BYTE* p, std::size_t pos, std::size_t len) {
-	if (len < 1 || (pos + le
+	if (len < 1 || (pos + len) > m_nByteSize << 3) {
+		return;
+	}
+	if (len == 1) {
+		XORBitNoMask(pos, *p);
+		return;
+	}
+	if (!((pos & 0x07) || (len & 0x07))) {
+		XORBytes(p, pos >> 3, len >> 3);
+		return;
+	}
+	int posctr = pos >> 3;
+	int lowermask = pos & 7;
+	int uppermask = 8 - lowermask;
+
+	std::size_t i;
+	BYTE temp;
+	for (i = 0; i < len / (sizeof(BYTE) * 8); i++, posctr++) {
+		temp = p[i];
+		m_pBits[p

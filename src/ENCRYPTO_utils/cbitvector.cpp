@@ -561,4 +561,14 @@ void CBitVector::XORBits(const BYTE* p, std::size_t pos, std::size_t len) {
 	BYTE temp;
 	for (i = 0; i < len / (sizeof(BYTE) * 8); i++, posctr++) {
 		temp = p[i];
-		m_pBits[p
+		m_pBits[posctr] ^= ((temp << lowermask) & 0xFF);
+		m_pBits[posctr + 1] ^= (temp >> uppermask);
+	}
+	int remlen = len & 0x07;
+	if (remlen) {
+		temp = p[i] & RESET_BIT_POSITIONS[remlen];
+		if (remlen <= uppermask) {
+			m_pBits[posctr] ^= ((temp << lowermask) & 0xFF);
+		} else {
+			m_pBits[posctr] ^= ((temp << lowermask) & 0xFF);
+			m_pBits[posctr + 1] ^= (te

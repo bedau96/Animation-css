@@ -571,4 +571,13 @@ void CBitVector::XORBits(const BYTE* p, std::size_t pos, std::size_t len) {
 			m_pBits[posctr] ^= ((temp << lowermask) & 0xFF);
 		} else {
 			m_pBits[posctr] ^= ((temp << lowermask) & 0xFF);
-			m_pBits[posctr + 1] ^= (te
+			m_pBits[posctr + 1] ^= (temp >> uppermask);
+		}
+	}
+}
+
+//XOR bits given an offset on the bits for p which is not necessarily divisible by 8
+void CBitVector::XORBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len) {
+	assert((pos + len) <= (m_nByteSize<<3));
+	for (auto i = pos, j = ppos; j < ppos + len; i++, j++) {
+		m_pBits[i 

@@ -580,4 +580,16 @@ void CBitVector::XORBits(const BYTE* p, std::size_t pos, std::size_t len) {
 void CBitVector::XORBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len) {
 	assert((pos + len) <= (m_nByteSize<<3));
 	for (auto i = pos, j = ppos; j < ppos + len; i++, j++) {
-		m_pBits[i 
+		m_pBits[i / 8] ^= (((p[j / 8] & (1 << (j % 8))) >> j % 8) << i % 8);
+	}
+}
+
+//Method for directly XORing CBitVectors
+void CBitVector::XOR(const CBitVector* b) {
+	assert(b->GetSize() == m_nByteSize);
+	XORBytes(b->GetArr(), 0, m_nByteSize);
+}
+
+void CBitVector::XORBytesReverse(const BYTE* p, std::size_t pos, std::size_t len) {
+	assert((pos + len) <= m_nByteSize);
+	const BYTE* src = 

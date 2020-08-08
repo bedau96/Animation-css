@@ -592,4 +592,18 @@ void CBitVector::XOR(const CBitVector* b) {
 
 void CBitVector::XORBytesReverse(const BYTE* p, std::size_t pos, std::size_t len) {
 	assert((pos + len) <= m_nByteSize);
-	const BYTE* src = 
+	const BYTE* src = p;
+	BYTE* dst = m_pBits + pos;
+	BYTE* lim = dst + len;
+	while (dst != lim) {
+		*dst++ ^= REVERSE_BYTE_ORDER[*src++];
+	}
+}
+
+
+//optimized bytewise for AND operation
+void CBitVector::ANDBytes(const BYTE* p, std::size_t pos, std::size_t len) {
+	assert(pos+len <= m_nByteSize);
+	BYTE* dst = m_pBits + pos;
+	const BYTE* src = p;
+	//Do many operations

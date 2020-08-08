@@ -606,4 +606,11 @@ void CBitVector::ANDBytes(const BYTE* p, std::size_t pos, std::size_t len) {
 	assert(pos+len <= m_nByteSize);
 	BYTE* dst = m_pBits + pos;
 	const BYTE* src = p;
-	//Do many operations
+	//Do many operations on REGSIZE types first and then (if necessary) use bytewise operations
+	::ANDBytes((REGSIZE*) dst, (REGSIZE*) src, ((REGSIZE*) dst) + (len >> SHIFTVAL));
+	dst += ((len >> SHIFTVAL) << SHIFTVAL);
+	src += ((len >> SHIFTVAL) << SHIFTVAL);
+	::ANDBytes(dst, src, dst + (len & ((1 << SHIFTVAL) - 1)));
+}
+
+void CBitVector::SetXOR(const BYTE* p, const BYTE* q

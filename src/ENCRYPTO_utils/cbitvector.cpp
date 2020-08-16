@@ -613,4 +613,20 @@ void CBitVector::ANDBytes(const BYTE* p, std::size_t pos, std::size_t len) {
 	::ANDBytes(dst, src, dst + (len & ((1 << SHIFTVAL) - 1)));
 }
 
-void CBitVector::SetXOR(const BYTE* p, const BYTE* q
+void CBitVector::SetXOR(const BYTE* p, const BYTE* q, std::size_t pos, std::size_t len) {
+	Copy(p, pos, len);
+	XORBytes(q, pos, len);
+}
+
+void CBitVector::SetAND(const BYTE* p, const BYTE* q, std::size_t pos, std::size_t len) {
+	Copy(p, pos, len);
+	ANDBytes(q, pos, len);
+}
+
+//Method for directly ANDing CBitVectors
+void CBitVector::AND(const CBitVector* b) {
+	assert(b->GetSize() == m_nByteSize);
+	ANDBytes(b->GetArr(), 0, m_nByteSize);
+}
+
+//Cy

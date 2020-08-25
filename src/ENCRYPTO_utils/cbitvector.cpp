@@ -629,4 +629,22 @@ void CBitVector::AND(const CBitVector* b) {
 	ANDBytes(b->GetArr(), 0, m_nByteSize);
 }
 
-//Cy
+//Cyclic left shift by pos bits
+void CBitVector::CLShift(std::size_t pos) {
+	uint8_t* tmpbuf = (uint8_t*) malloc(m_nByteSize);
+	for(std::size_t i = 0; i < m_nByteSize; i++) {
+		tmpbuf[i+pos] = m_pBits[i];
+	}
+	free(m_pBits);
+	m_pBits = tmpbuf;
+}
+
+BYTE* CBitVector::GetArr() {
+	return m_pBits;
+}
+
+const BYTE* CBitVector::GetArr() const {
+	return m_pBits;
+}
+
+void 

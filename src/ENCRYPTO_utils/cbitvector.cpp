@@ -647,4 +647,20 @@ const BYTE* CBitVector::GetArr() const {
 	return m_pBits;
 }
 
-void 
+void CBitVector::AttachBuf(BYTE* p, std::size_t size) {
+	m_pBits = p;
+	m_nByteSize = size;
+}
+
+
+/**
+	This method is used to detach the buffer from the CBitVector. */
+void CBitVector::DetachBuf() {
+	m_pBits = NULL;
+	m_nByteSize = 0;
+}
+
+
+void CBitVector::Print(std::size_t fromBit, std::size_t toBit) {
+	std::size_t to = toBit > (m_nByteSize << 3) ? (m_nByteSize << 3) : toBit;
+	for (std::size_t i = fromBit; i < to; 

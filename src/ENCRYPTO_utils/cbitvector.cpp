@@ -663,4 +663,19 @@ void CBitVector::DetachBuf() {
 
 void CBitVector::Print(std::size_t fromBit, std::size_t toBit) {
 	std::size_t to = toBit > (m_nByteSize << 3) ? (m_nByteSize << 3) : toBit;
-	for (std::size_t i = fromBit; i < to; 
+	for (std::size_t i = fromBit; i < to; i++) {
+		std::cout << (unsigned int) GetBitNoMask(i);
+	}
+	std::cout << std::endl;
+}
+
+void CBitVector::PrintHex(bool linebreak) {
+	for (std::size_t i = 0; i < m_nByteSize; i++) {
+		std::cout << std::setw(2) << std::setfill('0') << (std::hex) << ((unsigned int) m_pBits[i]);
+	}
+	if(linebreak){
+		std::cout << (std::dec) << std::endl;
+	}
+}
+
+void CBitVector

@@ -678,4 +678,16 @@ void CBitVector::PrintHex(bool linebreak) {
 	}
 }
 
-void CBitVector
+void CBitVector::PrintHex(std::size_t fromByte, std::size_t toByte, bool linebreak) {
+	std::size_t to = toByte > (m_nByteSize) ? (m_nByteSize) : toByte;
+
+	for (std::size_t i = fromByte; i < to; i++) {
+		std::cout << std::setw(2) << std::setfill('0') << (std::hex) << ((unsigned int) m_pBits[i]);
+	}
+	if(linebreak){
+		std::cout << (std::dec) << std::endl;
+	}
+}
+
+void CBitVector::PrintBinary() {
+	Print(0, m_nByteSize 

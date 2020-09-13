@@ -706,4 +706,15 @@ void CBitVector::PrintContent() {
 	} else {
 		for (std::size_t i = 0; i < m_nNumElements; i++) {
 			std::cout << "(";
-			for (std::si
+			for (std::size_t j = 0; j < m_nNumElementsDimB - 1; j++) {
+				std::cout << Get2D<int>(i, j) << ", ";
+			}
+			std::cout << Get2D<int>(i, m_nNumElementsDimB - 1);
+			std::cout << "), ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+void CBitVector::PrintBinaryMasked(std::size_t from, std::size_t to) {
+	std::size_t new_to = to > (m_nByteSize<<3) ? (m_nByteSize<<3) 

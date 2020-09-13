@@ -690,4 +690,20 @@ void CBitVector::PrintHex(std::size_t fromByte, std::size_t toByte, bool linebre
 }
 
 void CBitVector::PrintBinary() {
-	Print(0, m_nByteSize 
+	Print(0, m_nByteSize << 3);
+}
+
+void CBitVector::PrintContent() {
+	if (m_nElementLength == 1) {
+		PrintHex();
+		return;
+	}
+	if (m_nNumElementsDimB == 1) {
+		for (std::size_t i = 0; i < m_nNumElements; i++) {
+			std::cout << Get<int>(i) << ", ";
+		}
+		std::cout << std::endl;
+	} else {
+		for (std::size_t i = 0; i < m_nNumElements; i++) {
+			std::cout << "(";
+			for (std::si

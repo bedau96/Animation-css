@@ -717,4 +717,20 @@ void CBitVector::PrintContent() {
 }
 
 void CBitVector::PrintBinaryMasked(std::size_t from, std::size_t to) {
-	std::size_t new_to = to > (m_nByteSize<<3) ? (m_nByteSize<<3) 
+	std::size_t new_to = to > (m_nByteSize<<3) ? (m_nByteSize<<3) : to;
+
+	for (std::size_t i = from; i < new_to; i++) {
+		std::cout << (unsigned int) GetBit(i);
+	}
+	std::cout << std::endl;
+}
+
+void CBitVector::Transpose(std::size_t rows, std::size_t columns) {
+#ifdef SIMPLE_TRANSPOSE
+	SimpleTranspose(rows, columns);
+#else
+	EklundhBitTranspose(rows, columns);
+#endif
+}
+
+void CBitVector::SimpleTranspose(std::siz

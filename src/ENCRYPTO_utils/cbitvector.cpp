@@ -733,4 +733,15 @@ void CBitVector::Transpose(std::size_t rows, std::size_t columns) {
 #endif
 }
 
-void CBitVector::SimpleTranspose(std::siz
+void CBitVector::SimpleTranspose(std::size_t rows, std::size_t columns) {
+	CBitVector temp(rows * columns);
+	temp.Copy(m_pBits, 0, rows * columns / 8);
+	for (std::size_t i = 0; i < rows; i++) {
+		for (std::size_t j = 0; j < columns; j++) {
+			SetBit(j * rows + i, temp.GetBit(i * columns + j));
+		}
+	}
+}
+
+//A transposition algorithm for bit-matrices of size 2^i x 2^i
+void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t co

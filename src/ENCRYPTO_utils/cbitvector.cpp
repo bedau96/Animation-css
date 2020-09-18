@@ -744,4 +744,16 @@ void CBitVector::SimpleTranspose(std::size_t rows, std::size_t columns) {
 }
 
 //A transposition algorithm for bit-matrices of size 2^i x 2^i
-void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t co
+void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
+	REGISTER_SIZE* rowaptr;	//ptr;
+	REGISTER_SIZE* rowbptr;
+	REGISTER_SIZE temp_row;
+	REGISTER_SIZE mask;
+	REGISTER_SIZE invmask;
+	REGISTER_SIZE* lim;
+
+	lim = (REGISTER_SIZE*) m_pBits + ceil_divide(rows * columns, 8);
+
+	std::size_t offset = (columns >> 3) / sizeof(REGISTER_SIZE);
+	std::size_t numiters = ceil_log2(std::min(rows, columns));
+	s

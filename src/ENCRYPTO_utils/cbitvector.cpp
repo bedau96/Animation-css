@@ -756,4 +756,14 @@ void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
 
 	std::size_t offset = (columns >> 3) / sizeof(REGISTER_SIZE);
 	std::size_t numiters = ceil_log2(std::min(rows, columns));
-	s
+	std::size_t srcidx = 1, destidx;
+	std::size_t rounds;
+
+	//If swapping is performed on bit-level
+	for (std::size_t i = 0; i < LOG2_REGISTER_SIZE; i++, srcidx *= 2) {
+		destidx = offset * srcidx;
+		rowaptr = (REGISTER_SIZE*) m_pBits;
+		rowbptr = rowaptr + destidx;
+
+		//Preset the masks that are required for bit-level swapping operations
+		mask = TRANSPOSITION_M

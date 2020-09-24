@@ -766,4 +766,13 @@ void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
 		rowbptr = rowaptr + destidx;
 
 		//Preset the masks that are required for bit-level swapping operations
-		mask = TRANSPOSITION_M
+		mask = TRANSPOSITION_MASKS[i];
+		invmask = ~mask;
+
+		//If swapping is performed on byte-level reverse operations due to little-endian format.
+		rounds = rows / (srcidx * 2);
+		if (i > 2) {
+			for (std::size_t j = 0; j < rounds; j++) {
+				for (lim = rowbptr + destidx; rowbptr < lim; rowaptr++, rowbptr++) {
+					temp_row = *rowaptr;
+					*rowaptr = ((*rowaptr & mask) ^ ((*rowbptr & mask

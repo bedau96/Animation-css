@@ -775,4 +775,15 @@ void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
 			for (std::size_t j = 0; j < rounds; j++) {
 				for (lim = rowbptr + destidx; rowbptr < lim; rowaptr++, rowbptr++) {
 					temp_row = *rowaptr;
-					*rowaptr = ((*rowaptr & mask) ^ ((*rowbptr & mask
+					*rowaptr = ((*rowaptr & mask) ^ ((*rowbptr & mask) << srcidx));
+					*rowbptr = ((*rowbptr & invmask) ^ ((temp_row & invmask) >> srcidx));
+				}
+				rowaptr += destidx;
+				rowbptr += destidx;
+			}
+		} else {
+			for (std::size_t j = 0; j < rounds; j++) {
+				for (lim = rowbptr + destidx; rowbptr < lim; rowaptr++, rowbptr++) {
+					temp_row = *rowaptr;
+					*rowaptr = ((*rowaptr & invmask) ^ ((*rowbptr & invmask) >> srcidx));
+				

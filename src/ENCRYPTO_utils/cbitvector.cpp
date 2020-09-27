@@ -786,4 +786,15 @@ void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
 				for (lim = rowbptr + destidx; rowbptr < lim; rowaptr++, rowbptr++) {
 					temp_row = *rowaptr;
 					*rowaptr = ((*rowaptr & invmask) ^ ((*rowbptr & invmask) >> srcidx));
-				
+					*rowbptr = ((*rowbptr & mask) ^ ((temp_row & mask) << srcidx));
+				}
+				rowaptr += destidx;
+				rowbptr += destidx;
+			}
+		}
+	}
+
+	for (std::size_t i = LOG2_REGISTER_SIZE, swapoffset = 1, dswapoffset; i < numiters; i++, srcidx *= 2, swapoffset = swapoffset << 1) {
+		destidx = offset * srcidx;
+		dswapoffset = swapoffset << 1;
+		rowaptr = (REGISTER_SIZ

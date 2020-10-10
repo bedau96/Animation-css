@@ -821,4 +821,16 @@ void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
 
 		rowaptr = (REGISTER_SIZE*) m_pBits;
 		std::size_t rowbytesize = rows / 8;
-		std::size_t rowregsize = rows / (sizeof(
+		std::size_t rowregsize = rows / (sizeof(REGISTER_SIZE) * 8);
+		for (std::size_t i = 0; i < columns / rows; i++) {
+			rowbptr = (REGISTER_SIZE*) tempvec;
+			rowbptr += (i * rowregsize);
+			for (std::size_t j = 0; j < rows; j++, rowaptr += rowregsize, rowbptr += offset) {
+				memcpy(rowaptr, rowbptr, rowbytesize);
+			}
+		}
+		free(tempvec);
+	}
+
+	if (rows > columns) {
+		BYTE* tempvec = (BYTE*) malloc((rows * 

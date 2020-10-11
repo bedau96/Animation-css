@@ -833,4 +833,13 @@ void CBitVector::EklundhBitTranspose(std::size_t rows, std::size_t columns) {
 	}
 
 	if (rows > columns) {
-		BYTE* tempvec = (BYTE*) malloc((rows * 
+		BYTE* tempvec = (BYTE*) malloc((rows * columns) / 8);
+		memcpy(tempvec, m_pBits, ((rows / 8) * columns));
+
+		REGISTER_SIZE* rowaptr = (REGISTER_SIZE*) m_pBits;
+		std::size_t colbytesize = columns / 8;
+		std::size_t colregsize = columns / (sizeof(REGISTER_SIZE) * 8);
+		std::size_t offset_cols = (columns * columns) / (sizeof(REGISTER_SIZE) * 8);
+
+		for (std::size_t i = 0; i < columns; i++) {
+	

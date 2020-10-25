@@ -23,4 +23,17 @@
 #include <cassert>
 #include <cstddef>
 
-// forward declarati
+// forward declarations
+class crypto;
+
+/** Class which defines the functionality of storing C-based Bits in vector type format.*/
+class CBitVector {
+public:
+
+	//Constructor code begins here...
+
+	/** Constructor which initializes the member variables bit pointer and size to NULL and zero respectively. */
+	CBitVector();
+
+	/**
+	 	 Overloaded constructor of class \link CBitVec

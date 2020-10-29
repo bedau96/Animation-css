@@ -36,4 +36,10 @@ public:
 	CBitVector();
 
 	/**
-	 	 Overloaded constructor of class \link CBitVec
+	 	 Overloaded constructor of class \link CBitVector \endlink which calls internally \link Create(std::size_t bits) \endlink
+	 	 \param  bits	 - It is the number of bits which will be used to allocate the CBitVector with. For more info on how these bits are allocated refer to \link Create(std::size_t bits) \endlink
+	 */
+	CBitVector(std::size_t bits);
+
+	/**
+	 	Overloaded c

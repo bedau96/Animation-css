@@ -42,4 +42,6 @@ public:
 	CBitVector(std::size_t bits);
 
 	/**
-	 	Overloaded c
+	 	Overloaded constructor of class \link CBitVector \endlink which calls internally \link Create(std::size_t bits,crypto* crypt) \endlink
+	 	\param  bits	 - It is the number of bits which will be used to allocate the CBitVector with. For more info on how these bits are allocated refer to \link Create(std::size_t bits,crypto* crypt) \endlink
+	 	\param  crypt 	 - This ob

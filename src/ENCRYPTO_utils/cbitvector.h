@@ -44,4 +44,12 @@ public:
 	/**
 	 	Overloaded constructor of class \link CBitVector \endlink which calls internally \link Create(std::size_t bits,crypto* crypt) \endlink
 	 	\param  bits	 - It is the number of bits which will be used to allocate the CBitVector with. For more info on how these bits are allocated refer to \link Create(std::size_t bits,crypto* crypt) \endlink
-	 	\param  crypt 	 - This ob
+	 	\param  crypt 	 - This object from crypto class is used to generate pseudo random values for the cbitvector.
+	 */
+	CBitVector(std::size_t bits, crypto* crypt);
+
+	//Constructor code ends here...
+
+	//Basic Primitive function of allocation and deallocation begins here.
+	/**
+	 	 Function which gets called initially when the cbitvector object is created. This method is mostly

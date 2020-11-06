@@ -52,4 +52,16 @@ public:
 
 	//Basic Primitive function of allocation and deallocation begins here.
 	/**
-	 	 Function which gets called initially when the cbitvector object is created. This method is mostly
+	 	 Function which gets called initially when the cbitvector object is created. This method is mostly called from constructor of CBitVector class.
+	 	 The method sets bit pointer and size to NULL and zero respectively.
+	*/
+	void Init();
+
+	/**
+			Destructor which internally calls the delCBitVector for deallocating the space. This method internally calls
+			\link delCBitVector() \endlink.
+	*/
+	~CBitVector();
+
+	/**
+		Th

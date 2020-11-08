@@ -64,4 +64,12 @@ public:
 	~CBitVector();
 
 	/**
-		Th
+		This method is used to deallocate the bit pointer and size explicitly. This method needs to be called by the programmer explicitly.
+	*/
+	void delCBitVector();
+	//Basic Primitive function of allocation and deallocation ends here.
+
+
+	//Create function supported by CBitVector starts here...
+	/**
+		This method generates random values and assigns it to the 

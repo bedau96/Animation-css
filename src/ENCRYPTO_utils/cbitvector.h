@@ -72,4 +72,7 @@ public:
 
 	//Create function supported by CBitVector starts here...
 	/**
-		This method generates random values and assigns it to the 
+		This method generates random values and assigns it to the bitvector using crypto object. If the bits provided in the params are greater
+		than the bit size of the bitvector, then the bit vector is recreated with new bit size and filled in with random values.
+
+		\param  bits	 - It is the number of bits which will be used to allocate and assign random values of the CBitVector with. For more info

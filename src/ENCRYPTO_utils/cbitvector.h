@@ -97,4 +97,11 @@ public:
 		For example, if bit size provided is 110. After this method is called it will be 128 bits. It will perform a ceil of provided_bit_size
 		to AES bit size and multiply that ceiled value with AES bits size. (For reference, AES Bit size is taken as 128 bits)
 
-		\param  bits	
+		\param  bits	 - It is the number of bits which will be used to allocate the CBitVector with.
+	*/
+	void Create(std::size_t bits);
+
+
+	/**
+		This method is used to create the CBitVector with the provided byte size. The method creates a bit vector with a size close to AES Bytesize.
+		For example, if byte size provided is 9. After this method is called it will be 16 bytes. It wil

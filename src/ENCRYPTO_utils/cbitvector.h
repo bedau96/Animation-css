@@ -75,4 +75,14 @@ public:
 		This method generates random values and assigns it to the bitvector using crypto object. If the bits provided in the params are greater
 		than the bit size of the bitvector, then the bit vector is recreated with new bit size and filled in with random values.
 
-		\param  bits	 - It is the number of bits which will be used to allocate and assign random values of the CBitVector with. For more info
+		\param  bits	 - It is the number of bits which will be used to allocate and assign random values of the CBitVector with. For more info on how these bits are allocated refer to \link Create(std::size_t bits) \endlink
+		\param	crypt	 - It is the crypto class object which is used to generate random values for the bit size.
+	*/
+	void FillRand(std::size_t bits, crypto* crypt);
+
+
+
+	/* Create in bits and bytes */
+	
+	/**
+		This method is used to create the CBitVector with the provided bits. The me

@@ -93,4 +93,8 @@ public:
 	void CreateExact(std::size_t bits);
 
 	/**
-		This method is used to create the CBit
+		This method is used to create the CBitVector with the provided bits. The method creates a bit vector with a size close to AES Bitsize.
+		For example, if bit size provided is 110. After this method is called it will be 128 bits. It will perform a ceil of provided_bit_size
+		to AES bit size and multiply that ceiled value with AES bits size. (For reference, AES Bit size is taken as 128 bits)
+
+		\param  bits	

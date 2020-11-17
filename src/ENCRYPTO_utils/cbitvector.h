@@ -104,4 +104,8 @@ public:
 
 	/**
 		This method is used to create the CBitVector with the provided byte size. The method creates a bit vector with a size close to AES Bytesize.
-		For example, if byte size provided is 9. After this method is called it will be 16 bytes. It wil
+		For example, if byte size provided is 9. After this method is called it will be 16 bytes. It will perform a ceil of provided_byte_size
+		to AES byte size and multiply that ceiled value with AES byte size. (For reference, AES Byte size is taken as 16 bytes). Internally, this method
+		calls \link Create(std::size_t bits) \endlink. Therefore, for further info please refer to the internal method provided.
+
+		\param  bytes	 - It is the number of bytes whic

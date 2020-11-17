@@ -108,4 +108,10 @@ public:
 		to AES byte size and multiply that ceiled value with AES byte size. (For reference, AES Byte size is taken as 16 bytes). Internally, this method
 		calls \link Create(std::size_t bits) \endlink. Therefore, for further info please refer to the internal method provided.
 
-		\param  bytes	 - It is the number of bytes whic
+		\param  bytes	 - It is the number of bytes which will be used to allocate the CBitVector with.
+	*/
+	void CreateBytes(std::size_t bytes);
+
+	/**
+		This method is used to create the CBitVector with the provided byte size and fills it with random data from the crypt object. The method creates a
+		bit vector with a size close to AES Bytesize. For example, if byte size provided is 9. After this method

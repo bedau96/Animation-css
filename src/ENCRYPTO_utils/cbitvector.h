@@ -124,4 +124,8 @@ public:
 	void CreateBytes(std::size_t bytes, crypto* crypt);
 
 	/**
-		This method is used to create the CBitVector with the provided bits and set them to value zero. The method creates a bit vect
+		This method is used to create the CBitVector with the provided bits and set them to value zero. The method creates a bit vector with a size close to AES Bitsize.
+		And performs an assignment of zero to each bit being allocated. Internally, this method calls \link Create(std::size_t bits) \endlink. Therefore, for further info
+		please refer to the internal method provided.
+
+		\param  bits	 - It is the number of bits which will be used to allocate and assign zero values of the

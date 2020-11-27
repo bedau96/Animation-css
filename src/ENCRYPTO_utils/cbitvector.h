@@ -134,4 +134,8 @@ public:
 
 	/**
 		This method is used to create the CBitVector with the provided bits and set them to some random values. The method creates a bit vector with a size close to AES Bitsize.
-		And performs an assignment of random values to each bit being allocated. Internally, this method calls \link Create(std::size_t bits) \endlink a
+		And performs an assignment of random values to each bit being allocated. Internally, this method calls \link Create(std::size_t bits) \endlink and
+		\link FillRand(std::size_t bits, crypto* crypt) \endlink. Therefore, for further info please refer to the internal method provided.
+
+		\param  bits	 - It is the number of bits which will be used to allocate and assign random values of the CBitVector with.
+		\param	crypt	 - It is the crypto class object which is used to generate random values for the bit siz

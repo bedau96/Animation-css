@@ -138,4 +138,11 @@ public:
 		\link FillRand(std::size_t bits, crypto* crypt) \endlink. Therefore, for further info please refer to the internal method provided.
 
 		\param  bits	 - It is the number of bits which will be used to allocate and assign random values of the CBitVector with.
-		\param	crypt	 - It is the crypto class object which is used to generate random values for the bit siz
+		\param	crypt	 - It is the crypto class object which is used to generate random values for the bit size.
+	*/
+	void Create(std::size_t bits, crypto* crypt);
+
+
+	/**
+		This method is used create the CBitVector with the provided number of elements and element length. This method basically creates a 1-dimensional array/vector with the provided
+		element size and number of elements. This method internally calls \link Create(std::size_t bits) \endlink with

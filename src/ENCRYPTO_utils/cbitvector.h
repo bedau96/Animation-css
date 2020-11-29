@@ -160,3 +160,8 @@ public:
 		\param crypt			- It is the crypto class object which is used to generate random values for the provided bit size.
 	*/
 	void Create(std::size_t numelements, std::size_t elementlength, crypto* crypt);
+
+	/**
+		This method is used create the CBitVector with the provided number of elements of 2 dimensions and element length. This method basically creates a 2-dimensional array/vector
+		with the provided element size and number of elements in two dimensions. This method internally calls \link Create(std::size_t bits) \endlink with arguments as
+		elementlength*numelementsDimA*numelementsDi

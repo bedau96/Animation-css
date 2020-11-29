@@ -155,4 +155,8 @@ public:
 		This method is used create the CBitVector with the provided number of elements and element length and then assign random values to them. This method basically creates
 		a 1-dimensional array/vector with the provided element size and number of elements and assign some random values based on crypt object provided. This method internally
 		calls \link Create(std::size_t bits, crypto* crypt) \endlink for creation of 1-d vector.
-		\param numelements		- T
+		\param numelements		- The number of elements in the 1-dimensional array/vector which gets created.
+		\param elementlength	- The size of element in the provided cbitvector.
+		\param crypt			- It is the crypto class object which is used to generate random values for the provided bit size.
+	*/
+	void Create(std::size_t numelements, std::size_t elementlength, crypto* crypt);

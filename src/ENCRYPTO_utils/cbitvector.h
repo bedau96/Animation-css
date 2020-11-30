@@ -164,4 +164,9 @@ public:
 	/**
 		This method is used create the CBitVector with the provided number of elements of 2 dimensions and element length. This method basically creates a 2-dimensional array/vector
 		with the provided element size and number of elements in two dimensions. This method internally calls \link Create(std::size_t bits) \endlink with arguments as
-		elementlength*numelementsDimA*numelementsDi
+		elementlength*numelementsDimA*numelementsDimB.
+		\param numelementsDimA		- The number of elements in the 1st-dimension of the 2d array/vector which gets created.
+		\param numelementsDimB		- The number of elements in the 2nd-dimension of the 2d array/vector which gets created.
+		\param elementlength		- The size of element in the provided cbitvector.
+	*/
+	void Create(std::size_t nume

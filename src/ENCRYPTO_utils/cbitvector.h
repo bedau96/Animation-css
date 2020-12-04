@@ -172,4 +172,7 @@ public:
 	void Create(std::size_t numelementsDimA, std::size_t numelementsDimB, std::size_t elementlength);
 	/**
 		This method is used create the CBitVector with the provided number of elements of 2 dimensions and element length, and then assign random values to them. This method basically
-		creates a 2-dimensional array/vector with the provided element size and number of elements in two dimensions  and assign 
+		creates a 2-dimensional array/vector with the provided element size and number of elements in two dimensions  and assign some random values based on crypt object provided.
+		This method internally calls \link Create(std::size_t bits, crypto* crypt) \endlink.
+		\param numelementsDimA		- The number of elements in the 1st-dimension of the 2d array/vector which gets created.
+		\param numelementsDimB		- The number of elements in the 2nd-dimension of the 2d array/vector which gets created.

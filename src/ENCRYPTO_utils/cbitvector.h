@@ -176,3 +176,13 @@ public:
 		This method internally calls \link Create(std::size_t bits, crypto* crypt) \endlink.
 		\param numelementsDimA		- The number of elements in the 1st-dimension of the 2d array/vector which gets created.
 		\param numelementsDimB		- The number of elements in the 2nd-dimension of the 2d array/vector which gets created.
+		\param elementlength		- The size of element in the provided cbitvector.
+		\param crypt				- It is the crypto class object which is used to generate random values for the provided bit size.
+	*/
+	void Create(std::size_t numelementsDimA, std::size_t numelementsDimB, std::size_t elementlength, crypto* crypt);
+	//Create function supported by CBitVector ends here...
+
+
+
+	/*
+	 * Managem

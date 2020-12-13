@@ -209,4 +209,21 @@ public:
 	void ResetFromTo(std::size_t frombyte, std::size_t tobyte);
 
 	/**
-		This method sets all bit p
+		This method sets all bit position values in a CBitVector to One.
+	*/
+	void SetToOne();
+
+	/**
+		This method sets all bits in the CBitVector to the inverse
+	*/
+	void Invert();
+
+
+	/**
+		This is a getter method which returns the size of the CBitVector in bytes.
+		\return the byte size of CBitVector.
+	*/
+	std::size_t GetSize() const;
+
+	/**
+		This method checks if two CBitVectors are 

@@ -185,4 +185,13 @@ public:
 
 
 	/*
-	 * Managem
+	 * Management operations
+	 */
+
+	/**
+		This method is used to resize the bytes allocated to CBitVector with newly provided size. And also accommodate the data from previous allocation to new one.
+		\param newSizeBytes		-	This variable provides the new size to which the cbitvector needs to be modified to user's needs.
+	*/
+	void ResizeinBytes(std::size_t newSizeBytes);
+
+	/**

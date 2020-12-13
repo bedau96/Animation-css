@@ -195,3 +195,11 @@ public:
 	void ResizeinBytes(std::size_t newSizeBytes);
 
 	/**
+		This method is used to reset the values in the given CBitVector. This method sets all bit values to zeros. This is a slight variant of the method
+		\link CreateZeros(std::size_t bits) \endlink. The create method mentioned above allocates and sets value to zero. Whereas the provided method only
+		sets the value to zero.
+	*/
+	void Reset();
+
+	/**
+		This method is used to r

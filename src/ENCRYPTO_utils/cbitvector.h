@@ -202,4 +202,11 @@ public:
 	void Reset();
 
 	/**
-		This method is used to r
+		This method is used to reset the values in the given CBitVector for specific byte range.
+		\param 	frombyte	-	The source byte position from which the values needs to be reset.
+		\param 	tobyte		-	The destination byte position until which the values needs to be reset to.
+	*/
+	void ResetFromTo(std::size_t frombyte, std::size_t tobyte);
+
+	/**
+		This method sets all bit p

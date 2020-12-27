@@ -234,4 +234,9 @@ public:
 
 	/**
 		This method checks if two CBitVectors are equal or not for a given range of bit positions.
-		\param	vec		-		Vector to be checked with current one f
+		\param	vec		-		Vector to be checked with current one for the case of equality.
+		\param  from	-		Bit Position from which the vectors need to be checked for equality.
+		\param	to	 	-		Bit Position until which the vectors need to be checked for equality.
+		\return	boolean value which says whether the vectors are equal or not in the provided range of bits.
+	*/
+	BOOL IsEqual(const CBitVector& vec, std::size_t from, std

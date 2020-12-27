@@ -226,4 +226,12 @@ public:
 	std::size_t GetSize() const;
 
 	/**
-		This method checks if two CBitVectors are 
+		This method checks if two CBitVectors are equal or not.
+		\param	vec		-		Vector to be checked with current one for the case of equality.
+		\return	boolean value which says whether it is equal or not.
+	*/
+	BOOL IsEqual(const CBitVector& vec) const;
+
+	/**
+		This method checks if two CBitVectors are equal or not for a given range of bit positions.
+		\param	vec		-		Vector to be checked with current one f

@@ -250,4 +250,16 @@ public:
 
 
 	/**
-		This method gets the e
+		This method gets the element length of the CBitVector.
+		\return element length of the elements in CBitVector.
+	*/
+	std::size_t GetElementLength() const;
+
+	/*
+	 * Copy operations
+	 */
+
+	/**
+		This method is used to copy the provided CBitVector to itself. It internally calls
+		\link Copy(BYTE* p, int pos, int len) \endlink for copying bytewise.
+		\param	vec		- 		The vector from

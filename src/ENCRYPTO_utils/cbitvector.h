@@ -239,4 +239,15 @@ public:
 		\param	to	 	-		Bit Position until which the vectors need to be checked for equality.
 		\return	boolean value which says whether the vectors are equal or not in the provided range of bits.
 	*/
-	BOOL IsEqual(const CBitVector& vec, std::size_t from, std
+	BOOL IsEqual(const CBitVector& vec, std::size_t from, std::size_t to) const;
+
+	/**
+		This method sets the element length of the CBitVector. It can be used to modify the object size in a CBitVector when
+		around with the multi dimensional arrays/vectors.
+		\param	elelen	-		New element length which can be used to set the object size in a CBitVector.
+	*/
+	void SetElementLength(std::size_t elelen);
+
+
+	/**
+		This method gets the e

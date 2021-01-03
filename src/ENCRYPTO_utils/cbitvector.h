@@ -262,4 +262,10 @@ public:
 	/**
 		This method is used to copy the provided CBitVector to itself. It internally calls
 		\link Copy(BYTE* p, int pos, int len) \endlink for copying bytewise.
-		\param	vec		- 		The vector from
+		\param	vec		- 		The vector from which the copying needs to be performed.
+	*/
+	void Copy(const CBitVector& vec);
+
+	/**
+		This method is used to copy the provided CBitVector to itself for a given range. It internally calls \link Copy(BYTE* p, int pos, int len) \endlink
+		for copying bytewise. Copying is done in a slightly different way. Here the range is pos and len. The offset is defined for

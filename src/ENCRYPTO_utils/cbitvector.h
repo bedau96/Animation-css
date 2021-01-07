@@ -272,4 +272,10 @@ public:
 		for the copying vector. So if the method is called as B.Copy(A,5,10) then, values of vector A will be copied from first index location for length 10
 		to the vector B from position 5 for length 10. Unlike copying values from 5 position in vector A to vector B for length 10.
 		\param	vec		- 		The vector from which the copying needs to be performed.
-		\par
+		\param	pos		- 		The positional offset for copying into current vector.
+		\param	len		-		Length or amount of values to be copied to the current vector from provided vector.
+	*/
+	void Copy(const CBitVector& vec, std::size_t pos, std::size_t len);
+
+	/**
+		This method is used to copy the current CBitVector with some ByteLocation with positional shift and length. This method is the base method for m

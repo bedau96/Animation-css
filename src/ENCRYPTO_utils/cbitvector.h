@@ -268,4 +268,8 @@ public:
 
 	/**
 		This method is used to copy the provided CBitVector to itself for a given range. It internally calls \link Copy(BYTE* p, int pos, int len) \endlink
-		for copying bytewise. Copying is done in a slightly different way. Here the range is pos and len. The offset is defined for
+		for copying bytewise. Copying is done in a slightly different way. Here the range is pos and len. The offset is defined for the base vector and not
+		for the copying vector. So if the method is called as B.Copy(A,5,10) then, values of vector A will be copied from first index location for length 10
+		to the vector B from position 5 for length 10. Unlike copying values from 5 position in vector A to vector B for length 10.
+		\param	vec		- 		The vector from which the copying needs to be performed.
+		\par

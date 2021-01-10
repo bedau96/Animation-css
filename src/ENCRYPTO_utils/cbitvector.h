@@ -278,4 +278,10 @@ public:
 	void Copy(const CBitVector& vec, std::size_t pos, std::size_t len);
 
 	/**
-		This method is used to copy the current CBitVector with some ByteLocation with positional shift and length. This method is the base method for m
+		This method is used to copy the current CBitVector with some ByteLocation with positional shift and length. This method is the base method for methods
+		\link Copy(CBitVector& vec, int pos, int len) \endlink and \link Copy(CBitVector& vec) \endlink.
+		\param	p		-		Pointer to the byte location to be copied to the CBitVector.
+		\param	pos		-		Positional offset for copying into current CBitVector.
+		\param	len		-  		Length or amount of values to be copied to the current vector from provided byte location.
+	*/
+	voi

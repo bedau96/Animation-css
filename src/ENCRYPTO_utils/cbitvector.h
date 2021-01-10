@@ -289,4 +289,17 @@ public:
 	/**
 		This method performs OR operation bytewise with the current CBitVector at the provided byte position with another Byte object.
 		\param	pos		- 		Byte position in the CBitVector which is used to perform OR operation with.
-		\param	p		-		Byte with which the OR operation is perform
+		\param	p		-		Byte with which the OR operation is performed to get the result.
+
+	*/
+	void ORByte(std::size_t pos, BYTE p);
+
+	/*
+	 * Bitwise operations
+	 */
+
+	/**
+		This method gets the bit in the provided index by using the maskbits. The maskbits brings the concept of
+		endianness in the vector. In this method MASK_BIT is used to  extract the bits which are assumed to be
+		organized in Little Endian form.
+		\param	idx		-		Bit Index which needs to be fetch

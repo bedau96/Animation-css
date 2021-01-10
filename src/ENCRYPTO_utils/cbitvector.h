@@ -284,4 +284,9 @@ public:
 		\param	pos		-		Positional offset for copying into current CBitVector.
 		\param	len		-  		Length or amount of values to be copied to the current vector from provided byte location.
 	*/
-	voi
+	void Copy(const BYTE* p, std::size_t pos, std::size_t len);
+
+	/**
+		This method performs OR operation bytewise with the current CBitVector at the provided byte position with another Byte object.
+		\param	pos		- 		Byte position in the CBitVector which is used to perform OR operation with.
+		\param	p		-		Byte with which the OR operation is perform

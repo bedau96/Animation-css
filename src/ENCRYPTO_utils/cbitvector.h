@@ -310,4 +310,12 @@ public:
 	/**
 		This method sets the bit in the provided index by using the maskbits and the provided bit. The maskbits brings the concept of
 		endianness in the vector. In this method C_MASK_BIT is used to figure out the bits which are assumed to be
-		organized
+		organized in Little Endian form.
+		\param	idx		-		Bit Index which needs to be written to in the CBitVector.
+		\param	b		-		The bit which being written in the provided index.
+	*/
+	void SetBit(std::size_t idx, BYTE b);
+
+	/**
+		This method gets the bit in the provided index without using the maskbits. The maskbits brings the concept of
+		endianness in the vector. In this method mask bits are not used so

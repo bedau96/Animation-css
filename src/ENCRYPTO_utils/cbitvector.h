@@ -302,4 +302,12 @@ public:
 		This method gets the bit in the provided index by using the maskbits. The maskbits brings the concept of
 		endianness in the vector. In this method MASK_BIT is used to  extract the bits which are assumed to be
 		organized in Little Endian form.
-		\param	idx		-		Bit Index which needs to be fetch
+		\param	idx		-		Bit Index which needs to be fetched from the CBitVector.
+		\return The byte which has got just the bit in it.
+	*/
+	BYTE GetBit(std::size_t idx) const;
+
+	/**
+		This method sets the bit in the provided index by using the maskbits and the provided bit. The maskbits brings the concept of
+		endianness in the vector. In this method C_MASK_BIT is used to figure out the bits which are assumed to be
+		organized

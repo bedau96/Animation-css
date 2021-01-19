@@ -326,4 +326,11 @@ public:
 
 	/**
 		This method sets the bit in the provided index without using the maskbits. The maskbits brings the concept of
-		endianness in the
+		endianness in the vector. In this method mask bits are not used so the vector is treated in Big Endian form.
+		\param	idx		-		Bit Index which needs to be written to in the CBitVector.
+		\param	b		-		The bit which being written in the provided index.
+	*/
+	void SetBitNoMask(std::size_t idx, BYTE b);
+
+	/**
+		This method XORs the bit in the provided index without using the maskbits. The maskbits 

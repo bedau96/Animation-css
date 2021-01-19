@@ -318,4 +318,12 @@ public:
 
 	/**
 		This method gets the bit in the provided index without using the maskbits. The maskbits brings the concept of
-		endianness in the vector. In this method mask bits are not used so
+		endianness in the vector. In this method mask bits are not used so the vector is treated in Big Endian form.
+		\param	idx		-		Bit Index which needs to be fetched from the CBitVector.
+		\return The byte which has got just the bit in it.
+	*/
+	BYTE GetBitNoMask(std::size_t idx) const;
+
+	/**
+		This method sets the bit in the provided index without using the maskbits. The maskbits brings the concept of
+		endianness in the

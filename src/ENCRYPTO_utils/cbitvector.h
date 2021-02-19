@@ -345,4 +345,11 @@ public:
 	 */
 
 	/**
-		Thi
+		This method sets a byte in a given index of the CBitVector with the provided Byte.
+		\param	idx		-	Index where the byte needs to be set.
+		\param	p		-	Byte which needs to be copied to.
+	*/
+	void SetByte(std::size_t idx, BYTE p);
+
+	/**
+		This method returns the byte at the given index in the CBitVector. Here the index is w.r.t bytes

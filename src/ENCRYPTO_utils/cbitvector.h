@@ -352,4 +352,13 @@ public:
 	void SetByte(std::size_t idx, BYTE p);
 
 	/**
-		This method returns the byte at the given index in the CBitVector. Here the index is w.r.t bytes
+		This method returns the byte at the given index in the CBitVector. Here the index is w.r.t bytes.
+		\param	idx		-	Index of the byte which needs to be returned from the CBitVector.
+		\return Byte is returned from CBitVector at the given index.
+	*/
+	BYTE GetByte(std::size_t idx) const;
+
+	/**
+		Not Used Currently in Framework.
+		This method performs XOR operation at the given index in the CBitVector with a provided Byte.
+		\param	idx		-	Index of the byte which needs t

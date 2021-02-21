@@ -387,4 +387,10 @@ public:
 	void GetBits(BYTE* p, std::size_t pos, std::size_t len) const;
 
 	/**
-		This method gets elements from the CBitVector bytewise from a given offset for
+		This method gets elements from the CBitVector bytewise from a given offset for a given length. And stores the result
+		in the provided byte pointer.
+		\param	p		-	The resulting bits for the given range in the CBitVector is stored in the byte pointer p.
+		\param	pos		-	The positional offset in the CBitVector from which the data needs to obtained.
+		\param	len		- 	The range limit of obtaining the data from the CBitVector.
+	*/
+	void GetBytes(BYTE* p, std::size_t pos, s

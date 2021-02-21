@@ -370,3 +370,14 @@ public:
 		This method performs AND operation at the given index in the CBitVector with a provided Byte.
 		\param	idx		-	Index of the byte which needs to be ANDed inside the CBitVector.
 		\param	b		- 	Byte to be ANDed with the CBitVector.
+	*/
+	void ANDByte(std::size_t idx, BYTE b);
+
+	/*
+	 * Get Operations
+	 */
+
+	/**
+		This method gets elements from the CBitVector bitwise from a given offset for a given length. And stores the result
+		in the provided byte pointer. This method is used by the generic method \link Get(int pos, int len) \endlink
+		\param	p		-	The resulting bits for the given range in the CBitVecto

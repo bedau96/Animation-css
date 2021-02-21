@@ -361,4 +361,12 @@ public:
 	/**
 		Not Used Currently in Framework.
 		This method performs XOR operation at the given index in the CBitVector with a provided Byte.
-		\param	idx		-	Index of the byte which needs t
+		\param	idx		-	Index of the byte which needs to be XORed inside the CBitVector.
+		\param	b		- 	Byte to be XORed with the CBitVector.
+	*/
+	void XORByte(std::size_t idx, BYTE b);
+
+	/**
+		This method performs AND operation at the given index in the CBitVector with a provided Byte.
+		\param	idx		-	Index of the byte which needs to be ANDed inside the CBitVector.
+		\param	b		- 	Byte to be ANDed with the CBitVector.

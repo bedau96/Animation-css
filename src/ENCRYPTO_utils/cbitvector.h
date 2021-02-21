@@ -380,4 +380,11 @@ public:
 	/**
 		This method gets elements from the CBitVector bitwise from a given offset for a given length. And stores the result
 		in the provided byte pointer. This method is used by the generic method \link Get(int pos, int len) \endlink
-		\param	p		-	The resulting bits for the given range in the CBitVecto
+		\param	p		-	The resulting bits for the given range in the CBitVector is stored in the byte pointer p.
+		\param	pos		-	The positional offset in the CBitVector from which the data needs to obtained.
+		\param	len		- 	The range limit of obtaining the data from the CBitVector.
+	*/
+	void GetBits(BYTE* p, std::size_t pos, std::size_t len) const;
+
+	/**
+		This method gets elements from the CBitVector bytewise from a given offset for

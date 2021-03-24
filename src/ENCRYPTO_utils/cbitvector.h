@@ -399,4 +399,18 @@ public:
 		Generic method which performs the operation of getting values from a CBitVector for a given bit position and length.
 		This method internally calls \link GetBits(BYTE* p, int pos, int len) \endlink.
 		\param	pos		-	The positional offset in the CBitVector from which the data needs to obtained.
-		
+		\param	len		- 	The range limit of obtaining the data from the CBitVector.
+		\return	returns the value/values for the provided range.
+	*/
+	template<class T> T Get(std::size_t pos, std::size_t len) const {
+		assert(len <= sizeof(T) * 8);
+		T val = 0;
+		GetBits((BYTE*) &val, pos, len);
+		return val;
+	}
+
+	/*
+	 * Set Operations
+	 */
+	/**
+		The method for setting CBitVector for

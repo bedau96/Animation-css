@@ -413,4 +413,8 @@ public:
 	 * Set Operations
 	 */
 	/**
-		The method for setting CBitVector for
+		The method for setting CBitVector for a given bit range with offset and length in unsigned 64bit integer format. This method
+		is called from \link SetBits(BYTE* p, int pos, int len) \endlink and \link Set(T val, int pos, int len) \endlink.
+		\param	p		-	Byte array passed to be set to the current CBitVector.
+		\param	pos		-	Positional offset in the CBitVector, where data will be set from the provided byte array.
+		\param	

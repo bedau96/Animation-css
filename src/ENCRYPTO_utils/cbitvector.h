@@ -417,4 +417,11 @@ public:
 		is called from \link SetBits(BYTE* p, int pos, int len) \endlink and \link Set(T val, int pos, int len) \endlink.
 		\param	p		-	Byte array passed to be set to the current CBitVector.
 		\param	pos		-	Positional offset in the CBitVector, where data will be set from the provided byte array.
-		\param	
+		\param	len		-   The range limit of obtaining the data from the CBitVector.
+	*/
+	void SetBits(const BYTE* p, std::size_t pos, std::size_t len);
+
+	/**
+		The method for setting CBitVector for a given bit range with offsets and length with another Byte Array.
+		\param	p		-	Byte array passed to be set with the current CBitVector.
+		\param	ppos	-	Positional offset in the Byte Array.

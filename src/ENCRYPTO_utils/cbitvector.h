@@ -425,3 +425,10 @@ public:
 		The method for setting CBitVector for a given bit range with offsets and length with another Byte Array.
 		\param	p		-	Byte array passed to be set with the current CBitVector.
 		\param	ppos	-	Positional offset in the Byte Array.
+		\param	pos		-	Positional offset in the CBitVector, where data will be set from the provided byte array.
+		\param	len		-	The range limit of obtaining the data from the CBitVector.
+	 */
+	void SetBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len);
+
+	/**
+		The method for setting CBitVector for a given byte range with offset and len

@@ -437,4 +437,14 @@ public:
 		\param	pos		-	Byte position offset in the CBitVector, where data will be set from the provided byte array.
 		\param	len		-   The number of bytes to be set.
 	*/
-	void SetBytes(const BYT
+	void SetBytes(const BYTE* src, std::size_t pos, std::size_t len);
+
+	/**
+		This method sets the values in a given byte range to Zero in the current CBitVector.
+		\param	bytepos		-	Byte Positional offset in the CBitVector.
+		\param	bytelen		-	Byte Length in the CBitVector until which the value needs to be set to zero.
+	*/
+	void SetBytesToZero(std::size_t bytepos, std::size_t bytelen);
+
+	/**
+		Generic method

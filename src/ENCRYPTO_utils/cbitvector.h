@@ -431,4 +431,10 @@ public:
 	void SetBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len);
 
 	/**
-		The method for setting CBitVector for a given byte range with offset and len
+		The method for setting CBitVector for a given byte range with offset and length. This method internally calls the method
+		\link SetBytes(T* dst, T* src, T* lim) \endlink.
+		\param	src		-	Byte array passed to be set to the current CBitVector.
+		\param	pos		-	Byte position offset in the CBitVector, where data will be set from the provided byte array.
+		\param	len		-   The number of bytes to be set.
+	*/
+	void SetBytes(const BYT

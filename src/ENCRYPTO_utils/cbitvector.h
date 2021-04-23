@@ -477,4 +477,9 @@ public:
 	*/
 	void XORBytes(const BYTE* p, std::size_t pos, std::size_t len);
 	/**
-		This method performs XOR oper
+		This method performs XOR operation for a given length in the CBitVector with a provided Byte Array.	This method internally calls
+		\link XORBytes(BYTE* p, int pos, int len) \endlink.
+		\param	p		- 		Byte Array to be XORed with the CBitVector range.
+		\param	len		-  		Length or amount of values to be XORed to the current vector from provided byte location.
+	*/
+	void XORBytes(const

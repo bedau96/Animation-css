@@ -506,4 +506,11 @@ public:
 	/**
 		The method for XORing CBitVector for a given bit range with offset and length. This method is called from
 		\link XOR(T val, int pos, int len) \endlink.
-	
+		\param	p		-	Byte array passed to be XORed with the current CBitVector.
+		\param	pos		-	Positional offset in the CBitVector, where data will be XORed from the provided byte array.
+		\param	len		-   The range limit of obtaining the data from the CBitVector.
+	*/
+	void XORBits(const BYTE* p, std::size_t pos, std::size_t len);
+
+	/**
+		The meth

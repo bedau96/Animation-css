@@ -452,4 +452,12 @@ public:
 		\param	pos		-	The positional offset in the CBitVector from which the data needs to obtained.
 		\param	len		- 	The range limit of obtaining the data from the CBitVector.
 	*/
-	t
+	template<class T> void Set(T val, std::size_t pos, std::size_t len) {
+		assert(len <= sizeof(T) * 8);
+		SetBits((BYTE*) &val, pos, len);
+	}
+
+	/**
+		This method sets the values in a given bit range to Zero in the current CBitVector.
+		\param	bitpos		-	Bit Positional offset in the CBitVector.
+		\param	bitlen		-	Bit Length in the CBitVector until which the value needs

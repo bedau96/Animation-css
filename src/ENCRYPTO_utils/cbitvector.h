@@ -495,4 +495,15 @@ public:
 	void XORVector(const CBitVector &vec, std::size_t pos, std::size_t len);
 
 	/**
-		Generic method which is used to XOR bit wise the CBitVector. This method intern
+		Generic method which is used to XOR bit wise the CBitVector. This method internally calls
+		\link XORBits(BYTE* p, int pos, int len) \endlink.
+	*/
+	template<class T> void XOR(T val, std::size_t pos, std::size_t len) {
+		assert(len <= sizeof(T) * 8);
+		XORBits((BYTE*) &val, pos, len);
+	}
+
+	/**
+		The method for XORing CBitVector for a given bit range with offset and length. This method is called from
+		\link XOR(T val, int pos, int len) \endlink.
+	

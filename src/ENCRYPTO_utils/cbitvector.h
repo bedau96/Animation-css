@@ -482,4 +482,10 @@ public:
 		\param	p		- 		Byte Array to be XORed with the CBitVector range.
 		\param	len		-  		Length or amount of values to be XORed to the current vector from provided byte location.
 	*/
-	void XORBytes(const
+	void XORBytes(const BYTE* p, std::size_t len);
+
+	/**
+	 	Not Used in the Framework.
+		This method performs XOR operation from a given position in the CBitVector with another CBitVector with a length.
+		This method internally calls \link XORBytes(BYTE* p, int pos, int len) \endlink.
+		\param	vec		- 		Provided Array to be XORed with the CBitVector.

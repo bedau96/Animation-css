@@ -447,4 +447,9 @@ public:
 	void SetBytesToZero(std::size_t bytepos, std::size_t bytelen);
 
 	/**
-		Generic method
+		Generic method which performs the operation of setting values to a CBitVector for a given bit position and length.
+		This method internally calls \link SetBits(BYTE* p, std::size_t pos, std::size_t len) \endlink.
+		\param	pos		-	The positional offset in the CBitVector from which the data needs to obtained.
+		\param	len		- 	The range limit of obtaining the data from the CBitVector.
+	*/
+	t

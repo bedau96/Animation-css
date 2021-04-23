@@ -489,3 +489,10 @@ public:
 		This method performs XOR operation from a given position in the CBitVector with another CBitVector with a length.
 		This method internally calls \link XORBytes(BYTE* p, int pos, int len) \endlink.
 		\param	vec		- 		Provided Array to be XORed with the CBitVector.
+		\param	pos		-		Positional offset for XORing into current CBitVector.
+		\param	len		-  		Length or amount of values to be XORed to the current vector from provided byte location.
+	*/
+	void XORVector(const CBitVector &vec, std::size_t pos, std::size_t len);
+
+	/**
+		Generic method which is used to XOR bit wise the CBitVector. This method intern

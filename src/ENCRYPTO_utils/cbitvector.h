@@ -460,4 +460,14 @@ public:
 	/**
 		This method sets the values in a given bit range to Zero in the current CBitVector.
 		\param	bitpos		-	Bit Positional offset in the CBitVector.
-		\param	bitlen		-	Bit Length in the CBitVector until which the value needs
+		\param	bitlen		-	Bit Length in the CBitVector until which the value needs to be set to zero.
+	*/
+	void SetBitsToZero(std::size_t bitpos, std::size_t bitlen);
+
+	/*
+	 * XOR Operations
+	 */
+
+	/**
+		This method performs XOR operation from a given position in the CBitVector with a provided Byte Array with a length.
+		This method is called from \link XORBytes(BYTE* p, int len) \endlink. This method internally calls \link XORBytes(T* dst, T* src, T* l

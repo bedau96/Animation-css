@@ -513,4 +513,8 @@ public:
 	void XORBits(const BYTE* p, std::size_t pos, std::size_t len);
 
 	/**
-		The meth
+		The method for XORing CBitVector for a given bit range with offsets and length with another Byte Array.
+		\param	p		-	Byte array passed to be XORed with the current CBitVector.
+		\param	ppos	-	Positional offset in the Byte Array.
+		\param	pos		-	Positional offset in the CBitVector, where data will be XORed from the provided byte array.
+		\param	len		-   Th

@@ -517,4 +517,15 @@ public:
 		\param	p		-	Byte array passed to be XORed with the current CBitVector.
 		\param	ppos	-	Positional offset in the Byte Array.
 		\param	pos		-	Positional offset in the CBitVector, where data will be XORed from the provided byte array.
-		\param	len		-   Th
+		\param	len		-   The range limit of obtaining the data from the CBitVector.
+	*/
+	void XORBitsPosOffset(const BYTE* p, std::size_t ppos, std::size_t pos, std::size_t len);
+
+	/**
+		Set the value of this CBitVector to this XOR b
+		\param	b		-	Pointer to a CBitVector which is XORed on this CBitVector
+	*/
+	void XOR(const CBitVector* b);
+
+	/**
+		This method performs XOR operation

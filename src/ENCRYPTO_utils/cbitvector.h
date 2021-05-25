@@ -528,4 +528,7 @@ public:
 	void XOR(const CBitVector* b);
 
 	/**
-		This method performs XOR operation
+		This method performs XOR operation from a given position in the CBitVector with a provided Byte Array with a length.
+		The XORing is performed in a slightly different way. The byte array is reversed before it is XORed with the CBitVector.
+		This method is called from \link XORBytes(BYTE* p, int len) \endlink. This method internally calls \link XORBytes(T* dst, T* src, T* lim) \endlink.
+		\param	p		- 		Byte Array to 

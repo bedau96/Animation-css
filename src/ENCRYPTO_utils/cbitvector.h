@@ -531,4 +531,15 @@ public:
 		This method performs XOR operation from a given position in the CBitVector with a provided Byte Array with a length.
 		The XORing is performed in a slightly different way. The byte array is reversed before it is XORed with the CBitVector.
 		This method is called from \link XORBytes(BYTE* p, int len) \endlink. This method internally calls \link XORBytes(T* dst, T* src, T* lim) \endlink.
-		\param	p		- 		Byte Array to 
+		\param	p		- 		Byte Array to be XORed with the CBitVector range.
+		\param	pos		-		Positional offset for XORing into current CBitVector.
+		\param	len		-  		Length or amount of values to be XORed to the current vector from provided byte location.
+	*/
+	void XORBytesReverse(const BYTE* p, std::size_t pos, std::size_t len);
+
+	/*
+	 * AND Operations
+	 */
+
+	/**
+		This method performs A

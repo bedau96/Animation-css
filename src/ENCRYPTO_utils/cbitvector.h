@@ -542,4 +542,8 @@ public:
 	 */
 
 	/**
-		This method performs A
+		This method performs AND operation from a given position in the CBitVector with a provided Byte Array with a length.
+		This method internally calls \link ANDBytes(T* dst, T* src, T* lim) \endlink.
+		\param	p		- 		Byte Array to be ANDed with the CBitVector range.
+		\param	pos		-		Positional offset for ANDing into current CBitVector.
+		\param	len		-  		Length or amount of values to be ANDed to the current vector from pr

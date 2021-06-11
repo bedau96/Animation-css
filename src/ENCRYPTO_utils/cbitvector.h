@@ -546,4 +546,14 @@ public:
 		This method internally calls \link ANDBytes(T* dst, T* src, T* lim) \endlink.
 		\param	p		- 		Byte Array to be ANDed with the CBitVector range.
 		\param	pos		-		Positional offset for ANDing into current CBitVector.
-		\param	len		-  		Length or amount of values to be ANDed to the current vector from pr
+		\param	len		-  		Length or amount of values to be ANDed to the current vector from provided byte location.
+	*/
+	void ANDBytes(const BYTE* p, std::size_t pos, std::size_t len);
+
+	/*
+	 * Set operations
+	 */
+	/**
+		This method is used to set and XOR a CBitVector with a byte array and then XOR it with another byte array
+		for a given range. This method internally calls \link Copy(BYTE* p, int pos, int len) \endlink and
+		\link XORBytes(BYTE* p, int po

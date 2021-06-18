@@ -560,4 +560,11 @@ public:
 		\param	p		-		Pointer to the byte location to be copied to the CBitVector.
 		\param 	q		-		Pointer to the byte location with which the CBitVector is XORed with.
 		\param	pos		-		Positional offset for copying and XORing into current CBitVector.
-		\param	len		-  		Length or amount of values to be copied and XORed to the current vector fro
+		\param	len		-  		Length or amount of values to be copied and XORed to the current vector from provided byte location.
+	*/
+	void SetXOR(const BYTE* p, const BYTE* q, std::size_t pos, std::size_t len);
+
+	/**
+		This method is used to set and AND a CBitVector with a byte array and then AND it with another byte array
+		for a given range. This method internally calls \link Copy(BYTE* p, int pos, int len) \endlink and
+		\link ANDByt

@@ -567,4 +567,8 @@ public:
 	/**
 		This method is used to set and AND a CBitVector with a byte array and then AND it with another byte array
 		for a given range. This method internally calls \link Copy(BYTE* p, int pos, int len) \endlink and
-		\link ANDByt
+		\link ANDBytes(BYTE* p, int pos, int len) \endlink.
+		\param	p		-		Pointer to the byte location to be copied to the CBitVector.
+		\param 	q		-		Pointer to the byte location with which the CBitVector is ANDed with.
+		\param	pos		-		Positional offset for copying and ANDing into current CBitVector.
+		\param	len		-  		Length or amount of values to be copied 

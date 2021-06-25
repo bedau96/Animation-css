@@ -571,4 +571,16 @@ public:
 		\param	p		-		Pointer to the byte location to be copied to the CBitVector.
 		\param 	q		-		Pointer to the byte location with which the CBitVector is ANDed with.
 		\param	pos		-		Positional offset for copying and ANDing into current CBitVector.
-		\param	len		-  		Length or amount of values to be copied 
+		\param	len		-  		Length or amount of values to be copied and ANDed to the current vector from provided byte location.
+	*/
+	void SetAND(const BYTE* p, const BYTE* q, std::size_t pos, std::size_t len);
+
+	/**
+		Set the value of this CBitVector to this AND b
+		\param	b		-	Pointer to a CBitVector which is ANDed on this CBitVector
+	*/
+	void AND(const CBitVector* b);
+
+	/**
+		Cyclic shift left by pos positions
+		\param

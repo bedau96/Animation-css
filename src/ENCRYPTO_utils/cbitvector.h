@@ -583,4 +583,20 @@ public:
 
 	/**
 		Cyclic shift left by pos positions
-		\param
+		\param	pos		-	the left shift value
+	*/
+	void CLShift(std::size_t pos);
+
+
+	/*
+	 * Buffer access operations
+	 */
+
+	/**
+		This method returns CBitVector in byte array format. This is very widely used method.
+	*/
+	BYTE* GetArr();
+	const BYTE* GetArr() const;
+
+	/**
+		This method is used to attach a new buffer into the CBitVector provided as arguments to this met

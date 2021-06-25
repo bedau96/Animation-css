@@ -599,4 +599,19 @@ public:
 	const BYTE* GetArr() const;
 
 	/**
-		This method is used to attach a new buffer into the CBitVector provided as arguments to this met
+		This method is used to attach a new buffer into the CBitVector provided as arguments to this method.
+		\param	p		-		Pointer to the byte location to be attached to the CBitVector.
+		\param  size	-		Number of bytes attached from the provided buffer.
+	*/
+	void AttachBuf(BYTE* p, std::size_t size = 0);
+
+	/**
+		This method is used to detach the buffer from the CBitVector. */
+	void DetachBuf();
+
+	/*
+	 * Print Operations
+	 */
+
+	/**
+		This method pr

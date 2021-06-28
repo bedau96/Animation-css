@@ -631,4 +631,13 @@ public:
 		\param	fromByte		-		The byte from which the printing of CBitVector begins.
 		\param	toByte			-		The byte until which the printing of CBitVector is done.
 	*/
-	void P
+	void PrintHex(std::size_t fromByte, std::size_t toByte, bool linebreak = true);
+
+	/**
+		This method prints the CBitVector in Binary format. This method internally calls \link Print(int fromBit, int toBit) \endlink.
+	*/
+	void PrintBinary();
+
+	/**
+		This method is a more abstract printing method which is used to print the CBitVector even if the vector is a simple 1 bit based
+		vector o

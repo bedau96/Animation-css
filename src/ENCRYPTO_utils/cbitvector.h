@@ -621,4 +621,14 @@ public:
 	*/
 	void Print(std::size_t fromBit, std::size_t toBit);
 
-	/*
+	/**
+		This method prints the CBitVector in Hexadecimal format.
+	*/
+	void PrintHex(bool linebreak = true);
+
+	/**
+		This method prints the CBitVector in Hexadecimal format for the provided byte range.
+		\param	fromByte		-		The byte from which the printing of CBitVector begins.
+		\param	toByte			-		The byte until which the printing of CBitVector is done.
+	*/
+	void P

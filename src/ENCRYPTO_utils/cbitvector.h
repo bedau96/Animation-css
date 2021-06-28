@@ -614,4 +614,11 @@ public:
 	 */
 
 	/**
-		This method pr
+		This method prints the CBitVector bitwise for provided bit range. This method internally calls \link  GetBitNoMask(int idx) \endlink.
+		This method is called from \link PrintBinary() \endlink.
+		\param	fromBit			-		The bit from which the printing starts in a CBitVector.
+		\param	toBit			-		The bit until which the printing in a CBitVector is done.
+	*/
+	void Print(std::size_t fromBit, std::size_t toBit);
+
+	/*

@@ -647,4 +647,14 @@ public:
 
 	/**
 		This method prints the CBitVector bitwise for provided bit range with mask. This method internally calls \link  GetBit(int idx) \endlink.
-		\param	fromBit			-		T
+		\param	fromBit			-		The bit from which the printing starts in a CBitVector.
+		\param	toBit			-		The bit until which the printing in a CBitVector is done.
+	*/
+	void PrintBinaryMasked(std::size_t from, std::size_t to);
+
+	/*
+	 * If the cbitvector is abstracted to an array of elements with m_nElementLength bits size, these methods can be used for easier access
+	 */
+
+	/**
+		Generic method which provides 

@@ -640,4 +640,11 @@ public:
 
 	/**
 		This method is a more abstract printing method which is used to print the CBitVector even if the vector is a simple 1 bit based
-		vector o
+		vector or 1-d array/vector or even a 2-d vector/array. This method internally calls methods \link Get(int i) \endlink and
+		\link Get2D(int i, int j) \endlink.
+	*/
+	void PrintContent();
+
+	/**
+		This method prints the CBitVector bitwise for provided bit range with mask. This method internally calls \link  GetBit(int idx) \endlink.
+		\param	fromBit			-		T

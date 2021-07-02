@@ -657,4 +657,12 @@ public:
 	 */
 
 	/**
-		Generic method which provides 
+		Generic method which provides more abstraction for getting elements in the CBitVector. It is mainly used for getting values which are
+		1-dimensional in nature. This method internally calls \link Get(int pos, int len) \endlink.
+		\param	i		-		Index from which data needs to be fetched.
+	*/
+	template<class T> T Get(std::size_t i) const {
+		return Get<T>(i * m_nElementLength, m_nElementLength);
+	}
+	/**
+	

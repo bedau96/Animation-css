@@ -668,4 +668,14 @@ public:
 		Generic method which provides more abstraction for setting elements in the CBitVector. It is mainly used for getting values which are
 		1-dimensional in nature. This method internally calls \link Set(int pos, int len) \endlink.
 		\param	val		-		Value which needs to be written to the given location.
-		\param	i		-		Index to which data needs t
+		\param	i		-		Index to which data needs to be written to.
+	*/
+	template<class T> void Set(T val, std::size_t i) {
+		Set<T>(val, i * m_nElementLength, m_nElementLength);
+	}
+	/*
+	 * The same as the above methods only for two-dimensional access
+	 */
+	/**
+		Generic method which provides more abstraction for getting elements in the CBitVector. It is mainly used for getting values which are
+		2-dimensional 

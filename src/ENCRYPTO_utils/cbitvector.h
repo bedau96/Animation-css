@@ -687,4 +687,7 @@ public:
 	}
 
 	/**
-	
+		Generic method which provides more abstraction for setting elements in the CBitVector. It is mainly used for getting values which are
+		2-dimensional in nature. This method internally calls \link Set(int pos, int len) \endlink.
+		\param	val		-		Value which needs to be written to the given location.
+		\param	i		-		Row index from which the data needs to be w

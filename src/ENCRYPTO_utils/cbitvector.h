@@ -678,4 +678,13 @@ public:
 	 */
 	/**
 		Generic method which provides more abstraction for getting elements in the CBitVector. It is mainly used for getting values which are
-		2-dimensional 
+		2-dimensional in nature. This method internally calls \link Get(int pos, int len) \endlink.
+		\param	i		-		Row index from which the data needs to be read.
+		\param	j		-		Column index from which the data needs to be read.
+	*/
+	template<class T> T Get2D(std::size_t i, std::size_t j) const {
+		return Get<T>((i * m_nNumElementsDimB + j) * m_nElementLength, m_nElementLength);
+	}
+
+	/**
+	

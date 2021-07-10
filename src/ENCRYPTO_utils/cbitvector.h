@@ -705,4 +705,9 @@ public:
 
 private:
 	BYTE* m_pBits;	/** Byte pointer which stores the CBitVector as simple byte array. */
-	std::size_t m_nByteSize; /** Byte size variable which stores the size of CBitVect
+	std::size_t m_nByteSize; /** Byte size variable which stores the size of CBitVector in bytes. */
+	std::size_t m_nBits; //The exact number of bits
+	std::size_t m_nElementLength; /** Size of elements in the CBitVector. By default, it is set to 1. It is used
+	 	 	 	 	 	 	 	   differently when it is used as 1-d or 2-d custom vector/array. */
+	std::size_t m_nNumElements;  /** Number elements in the first dimension in the CBitVector. */
+	std::size_t 

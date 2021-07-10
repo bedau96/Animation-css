@@ -690,4 +690,13 @@ public:
 		Generic method which provides more abstraction for setting elements in the CBitVector. It is mainly used for getting values which are
 		2-dimensional in nature. This method internally calls \link Set(int pos, int len) \endlink.
 		\param	val		-		Value which needs to be written to the given location.
-		\param	i		-		Row index from which the data needs to be w
+		\param	i		-		Row index from which the data needs to be written.
+		\param	j		-		Column index from which the data needs to be written.
+	*/
+	template<class T> void Set2D(T val, std::size_t i, std::size_t j) {
+		Set<T>(val, (i * m_nNumElementsDimB + j) * m_nElementLength, m_nElementLength);
+	}
+	//useful when accessing elements using an index
+
+	//View the cbitvector as a rows x columns matrix and transpose
+	void Tran

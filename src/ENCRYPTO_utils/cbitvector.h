@@ -699,4 +699,10 @@ public:
 	//useful when accessing elements using an index
 
 	//View the cbitvector as a rows x columns matrix and transpose
-	void Tran
+	void Transpose(std::size_t rows, std::size_t columns);
+	void SimpleTranspose(std::size_t rows, std::size_t columns);
+	void EklundhBitTranspose(std::size_t rows, std::size_t columns);
+
+private:
+	BYTE* m_pBits;	/** Byte pointer which stores the CBitVector as simple byte array. */
+	std::size_t m_nByteSize; /** Byte size variable which stores the size of CBitVect

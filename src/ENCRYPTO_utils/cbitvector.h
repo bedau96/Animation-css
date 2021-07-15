@@ -710,4 +710,7 @@ private:
 	std::size_t m_nElementLength; /** Size of elements in the CBitVector. By default, it is set to 1. It is used
 	 	 	 	 	 	 	 	   differently when it is used as 1-d or 2-d custom vector/array. */
 	std::size_t m_nNumElements;  /** Number elements in the first dimension in the CBitVector. */
-	std::size_t 
+	std::size_t m_nNumElementsDimB;/** Number elements in the second dimension in the CBitVector. */
+};
+
+#endif /* BITVECTOR_H_ */

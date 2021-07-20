@@ -1,6 +1,6 @@
 
 /**
- \file 		circular_queue.cpp
+ \file 		circular_queue.h
  \author 	michael.zohner@ec-spride.de
  \copyright	ABY - A Framework for Efficient Mixed-protocol Secure Two-party Computation
 			Copyright (C) 2019 ENCRYPTO Group, TU Darmstadt
@@ -14,40 +14,26 @@
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
             along with this program. If not, see <http://www.gnu.org/licenses/>.
- \brief		Circular Queue Implementation
+ \brief		Circular Queue class Implementation
  */
 
-#include "circular_queue.h"
-#include <cstdlib>
+#ifndef __CQUEUE__
+#define __CQUEUE__
 
-CQueue::CQueue(int maxsize) {
-	head = 0;
-	tail = 0;
 
-	queuesize = maxsize;
-	queue = (int*) malloc(sizeof(int) * queuesize);
-}
+class CQueue {
+private:
+	int queuesize;
+	int head;
+	int tail;
+	int* queue;
+public:
+	CQueue(int maxsize);
+	~CQueue();
+	void enq(int ele);
+	int deq();
+	int size();
 
-CQueue::~CQueue() {
-	if (queue)
-		free(queue);
-}
+};
 
-void CQueue::enq(int ele) {
-	queue[head] = ele;
-	head = (head + 1) % queuesize;
-}
-
-int CQueue::deq() {
-	int ret = queue[tail];
-	tail = (tail + 1) % queuesize;
-	return ret;
-}
-
-int CQueue::size() {
-	int rem = (head - tail) % queuesize;
-	if (rem < 0)
-		return queuesize + rem;
-	else
-		return rem;
-}
+#endif

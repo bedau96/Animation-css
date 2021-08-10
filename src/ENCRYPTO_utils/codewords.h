@@ -31,4 +31,6 @@ const uint32_t m_nCodeWordBytes = m_nCodeWordBits/8;
 extern const uint32_t CODE_MATRIX[m_nCodewords][m_nCWIntlen];
 
 void readCodeWords(uint64_t** codewords);
-void InitAn
+void InitAndReadCodeWord(uint64_t*** codewords);
+
+#endif //CODEWORDS_H_

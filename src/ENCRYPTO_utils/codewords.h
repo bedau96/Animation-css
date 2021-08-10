@@ -13,4 +13,22 @@
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
             along with this program. If not, see <http://www.gnu.org/licenses/>.
- \brief		A hard-coded Welsh-Hadamard code for up to 8-bit words and resulting 256-bit codew
+ \brief		A hard-coded Welsh-Hadamard code for up to 8-bit words and resulting 256-bit codewords
+ */
+
+#ifndef __CODEWORDS_H_
+#define __CODEWORDS_H_
+
+#include <cstdint>
+#include <cstdlib>
+
+const uint32_t m_nCodewords = 256;
+const uint32_t m_nCWIntlen = 8;
+
+const uint32_t m_nCodeWordBits = 256;
+const uint32_t m_nCodeWordBytes = m_nCodeWordBits/8;
+
+extern const uint32_t CODE_MATRIX[m_nCodewords][m_nCWIntlen];
+
+void readCodeWords(uint64_t** codewords);
+void InitAn

@@ -29,4 +29,20 @@ bool Connect(const std::string& address, uint16_t port,
 #ifndef BATCH
 	std::cout << "Connecting party "<< id <<": " << address << ", " << port << std::endl;
 #endif
-	assert(sockets.size() <= std::numeric_lim
+	assert(sockets.size() <= std::numeric_limits<uint32_t>::max());
+	for (size_t j = 0; j < sockets.size(); j++) {
+		sockets[j] = Connect(address, port);
+		if (sockets[j]) {
+			// handshake
+			sockets[j]->Send(&id, sizeof(id));
+			uint32_t index = static_cast<uint32_t>(j);
+			sockets[j]->Send(&index, sizeof(index));
+		}
+		else {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Listen(const std::strin

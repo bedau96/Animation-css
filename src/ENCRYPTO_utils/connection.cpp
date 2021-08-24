@@ -18,3 +18,15 @@
 
 #include "connection.h"
 #include "constants.h"
+#include "socket.h"
+#include "utils.h"
+#include <cassert>
+#include <iostream>
+#include <limits>
+
+bool Connect(const std::string& address, uint16_t port,
+		std::vector<std::unique_ptr<CSocket>> &sockets, uint32_t id) {
+#ifndef BATCH
+	std::cout << "Connecting party "<< id <<": " << address << ", " << port << std::endl;
+#endif
+	assert(sockets.size() <= std::numeric_lim

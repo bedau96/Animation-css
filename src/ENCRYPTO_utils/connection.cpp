@@ -45,4 +45,15 @@ bool Connect(const std::string& address, uint16_t port,
 	return true;
 }
 
-bool Listen(const std::strin
+bool Listen(const std::string& address, uint16_t port,
+		std::vector<std::vector<std::unique_ptr<CSocket>>> &sockets,
+		size_t numConnections, uint32_t myID) {
+
+	auto listen_socket = std::make_unique<CSocket>();
+
+	if (!listen_socket->Bind(address, port)) {
+		std::cerr << "Error: a socket could not be bound\n";
+		return false;
+	}
+	if (!listen_socket->Listen()) {
+		std::cerr << "Error: could not lis

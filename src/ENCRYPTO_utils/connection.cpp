@@ -56,4 +56,17 @@ bool Listen(const std::string& address, uint16_t port,
 		return false;
 	}
 	if (!listen_socket->Listen()) {
-		std::cerr << "Error: could not lis
+		std::cerr << "Error: could not listen on the socket \n";
+		return false;
+	}
+
+	for (size_t i = 0; i < numConnections; i++)
+	{
+		auto sock = listen_socket->Accept();
+		if (!sock) {
+			std::cerr << "Error: could not accept connection\n";
+			return false;
+		}
+		// receive initial pid when connected
+		uint32_t nID;
+		uint32_t conID; //a mix of threadID 

@@ -84,4 +84,18 @@ bool Listen(const std::string& address, uint16_t port,
 			i--;  // try same index again
 			continue;
 		}
-		//
+		// locate the socket appropriately
+		sockets[nID][conID] = std::move(sock);
+	}
+
+#ifndef BATCH
+	std::cout << "Listening finished" << std::endl;
+#endif
+	return true;
+}
+
+std::unique_ptr<CSocket> Connect(const std::string& address, uint16_t port) {
+	auto socket = std::make_unique<CSocket>();
+	for (int i = 0; i < RETRY_CONNECT; i++) {
+		if (socket->Connect(address, port))
+	

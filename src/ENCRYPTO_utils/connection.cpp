@@ -69,4 +69,19 @@ bool Listen(const std::string& address, uint16_t port,
 		}
 		// receive initial pid when connected
 		uint32_t nID;
-		uint32_t conID; //a mix of threadID 
+		uint32_t conID; //a mix of threadID and role - depends on the application
+		sock->Receive(&nID, sizeof(nID));
+		sock->Receive(&conID, sizeof(conID));
+
+		if (nID >= sockets.size()) //Not more than two parties currently allowed
+				{
+			sock->Close();
+			i--;  // try same index again
+			continue;
+		}
+		if (conID >= sockets[myID].size()) {
+			sock->Close();
+			i--;  // try same index again
+			continue;
+		}
+		//

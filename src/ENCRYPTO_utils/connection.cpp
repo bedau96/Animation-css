@@ -110,4 +110,8 @@ std::unique_ptr<CSocket> Listen(const std::string& address, uint16_t port) {
 	if (!listen_socket->Bind(address, port)) {
 		return nullptr;
 	}
-	if (!listen_socket->Listen(
+	if (!listen_socket->Listen()) {
+		return nullptr;
+	}
+	return listen_socket->Accept();
+}

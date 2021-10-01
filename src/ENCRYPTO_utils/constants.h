@@ -26,4 +26,19 @@
 #define BATCH
 //#define FIXED_KEY_AES_HASHING
 //#define USE_PIPELINED_AES_NI
-//#define SIMPLE_TRANSPOSE //activate the simple transpose, only required 
+//#define SIMPLE_TRANSPOSE //activate the simple transpose, only required for benchmarking, not recommended
+
+#define AES_KEY_BITS			128
+#define AES_KEY_BYTES			16
+#define AES_BITS				128
+#define AES_BYTES				16
+#define LOG2_AES_BITS			ceil_log2(AES_BITS)
+
+#define SHA1_OUT_BYTES 20
+#define SHA256_OUT_BYTES 32
+#define SHA512_OUT_BYTES 64
+
+#define MAX_NUM_COMM_CHANNELS 256
+#define ADMIN_CHANNEL MAX_NUM_COMM_CHANNELS-1
+
+enum fi

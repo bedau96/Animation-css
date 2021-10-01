@@ -13,4 +13,17 @@
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
             along with this program. If not, see <http://www.gnu.org/licenses/>.
- \brief		File cont
+ \brief		File containing all crypto and networking constants used throughout the source
+ */
+
+#ifndef _CONSTANTS_H_
+#define _CONSTANTS_H_
+
+#include "typedefs.h"
+#include <cstdint>
+#include <cmake_constants.h>
+
+#define BATCH
+//#define FIXED_KEY_AES_HASHING
+//#define USE_PIPELINED_AES_NI
+//#define SIMPLE_TRANSPOSE //activate the simple transpose, only required 

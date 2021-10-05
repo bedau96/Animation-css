@@ -41,4 +41,12 @@
 #define MAX_NUM_COMM_CHANNELS 256
 #define ADMIN_CHANNEL MAX_NUM_COMM_CHANNELS-1
 
-enum fi
+enum field_type {P_FIELD, ECC_FIELD, FIELD_LAST};
+
+static const seclvl ST = { 40, 80, 1024 };
+static const seclvl MT = { 40, 112, 2048 };
+static const seclvl LT = { 40, 128, 3072 };
+static const seclvl XLT = { 40, 192, 7680 };
+static const seclvl XXLT = { 40, 256, 15360 };
+
+const uint8_t m_vFixedKeyAESSeed[AES_KEY_BYTES] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55,

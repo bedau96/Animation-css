@@ -19,4 +19,19 @@
 * http://crypto.biu.ac.il/SCAPI.
 * 
 * SCAPI uses Crypto++, Miracl, NTL and Bouncy Castle. Please see these projects for any further licensing issues.
-* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+* 
+*/
+#include <emmintrin.h>
+
+/**
+* A configuration file that uses defines used by other files in the project.
+*
+* author: Cryptography and Computer Security Research Group Department of Computer Science Bar-Ilan University (Meital Levy)
+*/
+
+
+
+typedef __m128i block;
+
+#define SIZE_OF_BLOCK 16//size in 

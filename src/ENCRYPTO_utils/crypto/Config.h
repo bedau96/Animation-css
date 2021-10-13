@@ -34,4 +34,8 @@
 
 typedef __m128i block;
 
-#define SIZE_OF_BLOCK 16//size in 
+#define SIZE_OF_BLOCK 16//size in bytes
+#define XOR_GATE 6//the truth table is 0110
+#define XOR_NOT_GATE 9// the truth table is 1001, can also use the optimization of FreeXor
+#define ONE_GATE 15//the truth table is 1111
+#define ZERO_BLOCK _mm_setzero_si128()//a zero block used in many cases

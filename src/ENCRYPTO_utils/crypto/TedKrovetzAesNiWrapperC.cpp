@@ -479,3 +479,99 @@ void AES256_ecb_encrypt_blks_4_in_out_par_ks(block *in, block *out,  const unsig
 	out[3] = _mm_aesenc_si128(out[3], k3e);
 
 	//Eleventh Roundkey: odd result is written in kio
+	//EXPAND_ASSIST(x3, x1, x2, x0, 170, 16); aesKey->rd_key[11] = x3;
+	EXPAND_ASSIST(k0o, ktmp, k0tmp, k0e, 170, 16);
+	out[0] = _mm_aesenc_si128(out[0], k0o);
+	EXPAND_ASSIST(k1o, ktmp, k1tmp, k1e, 170, 16);
+	out[1] = _mm_aesenc_si128(out[1], k1o);
+	EXPAND_ASSIST(k2o, ktmp, k2tmp, k2e, 170, 16);
+	out[2] = _mm_aesenc_si128(out[2], k2o);
+	EXPAND_ASSIST(k3o, ktmp, k3tmp, k3e, 170, 16);
+	out[3] = _mm_aesenc_si128(out[3], k3o);
+
+	//Twelvth Roundkey; even round: result is written in kie
+	//EXPAND_ASSIST(x0, x1, x2, x3, 255, 32); aesKey->rd_key[12] = x0;
+	EXPAND_ASSIST(k0e, ktmp, k0tmp, k0o, 255, 32);
+	out[0] = _mm_aesenc_si128(out[0], k0e);
+	EXPAND_ASSIST(k1e, ktmp, k1tmp, k1o, 255, 32);
+	out[1] = _mm_aesenc_si128(out[1], k1e);
+	EXPAND_ASSIST(k2e, ktmp, k2tmp, k2o, 255, 32);
+	out[2] = _mm_aesenc_si128(out[2], k2e);
+	EXPAND_ASSIST(k3e, ktmp, k3tmp, k3o, 255, 32);
+	out[3] = _mm_aesenc_si128(out[3], k3e);
+
+	//Thirtheenth Roundkey: odd result is written in kio
+	//EXPAND_ASSIST(x3, x1, x2, x0, 170, 32); aesKey->rd_key[13] = x3;
+	EXPAND_ASSIST(k0o, ktmp, k0tmp, k0e, 170, 32);
+	out[0] = _mm_aesenc_si128(out[0], k0o);
+	EXPAND_ASSIST(k1o, ktmp, k1tmp, k1e, 170, 32);
+	out[1] = _mm_aesenc_si128(out[1], k1o);
+	EXPAND_ASSIST(k2o, ktmp, k2tmp, k2e, 170, 32);
+	out[2] = _mm_aesenc_si128(out[2], k2o);
+	EXPAND_ASSIST(k3o, ktmp, k3tmp, k3e, 170, 32);
+	out[3] = _mm_aesenc_si128(out[3], k3o);
+
+	//Fourteenth Roundkey; even round: result is written in kie
+	//EXPAND_ASSIST(x0, x1, x2, x3, 255, 64); aesKey->rd_key[14] = x0;
+	EXPAND_ASSIST(k0e, ktmp, k0tmp, k0o, 255, 64);
+	out[0] = _mm_aesenclast_si128(out[0], k0e);
+	EXPAND_ASSIST(k1e, ktmp, k1tmp, k1o, 255, 64);
+	out[1] = _mm_aesenclast_si128(out[1], k1e);
+	EXPAND_ASSIST(k2e, ktmp, k2tmp, k2o, 255, 64);
+	out[2] = _mm_aesenclast_si128(out[2], k2e);
+	EXPAND_ASSIST(k3e, ktmp, k3tmp, k3o, 255, 64);
+	out[3] = _mm_aesenclast_si128(out[3], k3e);
+}
+
+
+void AES_ecb_encrypt_chunk_in_out(block *in, block *out, unsigned nblks, AES_KEY *aesKey) {
+
+	int numberOfLoops = nblks / 8;
+	int blocksPipeLined = numberOfLoops * 8;
+	int remainingEncrypts = nblks - blocksPipeLined;
+
+	unsigned j, rnds = ROUNDS(aesKey);
+	const block *sched = ((block *)(aesKey->rd_key));
+
+	for (int i = 0; i < numberOfLoops; i++){
+
+		out[0 + i * 8] = _mm_xor_si128(in[0 + i * 8], sched[0]);
+		out[1 + i * 8] = _mm_xor_si128(in[1 + i * 8], sched[0]);
+		out[2 + i * 8] = _mm_xor_si128(in[2 + i * 8], sched[0]);
+		out[3 + i * 8] = _mm_xor_si128(in[3 + i * 8], sched[0]);
+		out[4 + i * 8] = _mm_xor_si128(in[4 + i * 8], sched[0]);
+		out[5 + i * 8] = _mm_xor_si128(in[5 + i * 8], sched[0]);
+		out[6 + i * 8] = _mm_xor_si128(in[6 + i * 8], sched[0]);
+		out[7 + i * 8] = _mm_xor_si128(in[7 + i * 8], sched[0]);
+
+		for (j = 1; j < rnds; ++j){
+			out[0 + i * 8] = _mm_aesenc_si128(out[0 + i * 8], sched[j]);
+			out[1 + i * 8] = _mm_aesenc_si128(out[1 + i * 8], sched[j]);
+			out[2 + i * 8] = _mm_aesenc_si128(out[2 + i * 8], sched[j]);
+			out[3 + i * 8] = _mm_aesenc_si128(out[3 + i * 8], sched[j]);
+			out[4 + i * 8] = _mm_aesenc_si128(out[4 + i * 8], sched[j]);
+			out[5 + i * 8] = _mm_aesenc_si128(out[5 + i * 8], sched[j]);
+			out[6 + i * 8] = _mm_aesenc_si128(out[6 + i * 8], sched[j]);
+			out[7 + i * 8] = _mm_aesenc_si128(out[7 + i * 8], sched[j]);
+		}
+		out[0 + i * 8] = _mm_aesenclast_si128(out[0 + i * 8], sched[j]);
+		out[1 + i * 8] = _mm_aesenclast_si128(out[1 + i * 8], sched[j]);
+		out[2 + i * 8] = _mm_aesenclast_si128(out[2 + i * 8], sched[j]);
+		out[3 + i * 8] = _mm_aesenclast_si128(out[3 + i * 8], sched[j]);
+		out[4 + i * 8] = _mm_aesenclast_si128(out[4 + i * 8], sched[j]);
+		out[5 + i * 8] = _mm_aesenclast_si128(out[5 + i * 8], sched[j]);
+		out[6 + i * 8] = _mm_aesenclast_si128(out[6 + i * 8], sched[j]);
+		out[7 + i * 8] = _mm_aesenclast_si128(out[7 + i * 8], sched[j]);
+	}
+
+	for (int i = blocksPipeLined; i < blocksPipeLined + remainingEncrypts; ++i){
+		out[i] = _mm_xor_si128(in[i], sched[0]);
+		for (j = 1; j < rnds; ++j)
+		{
+			out[i] = _mm_aesenc_si128(out[i], sched[j]);
+		}
+		out[i] = _mm_aesenclast_si128(out[i], sched[j]);
+	}
+
+}
+#endif

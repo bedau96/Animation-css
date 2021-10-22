@@ -13,4 +13,23 @@
 			GNU Lesser General Public License for more details.
 			You should have received a copy of the GNU Lesser General Public License
 			along with this program. If not, see <http://www.gnu.org/licenses/>.
- \brief		Implementation of crypto pri
+ \brief		Implementation of crypto primitive class
+ */
+
+#include "crypto.h"
+#include "../socket.h"
+#include <openssl/sha.h>
+#include <openssl/des.h>
+#include "ecc-pk-crypto.h"
+#include "gmp-pk-crypto.h"
+#include <cstring>
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+#include <utility>
+
+crypto::crypto(uint32_t symsecbits, uint8_t* seed) {
+	init(symsecbits, seed);
+}
+
+crypto::crypt

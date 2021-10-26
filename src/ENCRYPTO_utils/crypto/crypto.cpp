@@ -32,4 +32,19 @@ crypto::crypto(uint32_t symsecbits, uint8_t* seed) {
 	init(symsecbits, seed);
 }
 
-crypto::crypt
+crypto::crypto(uint32_t symsecbits) {
+	uint8_t* seed = (uint8_t*) malloc(sizeof(uint8_t) * AES_BYTES);
+	gen_secure_random(seed, AES_BYTES);
+
+	init(symsecbits, seed);
+	free(seed);
+}
+
+crypto::~crypto() {
+	free_prf_state(&global_prf_state);
+	free(aes_hash_in_buf);
+	free(aes_hash_out_buf);
+	free(sha_hash_buf);
+	free(aes_hash_buf_y1);
+	free(aes_hash_buf_y2);
+

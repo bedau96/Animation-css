@@ -73,4 +73,12 @@ void crypto::init(uint32_t symsecbits, uint8_t* seed) {
 
 	if (secparam.symbits == ST.symbits) {
 		hash_routine = &sha1_hash;
-		sha
+		sha_hash_buf = (uint8_t*) malloc(SHA1_OUT_BYTES);
+	} else if (secparam.symbits == MT.symbits) {
+		hash_routine = &sha256_hash;
+		sha_hash_buf = (uint8_t*) malloc(SHA256_OUT_BYTES);
+	} else if (secparam.symbits == LT.symbits) {
+		hash_routine = &sha256_hash;
+		sha_hash_buf = (uint8_t*) malloc(SHA256_OUT_BYTES);
+	} else if (secparam.symbits == XLT.symbits) {
+		hash_routine 

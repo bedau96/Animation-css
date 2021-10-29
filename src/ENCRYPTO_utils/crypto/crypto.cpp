@@ -61,3 +61,16 @@ void crypto::init(uint32_t symsecbits, uint8_t* seed) {
 #ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
 	aes_hash_key = EVP_CIPHER_CTX_new();
 	aes_enc_key = EVP_CIPHER_CTX_new();
+	aes_dec_key = EVP_CIPHER_CTX_new();
+#endif
+
+	init_prf_state(&global_prf_state, seed);
+
+	aes_hash_in_buf = (uint8_t*) malloc(AES_BYTES);
+	aes_hash_out_buf = (uint8_t*) malloc(AES_BYTES);
+	aes_hash_buf_y1 = (uint8_t*) malloc(AES_BYTES);
+	aes_hash_buf_y2 = (uint8_t*) malloc(AES_BYTES);
+
+	if (secparam.symbits == ST.symbits) {
+		hash_routine = &sha1_hash;
+		sha

@@ -81,4 +81,16 @@ void crypto::init(uint32_t symsecbits, uint8_t* seed) {
 		hash_routine = &sha256_hash;
 		sha_hash_buf = (uint8_t*) malloc(SHA256_OUT_BYTES);
 	} else if (secparam.symbits == XLT.symbits) {
-		hash_routine 
+		hash_routine = &sha512_hash;
+		sha_hash_buf = (uint8_t*) malloc(SHA512_OUT_BYTES);
+	} else if (secparam.symbits == XXLT.symbits) {
+		hash_routine = &sha512_hash;
+		sha_hash_buf = (uint8_t*) malloc(SHA512_OUT_BYTES);
+	} else {
+		hash_routine = &sha256_hash;
+		sha_hash_buf = (uint8_t*) malloc(SHA256_OUT_BYTES);
+	}
+}
+
+pk_crypto* crypto::gen_field(field_type ftype) {
+	uint8_t* pkseed = (uint8

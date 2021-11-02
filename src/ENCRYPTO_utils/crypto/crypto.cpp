@@ -93,4 +93,15 @@ void crypto::init(uint32_t symsecbits, uint8_t* seed) {
 }
 
 pk_crypto* crypto::gen_field(field_type ftype) {
-	uint8_t* pkseed = (uint8
+	uint8_t* pkseed = (uint8_t*) malloc(sizeof(uint8_t) * (secparam.symbits >> 3));
+	gen_rnd(pkseed, secparam.symbits >> 3);
+	pk_crypto* ret;
+	if (ftype == P_FIELD)
+		ret = new prime_field(secparam, pkseed);
+	else
+		ret = new ecc_field(secparam, pkseed);
+	free(pkseed);
+	return ret;
+}
+
+void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf,

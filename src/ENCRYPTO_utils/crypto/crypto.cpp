@@ -104,4 +104,16 @@ pk_crypto* crypto::gen_field(field_type ftype) {
 	return ret;
 }
 
-void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf,
+void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf, uint32_t nbytes) {
+	AES_KEY_CTX* aes_key;
+	uint64_t* rndctr;
+	uint8_t* tmpbuf;
+	uint32_t i, size;
+	int32_t dummy;
+
+	aes_key = &(prf_state->aes_key);
+	rndctr = prf_state->ctr;
+	size = ceil_divide(nbytes, AES_BYTES);
+	tmpbuf = (uint8_t*) malloc(sizeof(uint8_t) * size * AES_BYTES);
+
+	//TODO it might be better to store the result directly in resbuf but this would r

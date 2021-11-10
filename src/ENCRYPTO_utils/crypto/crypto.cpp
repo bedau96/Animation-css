@@ -124,4 +124,16 @@ void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf, uint32_t nbytes) {
 		EVP_EncryptUpdate(aes_key, tmpbuf + i * AES_BYTES, &dummy, (uint8_t*) rndctr, AES_BYTES);
 #endif
 	}
-	m
+	memcpy(resbuf, tmpbuf, nbytes);
+
+	free(tmpbuf);
+}
+
+void crypto::gen_rnd(uint8_t* resbuf, uint32_t nbytes) {
+	std::lock_guard<std::mutex> lock(global_prf_state_mutex);
+	gen_rnd_bytes(&global_prf_state, resbuf, nbytes);
+}
+
+void crypto::gen_rnd_uniform(uint32_t* res, uint32_t mod) {
+	//pad to multiple of 4 bytes for uint32_t length
+	uint32_t nrn

@@ -116,4 +116,12 @@ void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf, uint32_t nbytes) {
 	size = ceil_divide(nbytes, AES_BYTES);
 	tmpbuf = (uint8_t*) malloc(sizeof(uint8_t) * size * AES_BYTES);
 
-	//TODO it might be better to store the result directly in resbuf but this would r
+	//TODO it might be better to store the result directly in resbuf but this would require the invoking routine to pad it to a multiple of AES_BYTES
+	for (i = 0; i < size; i++, rndctr[0]++) {
+#ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
+		EVP_EncryptUpdate(*aes_key, tmpbuf + i * AES_BYTES, &dummy, (uint8_t*) rndctr, AES_BYTES);
+#else
+		EVP_EncryptUpdate(aes_key, tmpbuf + i * AES_BYTES, &dummy, (uint8_t*) rndctr, AES_BYTES);
+#endif
+	}
+	m

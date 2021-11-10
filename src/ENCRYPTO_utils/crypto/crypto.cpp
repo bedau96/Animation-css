@@ -145,4 +145,18 @@ void crypto::gen_rnd_uniform(uint32_t* res, uint32_t mod) {
 
 	uint64_t tmpval = 0, tmpmod = mod;
 
-	for(uint32_t i
+	for(uint32_t i = 0; i < rnditers; i++) {
+		tmpval = (((uint64_t) (tmpval << bitsint)) | ((uint64_t)rndbuf[i]));
+		tmpval %= tmpmod;
+	}
+	*res = (uint32_t) tmpval;
+	free(rndbuf);
+}
+void crypto::gen_rnd_from_seed(uint8_t* resbuf, uint32_t resbytes, uint8_t* seed) {
+	prf_state_ctx tmpstate;
+	init_prf_state(&tmpstate, seed);
+	gen_rnd_bytes(&tmpstate, resbuf, resbytes);
+	free_prf_state(&tmpstate);
+}
+
+void crypt

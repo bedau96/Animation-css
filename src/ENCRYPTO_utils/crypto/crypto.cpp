@@ -168,4 +168,14 @@ void crypto::encrypt(AES_KEY_CTX* enc_key, uint8_t* resbuf, uint8_t* inbuf, uint
 #endif
 	//EVP_EncryptFinal_ex(enc_key, resbuf, &dummy);
 }
-void crypto::decrypt(AES_KEY_CTX* d
+void crypto::decrypt(AES_KEY_CTX* dec_key, uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes) {
+	int32_t dummy;
+#ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
+	EVP_DecryptUpdate(*dec_key, resbuf, &dummy, inbuf, ninbytes);
+#else
+	EVP_DecryptUpdate(dec_key, resbuf, &dummy, inbuf, ninbytes);
+#endif
+	//EVP_DecryptFinal_ex(dec_key, resbuf, &dummy);
+}
+
+void crypto::encrypt(uint8_t* resbuf, uint8_t* inbuf, uint32

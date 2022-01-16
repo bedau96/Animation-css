@@ -159,4 +159,13 @@ void crypto::gen_rnd_from_seed(uint8_t* resbuf, uint32_t resbytes, uint8_t* seed
 	free_prf_state(&tmpstate);
 }
 
-void crypt
+void crypto::encrypt(AES_KEY_CTX* enc_key, uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes) {
+	int32_t dummy;
+#ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
+	EVP_EncryptUpdate(*enc_key, resbuf, &dummy, inbuf, ninbytes);
+#else
+	EVP_EncryptUpdate(enc_key, resbuf, &dummy, inbuf, ninbytes);
+#endif
+	//EVP_EncryptFinal_ex(enc_key, resbuf, &dummy);
+}
+void crypto::decrypt(AES_KEY_CTX* d

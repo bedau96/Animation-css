@@ -178,4 +178,16 @@ void crypto::decrypt(AES_KEY_CTX* dec_key, uint8_t* resbuf, uint8_t* inbuf, uint
 	//EVP_DecryptFinal_ex(dec_key, resbuf, &dummy);
 }
 
-void crypto::encrypt(uint8_t* resbuf, uint8_t* inbuf, uint32
+void crypto::encrypt(uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes) {
+	encrypt(&aes_enc_key, resbuf, inbuf, ninbytes);
+}
+
+void crypto::decrypt(uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes) {
+	decrypt(&aes_dec_key, resbuf, inbuf, ninbytes);
+}
+
+void crypto::seed_aes_hash(uint8_t* seed, bc_mode mode, const uint8_t* iv) {
+	seed_aes_key(&aes_hash_key, seed, mode, iv);
+}
+
+void crypto::seed_aes_enc(uint8_t*

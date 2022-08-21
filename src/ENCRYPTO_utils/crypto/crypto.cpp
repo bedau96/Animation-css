@@ -199,4 +199,13 @@ void crypto::init_aes_key(AES_KEY_CTX* aes_key, uint8_t* seed, bc_mode mode, con
 	seed_aes_key(aes_key, seed, mode, iv);
 }
 
-void crypto::init_aes_key(AES_KEY_CTX* aes_key, uint32_t symbits, uint8_t* seed, bc_mode mode, c
+void crypto::init_aes_key(AES_KEY_CTX* aes_key, uint32_t symbits, uint8_t* seed, bc_mode mode, const uint8_t* iv, bool encrypt) {
+	seed_aes_key(aes_key, symbits, seed, mode, iv, encrypt);
+}
+
+void crypto::seed_aes_key(AES_KEY_CTX* aeskey, uint8_t* seed, bc_mode mode, const uint8_t* iv, bool encrypt) {
+	seed_aes_key(aeskey, secparam.symbits, seed, mode, iv, encrypt);
+}
+
+void crypto::clean_aes_key(AES_KEY_CTX* aeskey) {
+#ifdef O

@@ -190,4 +190,13 @@ void crypto::seed_aes_hash(uint8_t* seed, bc_mode mode, const uint8_t* iv) {
 	seed_aes_key(&aes_hash_key, seed, mode, iv);
 }
 
-void crypto::seed_aes_enc(uint8_t*
+void crypto::seed_aes_enc(uint8_t* seed, bc_mode mode, const uint8_t* iv) {
+	seed_aes_key(&aes_enc_key, seed, mode, iv, true);
+	seed_aes_key(&aes_dec_key, seed, mode, iv, false);
+}
+
+void crypto::init_aes_key(AES_KEY_CTX* aes_key, uint8_t* seed, bc_mode mode, const uint8_t* iv) {
+	seed_aes_key(aes_key, seed, mode, iv);
+}
+
+void crypto::init_aes_key(AES_KEY_CTX* aes_key, uint32_t symbits, uint8_t* seed, bc_mode mode, c

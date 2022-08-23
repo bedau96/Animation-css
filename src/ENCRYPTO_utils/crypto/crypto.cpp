@@ -208,4 +208,16 @@ void crypto::seed_aes_key(AES_KEY_CTX* aeskey, uint8_t* seed, bc_mode mode, cons
 }
 
 void crypto::clean_aes_key(AES_KEY_CTX* aeskey) {
-#ifdef O
+#ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
+	EVP_CIPHER_CTX_free(*aeskey);
+#else
+	EVP_CIPHER_CTX_cleanup(aeskey);
+#endif
+}
+
+void crypto::seed_aes_key(AES_KEY_CTX* aeskey, uint32_t symbits, uint8_t* seed, bc_mode mode, const uint8_t* iv, bool encrypt) {
+#ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
+	*aeskey = EVP_CIPHER_CTX_new();
+	AES_KEY_CTX aes_key_tmp = *aeskey;
+#else
+	EVP_CIPHE

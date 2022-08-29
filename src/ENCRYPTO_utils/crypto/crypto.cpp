@@ -220,4 +220,17 @@ void crypto::seed_aes_key(AES_KEY_CTX* aeskey, uint32_t symbits, uint8_t* seed, 
 	*aeskey = EVP_CIPHER_CTX_new();
 	AES_KEY_CTX aes_key_tmp = *aeskey;
 #else
-	EVP_CIPHE
+	EVP_CIPHER_CTX_init(aeskey);
+	AES_KEY_CTX* aes_key_tmp = aeskey;
+#endif
+	int (*initfct)(EVP_CIPHER_CTX*, const EVP_CIPHER*, ENGINE*, const unsigned char*, const unsigned char*);
+
+	if (encrypt)
+		initfct = EVP_EncryptInit_ex;
+	else
+		initfct = EVP_DecryptInit_ex;
+
+	switch (mode) {
+	case ECB:
+		if (symbits <= 128) {
+			initfct(aes_key_tmp, EVP

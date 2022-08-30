@@ -255,4 +255,14 @@ void crypto::seed_aes_key(AES_KEY_CTX* aeskey, uint32_t symbits, uint8_t* seed, 
 		} else if(symbits == 192) {
 			initfct(aes_key_tmp, EVP_aes_192_ecb(), NULL, seed, iv);
 		} else {
-			initfct(aes_key_tmp,
+			initfct(aes_key_tmp, EVP_aes_256_ecb(), NULL, seed, iv);
+		}
+		break;
+	}
+}
+
+void crypto::hash_ctr(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint64_t ctr) {
+	uint8_t* tmpbuf = (uint8_t*) malloc(ninbytes + sizeof(uint64_t));
+	memcpy(tmpbuf, &ctr, sizeof(uint64_t));
+	memcpy(tmpbuf + sizeof(uint64_t), inbuf, ninbytes);
+	hash_routine(resbuf, noutbyt

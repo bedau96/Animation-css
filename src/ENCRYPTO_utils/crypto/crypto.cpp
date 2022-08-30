@@ -233,4 +233,15 @@ void crypto::seed_aes_key(AES_KEY_CTX* aeskey, uint32_t symbits, uint8_t* seed, 
 	switch (mode) {
 	case ECB:
 		if (symbits <= 128) {
-			initfct(aes_key_tmp, EVP
+			initfct(aes_key_tmp, EVP_aes_128_ecb(), NULL, seed, iv);
+		} else if(symbits == 192) {
+			initfct(aes_key_tmp, EVP_aes_192_ecb(), NULL, seed, iv);
+		} else {
+			initfct(aes_key_tmp, EVP_aes_256_ecb(), NULL, seed, iv);
+		}
+		break;
+	case CBC:
+		if (symbits <= 128) {
+			initfct(aes_key_tmp, EVP_aes_128_cbc(), NULL, seed, iv);
+		} else if(symbits == 192) {
+			initfct(aes_

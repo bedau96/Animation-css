@@ -265,4 +265,14 @@ void crypto::hash_ctr(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint3
 	uint8_t* tmpbuf = (uint8_t*) malloc(ninbytes + sizeof(uint64_t));
 	memcpy(tmpbuf, &ctr, sizeof(uint64_t));
 	memcpy(tmpbuf + sizeof(uint64_t), inbuf, ninbytes);
-	hash_routine(resbuf, noutbyt
+	hash_routine(resbuf, noutbytes, tmpbuf, ninbytes+sizeof(uint64_t), sha_hash_buf);
+	free(tmpbuf);
+}
+
+void crypto::hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes) {
+	uint8_t* hash_buf = (uint8_t*) malloc(get_hash_bytes());
+	hash_routine(resbuf, noutbytes, inbuf, ninbytes, hash_buf);
+	free(hash_buf);
+}
+
+void crypto::hash_buf(uint8_t* resbuf, uint32_t noutbytes,

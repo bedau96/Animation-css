@@ -275,4 +275,12 @@ void crypto::hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t 
 	free(hash_buf);
 }
 
-void crypto::hash_buf(uint8_t* resbuf, uint32_t noutbytes,
+void crypto::hash_buf(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* buf) {
+	hash_routine(resbuf, noutbytes, inbuf, ninbytes, buf);
+}
+
+void crypto::hash_non_threadsafe(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes) {
+	hash_routine(resbuf, noutbytes, inbuf, ninbytes, sha_hash_buf);
+}
+
+//A fixed-key hashing scheme that uses AES, should not be used fo

@@ -283,4 +283,12 @@ void crypto::hash_non_threadsafe(uint8_t* resbuf, uint32_t noutbytes, uint8_t* i
 	hash_routine(resbuf, noutbytes, inbuf, ninbytes, sha_hash_buf);
 }
 
-//A fixed-key hashing scheme that uses AES, should not be used fo
+//A fixed-key hashing scheme that uses AES, should not be used for real hashing, hashes to AES_BYTES bytes
+//TODO not thread safe
+void crypto::fixed_key_aes_hash(AES_KEY_CTX* aes_key, uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes) {
+	int32_t dummy;
+
+	memset(aes_hash_in_buf, 0, AES_BYTES);
+	memcpy(aes_hash_in_buf, inbuf, ninbytes);
+
+	//two encryption iterations TODO: not secure since bot

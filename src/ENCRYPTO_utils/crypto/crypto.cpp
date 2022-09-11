@@ -298,4 +298,14 @@ void crypto::fixed_key_aes_hash(AES_KEY_CTX* aes_key, uint8_t* resbuf, uint32_t 
 	EVP_EncryptUpdate(aes_key, aes_hash_out_buf, &dummy, aes_hash_in_buf, AES_BYTES);
 #endif
 
-	((uint64_t*) aes_hash_out_buf)[0] ^= ((uint64_t*) aes_h
+	((uint64_t*) aes_hash_out_buf)[0] ^= ((uint64_t*) aes_hash_in_buf)[0];
+	((uint64_t*) aes_hash_out_buf)[1] ^= ((uint64_t*) aes_hash_in_buf)[1];
+
+	memcpy(resbuf, aes_hash_out_buf, noutbytes);
+}
+
+//Generate a random permutation of neles elements using Knuths algorithm
+void crypto::gen_rnd_perm(uint32_t* perm, uint32_t neles) {
+	uint32_t* rndbuf = (uint32_t*) malloc(sizeof(uint32_t) * neles);
+	uint32_t i, j;
+	//TODO 

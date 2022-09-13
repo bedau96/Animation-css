@@ -323,3 +323,19 @@ void crypto::gen_rnd_perm(uint32_t* perm, uint32_t neles) {
 uint32_t crypto::get_aes_key_bytes() {
 	if (secparam.symbits == ST.symbits)
 		return 16;
+	else if (secparam.symbits == MT.symbits)
+		return 16;
+	else if (secparam.symbits == LT.symbits)
+		return 16;
+	else if (secparam.symbits == XLT.symbits)
+		return 24;
+	else if (secparam.symbits == XXLT.symbits)
+		return 32;
+	else
+		return 64;
+}
+
+uint32_t crypto::get_hash_bytes() {
+	if (secparam.symbits == ST.symbits)
+		return 20;
+	else if (secparam.symbits == MT.symbi

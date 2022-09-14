@@ -338,4 +338,19 @@ uint32_t crypto::get_aes_key_bytes() {
 uint32_t crypto::get_hash_bytes() {
 	if (secparam.symbits == ST.symbits)
 		return 20;
-	else if (secparam.symbits == MT.symbi
+	else if (secparam.symbits == MT.symbits)
+		return 32;
+	else if (secparam.symbits == LT.symbits)
+		return 32;
+	else if (secparam.symbits == XLT.symbits)
+		return 64;
+	else if (secparam.symbits == XXLT.symbits)
+		return 64;
+	else
+		return 64;
+}
+
+//Generate a common seed, is only secure in the semi-honest model
+void crypto::gen_common_seed(prf_state_ctx* prf_state, CSocket& sock) {
+	uint8_t *seed_buf, *seed_rcv_buf;
+	uint

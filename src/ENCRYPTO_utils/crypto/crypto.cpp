@@ -365,4 +365,16 @@ void crypto::gen_common_seed(prf_state_ctx* prf_state, CSocket& sock) {
 	sock.Receive(seed_rcv_buf, seed_bytes);
 
 	//xor both seeds
-	for (i = 0; i < seed_bytes; 
+	for (i = 0; i < seed_bytes; i++) {
+		seed_buf[i] ^= seed_rcv_buf[i];
+	}
+
+	init_prf_state(prf_state, seed_buf);
+
+	free(seed_buf);
+	free(seed_rcv_buf);
+}
+
+void crypto::init_prf_state(prf_state_ctx* prf_state, uint8_t* seed) {
+	seed_aes_key(&(prf_state->aes_key), seed);
+	prf_state->ctr = (uint64_t*) calloc(ceil_divide(secparam.symbit

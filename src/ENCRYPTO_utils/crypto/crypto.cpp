@@ -377,4 +377,18 @@ void crypto::gen_common_seed(prf_state_ctx* prf_state, CSocket& sock) {
 
 void crypto::init_prf_state(prf_state_ctx* prf_state, uint8_t* seed) {
 	seed_aes_key(&(prf_state->aes_key), seed);
-	prf_state->ctr = (uint64_t*) calloc(ceil_divide(secparam.symbit
+	prf_state->ctr = (uint64_t*) calloc(ceil_divide(secparam.symbits, 8 * sizeof(uint64_t)), sizeof(uint64_t));
+}
+
+void crypto::free_prf_state(prf_state_ctx* prf_state) {
+	free(prf_state->ctr);
+	clean_aes_key(&(prf_state->aes_key));
+}
+
+void des_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
+	DES_cblock      keyblock;
+	DES_cblock		msgblock;
+	DES_cblock		outblock;
+	DES_key_schedule schedule;
+
+	

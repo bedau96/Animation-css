@@ -391,4 +391,16 @@ void des_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
 	DES_cblock		outblock;
 	DES_key_schedule schedule;
 
-	
+	memcpy(msgblock, inbuf, 8);
+	memcpy( keyblock, key,8);
+	DES_set_key( &keyblock, &schedule );
+
+	/* Encryption occurs here */
+	DES_ecb_encrypt(&msgblock, &outblock, &schedule, (int) encrypt);
+
+	memcpy(resbuf, outblock, 8);
+}
+
+
+void des3_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
+	DES_cblock      keybl

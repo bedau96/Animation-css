@@ -403,4 +403,17 @@ void des_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
 
 
 void des3_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
-	DES_cblock      keybl
+	DES_cblock      keyblock1, keyblock2, keyblock3;
+	DES_cblock		msgblock;
+	DES_cblock		outblock;
+	DES_key_schedule schedule1, schedule2, schedule3;
+
+	memcpy(msgblock, inbuf, 8);
+
+	memcpy( keyblock1, key,8);
+	memcpy( keyblock2, key+8,8);
+	memcpy( keyblock2, key+16,8);
+
+	DES_set_key( &keyblock1, &schedule1 );
+	DES_set_key( &keyblock2, &schedule2 );
+	DES_set_key( &keyblock3, &sch

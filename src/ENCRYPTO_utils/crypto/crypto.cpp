@@ -441,4 +441,14 @@ void sha256_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t n
 	memcpy(resbuf, hash_buf, noutbytes);
 }
 
-void
+void sha512_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf) {
+	SHA512_CTX sha;
+	SHA512_Init(&sha);
+	SHA512_Update(&sha, inbuf, ninbytes);
+	SHA512_Final(hash_buf, &sha);
+	memcpy(resbuf, hash_buf, noutbytes);
+}
+
+//Read random bytes from /dev/urandom
+void gen_secure_random(uint8_t* dest, uint32_t nbytes) {
+	int fd = 

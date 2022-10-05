@@ -428,4 +428,17 @@ void des3_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
 void sha1_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf) {
 	SHA_CTX sha;
 	SHA1_Init(&sha);
-	SHA1_Updat
+	SHA1_Update(&sha, inbuf, ninbytes);
+	SHA1_Final(hash_buf, &sha);
+	memcpy(resbuf, hash_buf, noutbytes);
+}
+
+void sha256_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf) {
+	SHA256_CTX sha;
+	SHA256_Init(&sha);
+	SHA256_Update(&sha, inbuf, ninbytes);
+	SHA256_Final(hash_buf, &sha);
+	memcpy(resbuf, hash_buf, noutbytes);
+}
+
+void

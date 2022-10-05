@@ -416,4 +416,16 @@ void des3_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt) {
 
 	DES_set_key( &keyblock1, &schedule1 );
 	DES_set_key( &keyblock2, &schedule2 );
-	DES_set_key( &keyblock3, &sch
+	DES_set_key( &keyblock3, &schedule3 );
+
+	/* Encryption occurs here */
+	DES_ecb3_encrypt(&msgblock, &outblock, &schedule1, &schedule2, &schedule2, (int) encrypt);
+
+	memcpy(resbuf, outblock, 8);
+}
+
+
+void sha1_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf) {
+	SHA_CTX sha;
+	SHA1_Init(&sha);
+	SHA1_Updat

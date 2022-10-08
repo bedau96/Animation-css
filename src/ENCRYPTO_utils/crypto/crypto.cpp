@@ -480,4 +480,10 @@ seclvl get_sec_lvl(uint32_t symsecbits) {
 		return MT;
 	else if (symsecbits == LT.symbits)
 		return LT;
-	else if (symsecbits == XL
+	else if (symsecbits == XLT.symbits)
+		return XLT;
+	else if (symsecbits == XXLT.symbits)
+		return XXLT;
+	else
+		return LT;
+}

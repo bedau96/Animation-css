@@ -461,4 +461,23 @@ void gen_secure_random(uint8_t* dest, uint32_t nbytes) {
 	while (bytectr < nbytes) {
 		ssize_t result = read(fd, dest + bytectr, nbytes - bytectr);
 		if (result < 0) {
-			std::cerr << "Unable to read from /dev/urandom, exiting" << 
+			std::cerr << "Unable to read from /dev/urandom, exiting" << std::endl;
+			exit(0);
+		}
+		bytectr += static_cast<size_t>(result);
+	}
+	if (close(fd) < 0)
+	{
+		std::cerr << "Unable to close /dev/urandom" << std::endl;
+	}
+}
+
+
+seclvl get_sec_lvl(uint32_t symsecbits) {
+	if (symsecbits == ST.symbits)
+		return ST;
+	else if (symsecbits == MT.symbits)
+		return MT;
+	else if (symsecbits == LT.symbits)
+		return LT;
+	else if (symsecbits == XL

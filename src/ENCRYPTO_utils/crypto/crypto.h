@@ -35,3 +35,17 @@ const uint8_t const_seed[2][16] = {{ 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0
 enum bc_mode {
 	ECB, CBC
 };
+
+//Check for the OpenSSL version number, since the EVP_CIPHER_CTX has become opaque from >= 1.1.0
+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
+	#define OPENSSL_OPAQUE_EVP_CIPHER_CTX
+#endif
+
+#ifdef OPENSSL_OPAQUE_EVP_CIPHER_CTX
+typedef EVP_CIPHER_CTX* AES_KEY_CTX;
+#else
+typedef EVP_CIPHER_CTX AES_KEY_CTX;
+#endif
+
+/* Predefined security levels,
+ * ST (SHORTTERM) = 1024/160/163 bit public key,

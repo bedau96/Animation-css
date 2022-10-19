@@ -56,4 +56,19 @@ typedef EVP_CIPHER_CTX AES_KEY_CTX;
  */
 
 struct prf_state_ctx {
-	A
+	AES_KEY_CTX aes_key;
+	uint64_t* ctr;
+};
+
+//TODO: not thread-safe when multiple threads generate random data using the same seed
+class crypto {
+
+public:
+
+	crypto(uint32_t symsecbits, uint8_t* seed);
+	crypto(uint32_t symsecbits);
+	~crypto();
+
+	//Randomness generation routines
+	void gen_rnd(uint8_t* resbuf, uint32_t numbytes);
+	void gen_rnd_from_

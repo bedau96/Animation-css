@@ -48,4 +48,12 @@ typedef EVP_CIPHER_CTX AES_KEY_CTX;
 #endif
 
 /* Predefined security levels,
- * ST (SHORTTERM) = 1024/160/163 bit public key,
+ * ST (SHORTTERM) = 1024/160/163 bit public key, 80 bit private key
+ * MT (MEDIUMTERM) = 2048/192/233 bit public key, 112 bit private key
+ * LT (LONGTERM) = 3072/256/283 bit public key, 128 bit private key
+ * XLT (EXTRA LONGTERM) = 7680/384/409 bit public key, 192 bit private key
+ * XXLT (EXTRA EXTRA LONGTERM) = 15360/512/571 bit public key, 256 bit private key
+ */
+
+struct prf_state_ctx {
+	A

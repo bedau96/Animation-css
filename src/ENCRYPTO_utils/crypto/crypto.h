@@ -78,4 +78,10 @@ public:
 
 	//Encryption routines
 	void encrypt(uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes);
-	void decrypt(ui
+	void decrypt(uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes);
+
+	//Hash routines
+	void hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes);
+	void hash_buf(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* buf);
+	void hash_non_threadsafe(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes);
+	void hash_ctr(uint8_t* resbuf

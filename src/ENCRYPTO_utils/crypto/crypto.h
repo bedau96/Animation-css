@@ -89,4 +89,9 @@ public:
 	void fixed_key_aes_hash_ctr(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes);
 
 	//Key seed routines
-	void seed_aes_
+	void seed_aes_hash(uint8_t* seed, bc_mode mode = ECB, const uint8_t* iv = ZERO_IV);
+	void seed_aes_enc(uint8_t* seed, bc_mode mode = ECB, const uint8_t* iv = ZERO_IV);
+
+	//External encryption routines
+	void init_aes_key(AES_KEY_CTX* aes_key, uint8_t* seed, bc_mode mode = ECB, const uint8_t* iv = ZERO_IV);
+	void init_aes_key(AES_KEY_C

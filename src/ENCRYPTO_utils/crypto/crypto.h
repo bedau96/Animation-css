@@ -98,4 +98,18 @@ public:
 	void clean_aes_key(AES_KEY_CTX* aeskey);
 	uint32_t get_aes_key_bytes();
 	void encrypt(AES_KEY_CTX* enc_key, uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes);
-	void decrypt(AES_KEY_CTX* dec_key, uint8_t* resbuf, uint8_t* inbu
+	void decrypt(AES_KEY_CTX* dec_key, uint8_t* resbuf, uint8_t* inbuf, uint32_t ninbytes);
+
+	pk_crypto* gen_field(field_type ftype);
+
+	seclvl get_seclvl() {
+		return secparam;
+	}
+	;
+	uint32_t get_hash_bytes();
+
+	void gen_common_seed(prf_state_ctx* aes_key, CSocket& sock);
+	void init_prf_state(prf_state_ctx* prf_state, uint8_t* seed);
+	void free_prf_state(prf_state_ctx* prf_state);
+private:
+	void seed_aes_key(AES_KEY_CTX* aeskey, uint8_t* 

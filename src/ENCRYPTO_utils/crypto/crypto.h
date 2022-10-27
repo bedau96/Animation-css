@@ -119,4 +119,19 @@ private:
 
 	AES_KEY_CTX aes_hash_key;
 	AES_KEY_CTX aes_enc_key;
-	AES_KEY_CTX aes
+	AES_KEY_CTX aes_dec_key;
+	prf_state_ctx global_prf_state;
+	std::mutex global_prf_state_mutex;
+
+	seclvl secparam;
+	uint8_t* aes_hash_in_buf;
+	uint8_t* aes_hash_out_buf;
+	uint8_t* aes_hash_buf_y1;
+	uint8_t* aes_hash_buf_y2;
+
+	uint8_t* sha_hash_buf;
+
+	void (*hash_routine)(uint8_t*, uint32_t, uint8_t*, uint32_t, uint8_t*);
+};
+
+//Some functions that shou

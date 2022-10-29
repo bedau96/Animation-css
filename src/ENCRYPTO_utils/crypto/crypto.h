@@ -134,4 +134,9 @@ private:
 	void (*hash_routine)(uint8_t*, uint32_t, uint8_t*, uint32_t, uint8_t*);
 };
 
-//Some functions that shou
+//Some functions that should be useable without the class
+void des_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt);
+void des3_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt);
+
+void sha1_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf);
+void sha256_hash(uint8_t* resbuf, uint32_t 

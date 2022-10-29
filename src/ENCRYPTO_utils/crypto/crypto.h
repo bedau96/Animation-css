@@ -139,4 +139,9 @@ void des_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt);
 void des3_encrypt(uint8_t* resbuf, uint8_t* inbuf, uint8_t* key, bool encrypt);
 
 void sha1_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf);
-void sha256_hash(uint8_t* resbuf, uint32_t 
+void sha256_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf);
+void sha512_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t ninbytes, uint8_t* hash_buf);
+void gen_secure_random(uint8_t* dest, uint32_t nbytes);
+void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf, uint32_t nbytes);
+
+seclvl get_sec_lvl(uint32_t symsecbits); //TODO pick 

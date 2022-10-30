@@ -630,3 +630,181 @@ void createKeys() {
 						//					gmp_printf("msg  %Zd\n", msg);
 						//					gmp_printf("ct   %Zd\n", ct);
 						//					gmp_printf("msg2 %Zd\n", msg2);
+						//
+						//					gmp_printf("n  %Zd\n", pub->n);
+						//					gmp_printf("u  %Zd\n", pub->u);
+						//					gmp_printf("g  %Zd\n", pub->g);
+						//					gmp_printf("h  %Zd\n", pub->h);
+						//					gmp_printf("p  %Zd\n", prv->p);
+						//					gmp_printf("q  %Zd\n", prv->q);
+						//					gmp_printf("vp %Zd\n", prv->vp);
+						//					gmp_printf("vq %Zd\n", prv->vq);
+						printf(".");
+						no_error = 0;
+						break;
+					}
+				}
+			}
+			if (no_error) {
+				// dgk_storekey(n, l, pub, prv);
+			} else {
+				if (l > 4) { // re-do last iteration
+					l /= 2;
+				}
+			}
+		}
+	}
+}
+
+void test_encdec() {
+	dgk_pubkey_t * pub;
+	dgk_prvkey_t * prv;
+
+	mpz_t a0, a1, b0, b1, c0, c1, r, d, a0c, b0c, rc, tmp0, tmp1;
+
+	mpz_inits(a0, a1, b0, b1, c0, c1, r, d, a0c, b0c, rc, tmp0, tmp1, NULL);
+
+	unsigned int l = 32;
+	unsigned int nbit = 3072;
+
+	//choose either keygen or readkey
+	//dgk_keygen(nbit, l, &pub, &prv);
+	dgk_readkey(nbit, l, &pub, &prv);
+
+	aby_prng(a0, l);
+	dgk_encrypt_crt(a0c, pub, prv, a0); //encrypt a0
+
+	dgk_decrypt(b0, pub, prv, a0c);
+
+	if (mpz_cmp(a0, b0) == 0) {
+		printf("fine\n");
+	} else {
+		printf("ERR :(\n");
+		gmp_printf("%Zd, %Zd", a0, b0);
+	}
+
+	dgk_encrypt_plain(a0c, pub, a0);
+	dgk_decrypt(b0, pub, prv, a0c);
+
+	if (mpz_cmp(a0, b0) == 0) {
+		printf("fine\n");
+	} else {
+		printf("ERR :(\n");
+		gmp_printf("%Zd, %Zd", a0, b0);
+	}
+}
+
+void test_sharing() {
+	dgk_pubkey_t * pub;
+	dgk_prvkey_t * prv;
+
+	mpz_t a0, a1, b0, b1, c0, c1, r, d, a0c, b0c, rc, tmp0, tmp1;
+
+	mpz_inits(a0, a1, b0, b1, c0, c1, r, d, a0c, b0c, rc, tmp0, tmp1, NULL);
+
+	unsigned int l = 32;
+	unsigned int nbit = 3072;
+
+	//choose either keygen or readkey
+	// dgk_keygen(nbit, l, &pub, &prv);
+	dgk_readkey(nbit, l, &pub, &prv);
+
+	// choose random a and b shares, l bits long
+	aby_prng(a0, l);
+	aby_prng(b0, l);
+	aby_prng(a1, l);
+	aby_prng(b1, l);
+
+	gmp_printf("a0,b0: %Zd %Zd \n", a0, b0);
+	gmp_printf("a1,b1: %Zd %Zd \n", a1, b1);
+
+	// choose random r for masking
+	aby_prng(r, 2 * l + 2);
+
+	dgk_encrypt_plain(a0c, pub, a0); //encrypt a0
+	dgk_encrypt_plain(b0c, pub, b0); //encrypt b0
+	dgk_encrypt_plain(rc, pub, r); //encrypt r
+
+	mpz_mul(c1, a1, b1);
+	mpz_mod_2exp(c1, c1, l);
+	mpz_sub(c1, c1, r); // c1 = a1*b1 - r
+	mpz_mod_2exp(c1, c1, l); // % l (stay within plaintext space)
+
+	// homomorphic multiplication
+	mpz_powm(a0c, a0c, b1, pub->n);
+	mpz_powm(b0c, b0c, a1, pub->n);
+
+	// test from here
+	dgk_decrypt(d, pub, prv, a0c);
+	gmp_printf("---test shares---\ndec a0*b1= %Zd\n", d);
+
+	mpz_mul(tmp0, b1, a0);
+	gmp_printf("a0*b1=     %Zd\n", tmp0);
+
+	dgk_decrypt(d, pub, prv, b0c);
+	gmp_printf("dec a1*b0= %Zd\n", d);
+
+	mpz_mul(tmp1, b0, a1);
+	gmp_printf("a1*b0=     %Zd\n---test shares---\n", tmp1);
+	// test till here
+
+	mpz_mul(a0c, a0c, b0c); // multiply [a0]^b1 and [b0]^a1 (homomorphic addition)
+	mpz_mod(a0c, a0c, pub->n); // product % n (stay within ciphertext space)
+
+	// test from here
+	dgk_decrypt(d, pub, prv, a0c); // decrypt ciphertext (sum of products a0c, yet no r)
+	gmp_printf("dec 4x= %Zd\n", d);
+
+	mpz_add(tmp0, tmp0, tmp1); // add plaintext products, should be equal to d
+	gmp_printf("4x=     %Zd\n", tmp0);
+
+	mpz_add(tmp0, tmp0, r); // plaintext add r
+	mpz_mod_2exp(tmp1, tmp0, l); // mod l
+	gmp_printf("4x + r= %Zd = %Zd (mod l)\n", tmp0, tmp1);
+	// test till here
+
+	mpz_mul(a0c, a0c, rc); // homomorphic addition of r
+	mpz_mod(a0c, a0c, pub->n); // product % n
+
+	dgk_decrypt(d, pub, prv, a0c); // decrypt masked sum+r
+
+	mpz_mul(c0, a0, b0); // c0 = a0 * b0
+	mpz_mod_2exp(c0, c0, l); // c0 = c0 % 2^l
+	mpz_add(c0, c0, d); // c0 = c0 + d
+	mpz_mod_2exp(c0, c0, l); // c0 = c0 % 2^l
+
+	gmp_printf("%Zd %Zd %Zd\n", a0, b0, c0);
+	gmp_printf("%Zd %Zd %Zd\n", a1, b1, c1);
+	gmp_printf("%Zd %Zd\n", r, d);
+
+	// test if MT is valid: (a0+a1) * (b0+b1) = c0+c1  [mod l]
+	mpz_add(a0, a0, a1);
+	mpz_add(b0, b0, b1);
+	mpz_mul(a0, a0, b0);
+	mpz_add(c0, c0, c1);
+
+	mpz_mod_2exp(c0, c0, l);
+	mpz_mod_2exp(a0, a0, l);
+
+	if (mpz_cmp(a0, c0) == 0) {
+		printf("fine\n");
+	} else {
+		printf("ERR :(\n");
+	}
+}
+
+/**
+ * uncomment the following main for direct testing
+ * g++ dgk.cpp ../utils.cpp ../powmod.cpp -lgmp -O3 -g0 -o dgk
+ */
+// #include <time.h>
+// int main(){
+// 	srand (time(NULL)^clock());
+
+// 	// createKeys();
+// 	test_encdec();
+// 	test_sharing();
+// 	printf("DGK END.\n");
+
+// 	return 0;
+// }

@@ -144,4 +144,7 @@ void sha512_hash(uint8_t* resbuf, uint32_t noutbytes, uint8_t* inbuf, uint32_t n
 void gen_secure_random(uint8_t* dest, uint32_t nbytes);
 void gen_rnd_bytes(prf_state_ctx* prf_state, uint8_t* resbuf, uint32_t nbytes);
 
-seclvl get_sec_lvl(uint32_t symsecbits); //TODO pick 
+seclvl get_sec_lvl(uint32_t symsecbits); //TODO pick a more elegant name (see crypto->get_seclvl())
+
+
+#endif /* CRYPTO_H_ */

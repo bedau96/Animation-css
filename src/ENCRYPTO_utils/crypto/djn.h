@@ -10,4 +10,17 @@
             but WITHOUT ANY WARRANTY; without even the implied warranty of
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
             GNU Lesser General Public License for more details.
-            You should have received a copy of the GNU Less
+            You should have received a copy of the GNU Lesser General Public License
+            along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+ \brief
+ libdjn - v0.9
+ A library implementing the Damgaard Jurik Nielsen cryptosystem with s=1 (~Paillier).
+ based on:
+ libpaillier - A library implementing the Paillier cryptosystem.
+ (http://hms.isi.jhu.edu/acsc/libpaillier/)
+ */
+
+#ifndef _DJN_H_
+#define _DJN_H_
+#includ

@@ -23,4 +23,13 @@
 
 #ifndef _DJN_H_
 #define _DJN_H_
-#includ
+#include <gmp.h>
+
+/*
+ On memory handling:
+
+ At no point is any special effort made to securely "shred" sensitive
+ memory or prevent it from being paged out to disk. This means that
+ it is important that functions dealing with private keys and
+ plaintexts (e.g., djn_keygen and djn_enc) only be run on
+ trusted machines. The resulting ciphertexts and publ

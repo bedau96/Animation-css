@@ -32,4 +32,20 @@
  memory or prevent it from being paged out to disk. This means that
  it is important that functions dealing with private keys and
  plaintexts (e.g., djn_keygen and djn_enc) only be run on
- trusted machines. The resulting ciphertexts and publ
+ trusted machines. The resulting ciphertexts and public keys,
+ however, may of course be handled in an untrusted manner.
+
+ */
+
+/******
+ TYPES
+ *******/
+
+/*
+ This represents a public key, which is the modulus n plus a generator h.
+ */
+struct djn_pubkey_t {
+	int bits; /* e.g., 1024 */
+	int rbits; /* e.g., 512 */
+	mpz_t n; /* public modulus n = p q */
+	mpz_t n_squared; /* cached to avoid reco

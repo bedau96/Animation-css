@@ -59,4 +59,12 @@ struct djn_pubkey_t {
  function (lambda) of the modulus. The other value is kept for
  efficiency and should be considered private.
  */
-struct djn_p
+struct djn_prvkey_t {
+	mpz_t lambda; /* lambda(n), i.e., lcm(p-1,q-1) */
+	mpz_t lambda_inverse; /* inverse of lambda (mod n)*/
+	mpz_t p; /* cached to avoid recomputing */
+	mpz_t q; /* cached to avoid recomputing */
+	mpz_t q_inverse; /* inverse of q (mod p) */
+	mpz_t q_squared_inverse; /* inverse of q^2 (mod p^2) */
+	mpz_t p_minusone; /* cached to avoid recomputing */
+	mpz_t q_minuson

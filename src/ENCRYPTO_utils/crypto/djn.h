@@ -48,4 +48,15 @@ struct djn_pubkey_t {
 	int bits; /* e.g., 1024 */
 	int rbits; /* e.g., 512 */
 	mpz_t n; /* public modulus n = p q */
-	mpz_t n_squared; /* cached to avoid reco
+	mpz_t n_squared; /* cached to avoid recomputing */
+	mpz_t h; /* generator h = -x^2 mod n */
+	mpz_t h_s; /* h_s = h^n mod n^2 */
+};
+
+/*
+ This represents a Paillier private key; it needs to be used with a
+ djn_pubkey_t to be meaningful. It includes the Carmichael
+ function (lambda) of the modulus. The other value is kept for
+ efficiency and should be considered private.
+ */
+struct djn_p

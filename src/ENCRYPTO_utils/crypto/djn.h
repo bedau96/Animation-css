@@ -67,4 +67,15 @@ struct djn_prvkey_t {
 	mpz_t q_inverse; /* inverse of q (mod p) */
 	mpz_t q_squared_inverse; /* inverse of q^2 (mod p^2) */
 	mpz_t p_minusone; /* cached to avoid recomputing */
-	mpz_t q_minuson
+	mpz_t q_minusone; /* cached to avoid recomputing */
+	mpz_t p_squared; /* cached to avoid recomputing */
+	mpz_t q_squared; /* cached to avoid recomputing */
+	mpz_t ordpsq; /* p^2-p */
+	mpz_t ordqsq; /* q^2-q */
+};
+
+/*
+ This is the type of the callback functions used to obtain the
+ randomness needed by the probabilistic algorithms. The functions
+ djn_get_rand_devrandom and djn_get_rand_devurandom
+ (documented l

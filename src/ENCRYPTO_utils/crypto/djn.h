@@ -78,4 +78,16 @@ struct djn_prvkey_t {
  This is the type of the callback functions used to obtain the
  randomness needed by the probabilistic algorithms. The functions
  djn_get_rand_devrandom and djn_get_rand_devurandom
- (documented l
+ (documented later) may be passed to any library function requiring a
+ djn_get_rand_t, or you may implement your own. If you implement
+ your own such function, it should fill in "len" random bytes in the
+ array "buf".
+ */
+typedef void (*djn_get_rand_t)(void* buf, int len);
+
+/*****************
+ BASIC OPERATIONS
+ *****************/
+
+/*
+ Generate a keypair of length

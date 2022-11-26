@@ -90,4 +90,11 @@ typedef void (*djn_get_rand_t)(void* buf, int len);
  *****************/
 
 /*
- Generate a keypair of length
+ Generate a keypair of length modulusbits using randomness from the
+ provided get_rand function. Space will be allocated for each of the
+ keys, and the given pointers will be set to point to the new
+ djn_pubkey_t and djn_prvkey_t structures. The functions
+ djn_get_rand_devrandom and djn_get_rand_devurandom may be
+ passed as the final argument.
+ */
+void djn_keygen(unsigned int modulusbits, djn_pubkey_t**

@@ -97,4 +97,15 @@ typedef void (*djn_get_rand_t)(void* buf, int len);
  djn_get_rand_devrandom and djn_get_rand_devurandom may be
  passed as the final argument.
  */
-void djn_keygen(unsigned int modulusbits, djn_pubkey_t**
+void djn_keygen(unsigned int modulusbits, djn_pubkey_t** pub, djn_prvkey_t** prv);
+
+/*
+ Encrypt the given plaintext with the given public key using
+ randomness from get_rand for blinding. If res is not null, its
+ contents will be overwritten with the result. Otherwise, a new
+ djn_ciphertext_t will be allocated and returned.
+ */
+void djn_encrypt(mpz_t res, djn_pubkey_t* pub, mpz_t pt);
+
+/*
+ Encrypt the given plaintext with t

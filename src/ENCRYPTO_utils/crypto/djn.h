@@ -127,4 +127,15 @@ void djn_encrypt_fb(mpz_t res, djn_pubkey_t* pub, mpz_t plaintext);
  */
 void djn_decrypt(mpz_t res, djn_pubkey_t* pub, djn_prvkey_t* prv, mpz_t ct);
 
-/***********
+/**********************
+ KEY IMPORT AND EXPORT
+ **********************/
+
+/*
+ Import or export public and private keys from or to hexadecimal,
+ ASCII strings, which are suitable for I/O. Note that the
+ corresponding public key is necessary to initialize a private key
+ from a hex string. In all cases, the returned value is allocated for
+ the caller and the values passed are unchanged.
+ */
+char* djn_pubkey

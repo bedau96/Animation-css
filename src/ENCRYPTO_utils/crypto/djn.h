@@ -118,4 +118,13 @@ void djn_encrypt_crt(mpz_t res, djn_pubkey_t* pub, djn_prvkey_t* prv, mpz_t pt);
 /**
  * fixed base encryption. Requires pre-computed fixed base table.
  */
-void d
+void djn_encrypt_fb(mpz_t res, djn_pubkey_t* pub, mpz_t plaintext);
+
+/*
+ Decrypt the given ciphertext with the given key pair. If res is not
+ null, its contents will be overwritten with the result. Otherwise, a
+ new djn_plaintext_t will be allocated and returned.
+ */
+void djn_decrypt(mpz_t res, djn_pubkey_t* pub, djn_prvkey_t* prv, mpz_t ct);
+
+/***********

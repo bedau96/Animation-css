@@ -138,4 +138,16 @@ void djn_decrypt(mpz_t res, djn_pubkey_t* pub, djn_prvkey_t* prv, mpz_t ct);
  from a hex string. In all cases, the returned value is allocated for
  the caller and the values passed are unchanged.
  */
-char* djn_pubkey
+char* djn_pubkey_to_hex(djn_pubkey_t* pub);
+char* djn_prvkey_to_hex(djn_prvkey_t* prv);
+djn_pubkey_t* djn_pubkey_from_hex(char* str);
+djn_prvkey_t* djn_prvkey_from_hex(char* str, djn_pubkey_t* pub);
+
+/********
+ CLEANUP
+ ********/
+
+/*
+ These free the structures allocated and returned by various
+ functions within library and should be used when the structures are
+ no longer need

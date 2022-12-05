@@ -150,4 +150,19 @@ djn_prvkey_t* djn_prvkey_from_hex(char* str, djn_pubkey_t* pub);
 /*
  These free the structures allocated and returned by various
  functions within library and should be used when the structures are
- no longer need
+ no longer needed.
+ */
+void djn_freepubkey(djn_pubkey_t* pub);
+void djn_freeprvkey(djn_prvkey_t* prv);
+
+/***********
+ MISC STUFF
+ ***********/
+
+/*
+ Just a utility used internally when we need round a number of bits
+ up the number of bytes necessary to hold them.
+ */
+#define PAILLIER_BITS_TO_BYTES(n) ((n) % 8 ? (n) / 8 + 1 : (n) / 8)
+
+void djn_pow_mod_n_crt(mpz_t res, const mpz_t b, co

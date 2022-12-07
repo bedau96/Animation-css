@@ -252,3 +252,103 @@ void intrin_sequential_enc8(const unsigned char* PT, unsigned char* CT, int n_ae
 			_mm_storeu_si128((__m128i *)(CT+5*16), block6);
 			_mm_storeu_si128((__m128i *)(CT+6*16), block7);
 			_mm_storeu_si128((__m128i *)(CT+7*16), block8);
+
+			PT+=128;
+			CT+=128;
+
+		}
+		keyptr+=8;
+	}
+}
+
+
+
+void intrin_sequential_gen_rnd8(unsigned char* ctr_buf, const unsigned long long ctr, unsigned char* CT,
+		int n_aesiters, int nkeys, ROUND_KEYS* ks){
+
+	ROUND_KEYS *keyptr=(ROUND_KEYS *)ks;
+    register __m128i keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, con, mask, x2, keyA_aux, keyB_aux, keyC_aux, keyD_aux, globAux;
+    unsigned char *ctptr;
+	int i, j, ctoffset;
+	unsigned long long* tmpctr = (unsigned long long*) ctr_buf;
+
+	ctoffset = n_aesiters * 16;
+
+	register __m128i inblock, block1, block2, block3, block4, block5, block6, block7, block8;
+
+	int lim = (nkeys/8)*8;
+
+	for (i=0;i<lim;i+=8){
+		ctptr=CT + i*ctoffset;
+		(*tmpctr) = ctr;
+		for(j=0;j<n_aesiters; j++) {
+			(*tmpctr)++;
+			inblock = _mm_loadu_si128((__m128i const*)(ctr_buf));
+
+			READ_KEYS(0)
+
+			block1 = _mm_xor_si128(keyA, inblock);
+			block2 = _mm_xor_si128(keyB, inblock);
+			block3 = _mm_xor_si128(keyC, inblock);
+			block4 = _mm_xor_si128(keyD, inblock);
+			block5 = _mm_xor_si128(keyE, inblock);
+			block6 = _mm_xor_si128(keyF, inblock);
+			block7 = _mm_xor_si128(keyG, inblock);
+			block8 = _mm_xor_si128(keyH, inblock);
+
+			ENC_round(1)
+			ENC_round(2)
+			ENC_round(3)
+			ENC_round(4)
+			ENC_round(5)
+			ENC_round(6)
+			ENC_round(7)
+			ENC_round(8)
+			ENC_round(9)
+			ENC_round_last(10)
+
+			_mm_storeu_si128((__m128i *)(ctptr+0*ctoffset), block1);
+			_mm_storeu_si128((__m128i *)(ctptr+1*ctoffset), block2);
+			_mm_storeu_si128((__m128i *)(ctptr+2*ctoffset), block3);
+			_mm_storeu_si128((__m128i *)(ctptr+3*ctoffset), block4);
+			_mm_storeu_si128((__m128i *)(ctptr+4*ctoffset), block5);
+			_mm_storeu_si128((__m128i *)(ctptr+5*ctoffset), block6);
+			_mm_storeu_si128((__m128i *)(ctptr+6*ctoffset), block7);
+			_mm_storeu_si128((__m128i *)(ctptr+7*ctoffset), block8);
+
+			ctptr+=16;
+		}
+		keyptr+=8;
+	}
+
+
+	for (;i<nkeys;i++){
+		ctptr=CT + i*ctoffset;
+		(*tmpctr) = ctr;
+		for(j=0;j<n_aesiters; j++) {
+			(*tmpctr)++;
+			inblock = _mm_loadu_si128((__m128i const*)(ctr_buf));
+
+			READ_KEYS1(0)
+
+			block1 = _mm_xor_si128(keyA, inblock);
+
+			ENC1_round(1)
+			ENC1_round(2)
+			ENC1_round(3)
+			ENC1_round(4)
+			ENC1_round(5)
+			ENC1_round(6)
+			ENC1_round(7)
+			ENC1_round(8)
+			ENC1_round(9)
+			ENC1_round_last(10)
+
+			_mm_storeu_si128((__m128i *)(ctptr), block1);
+
+			ctptr+=16;
+		}
+		keyptr++;
+	}
+}
+#endif

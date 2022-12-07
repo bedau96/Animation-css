@@ -165,4 +165,12 @@ void djn_freeprvkey(djn_prvkey_t* prv);
  */
 #define PAILLIER_BITS_TO_BYTES(n) ((n) % 8 ? (n) / 8 + 1 : (n) / 8)
 
-void djn_pow_mod_n_crt(mpz_t res, const mpz_t b, co
+void djn_pow_mod_n_crt(mpz_t res, const mpz_t b, const mpz_t e, const djn_pubkey_t* pub, const djn_prvkey_t* prv);
+void djn_pow_mod_n_squared_crt(mpz_t res, const mpz_t b, const mpz_t e, const djn_pubkey_t* pub, const djn_prvkey_t* prv);
+
+/**
+ * create full public key given only n and h (e.g., after a key exchange)
+ */
+void djn_complete_pubkey(unsigned int modulusbits, djn_pubkey_t** pub, mpz_t n, mpz_t h);
+
+#endif

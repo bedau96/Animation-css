@@ -27,4 +27,16 @@ uint32_t* BuildGrayCode(uint32_t length) {
 	return gray_code;
 }
 
-uint32_t* BuildGrayCodeIncrement(uint3
+uint32_t* BuildGrayCodeIncrement(uint32_t length) {
+	uint32_t* gray_code_increment = (uint32_t*) malloc(sizeof(uint32_t) * length);
+	for(uint32_t i = 0; i < length; ++i) {
+		gray_code_increment[i] = 0;
+	}
+	uint32_t length_inc = 2;
+	while(length_inc < length) {
+		uint32_t length_count = length_inc - 1;
+		while(length_count <= length) {
+			(gray_code_increment[length_count])++;
+			length_count += length_inc;
+		}
+		length_inc 

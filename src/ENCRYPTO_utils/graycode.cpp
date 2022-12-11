@@ -12,4 +12,19 @@
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
-            along with this program. If not, se
+            along with this program. If not, see <http://www.gnu.org/licenses/>.
+ \brief		Gray-Code implementation
+ */
+
+#include "./graycode.h"
+#include <stdlib.h>
+
+uint32_t* BuildGrayCode(uint32_t length) {
+	uint32_t* gray_code = (uint32_t*) malloc(sizeof(uint32_t) * length);
+	for(uint32_t i = 0; i < length; ++i) {
+		gray_code[i] = i ^ (i >> 1);
+	}
+	return gray_code;
+}
+
+uint32_t* BuildGrayCodeIncrement(uint3

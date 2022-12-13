@@ -1,5 +1,6 @@
+
 /**
- \file 		graycode.cpp
+ \file 		graycode.h
  \author 	Martin Kromm<martin.kromm@stud.tu-darmstadt.de>
  \copyright	ABY - A Framework for Efficient Mixed-protocol Secure Two-party Computation
 			Copyright (C) 2019 ENCRYPTO Group, TU Darmstadt
@@ -16,30 +17,7 @@
  \brief		Gray-Code implementation
  */
 
-#include "./graycode.h"
-#include <stdlib.h>
+#include <stdint.h>
 
-uint32_t* BuildGrayCode(uint32_t length) {
-	uint32_t* gray_code = (uint32_t*) malloc(sizeof(uint32_t) * length);
-	for(uint32_t i = 0; i < length; ++i) {
-		gray_code[i] = i ^ (i >> 1);
-	}
-	return gray_code;
-}
-
-uint32_t* BuildGrayCodeIncrement(uint32_t length) {
-	uint32_t* gray_code_increment = (uint32_t*) malloc(sizeof(uint32_t) * length);
-	for(uint32_t i = 0; i < length; ++i) {
-		gray_code_increment[i] = 0;
-	}
-	uint32_t length_inc = 2;
-	while(length_inc < length) {
-		uint32_t length_count = length_inc - 1;
-		while(length_count <= length) {
-			(gray_code_increment[length_count])++;
-			length_count += length_inc;
-		}
-		length_inc = length_inc << 1;
-	}
-	return gray_code_increment;
-}
+uint32_t* BuildGrayCode(uint32_t length);
+uint32_t* BuildGrayCodeIncrement(uint32_t length);

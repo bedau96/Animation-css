@@ -28,4 +28,18 @@
  \brief	Data types for command line parameters
  */
 enum etype {
-	T_NU
+	T_NUM, //uint32_t number
+	T_STR, //string
+	T_FLAG, //boolean flag
+	T_DOUBLE //double number
+};
+
+
+/**
+ \struct 	parsing_ctx
+ \brief	holds information about parameters that should be parsed in the command line input
+ */
+struct parsing_ctx {
+	void* val;	//value of the option, is written into by parse_options
+	etype type;	//type of value
+	std::string opt_name; //name 

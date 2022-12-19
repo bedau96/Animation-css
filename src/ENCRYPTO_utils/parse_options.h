@@ -11,4 +11,21 @@
             but WITHOUT ANY WARRANTY; without even the implied warranty of
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
             GNU Lesser General Public License for more details.
-            You should have received a copy of the GNU Lesser General P
+            You should have received a copy of the GNU Lesser General Public License
+            along with this program. If not, see <http://www.gnu.org/licenses/>.
+ \brief		Parse Options Implementation
+ */
+
+#ifndef UTIL_PARSE_OPTIONS_H_
+#define UTIL_PARSE_OPTIONS_H_
+
+#include <cstdint>
+#include <string>
+#include <vector>
+
+/**
+ \enum 	etype
+ \brief	Data types for command line parameters
+ */
+enum etype {
+	T_NU

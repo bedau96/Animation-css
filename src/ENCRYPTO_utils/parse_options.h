@@ -42,4 +42,7 @@ enum etype {
 struct parsing_ctx {
 	void* val;	//value of the option, is written into by parse_options
 	etype type;	//type of value
-	std::string opt_name; //name 
+	std::string opt_name; //name to set the parameter via command line
+	std::string help_str; //definition of the parameter that is printed in print_usage
+	bool required; //is the parameter required to run the program? If required and not set by the invocation, program will exit
+	bool set; //has the value for the parameter been set previously? In case the parameter is read, 

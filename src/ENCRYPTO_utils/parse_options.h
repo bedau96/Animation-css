@@ -62,4 +62,12 @@ struct parsing_ctx {
 int32_t parse_options(int32_t* argcp, char*** argvp, parsing_ctx* options, uint32_t nops);
 
 /**
-	This method prints the comm
+	This method prints the command line parameters together with a short help description in help_str
+
+	\param  progname	- Name of the program
+	\param  options		- Parameters that should be printed
+	\param	nops	 	- Number of parameters in options
+
+*/
+void print_usage(std::string progname, parsing_ctx* options, uint32_t nops);
+void tokenize(const std::string& str, std::vector<uint32_t>& 

@@ -53,4 +53,13 @@ struct parsing_ctx {
 	This method parses the command line arguments from a C program, given in argcp and argcv, using the flags and parameters specified
 	in options where nops gives the number of parameters that are parsed. The values for the parameters are written into options.
 
-	\param  argcp	 - Pointer to
+	\param  argcp	 - Pointer to argc
+	\param  argvp	 - Pointer to argv
+	\param	options  - A list of parameters that the command line input should be parsed for
+	\param	nops	 - Number of parameters in options
+	\return	0 if the command line string was faulty and 1 otherwise.
+*/
+int32_t parse_options(int32_t* argcp, char*** argvp, parsing_ctx* options, uint32_t nops);
+
+/**
+	This method prints the comm

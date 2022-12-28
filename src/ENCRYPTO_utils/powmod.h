@@ -25,4 +25,15 @@ extern mpz_t* m_table_g;
 extern mpz_t* m_table_h;
 extern mpz_t* m_prod;
 extern mpz_t m_mod;
-extern size_t m_numberOfElem
+extern size_t m_numberOfElements_g;
+extern size_t m_numberOfElements_h;
+
+/**
+ * initialize fixed base multiplication for a given base and a desired exponent bit size
+ * identical functionality for either g or h
+ */
+void fbpowmod_init_g(const mpz_t base, const mpz_t mod, size_t bitsize);
+void fbpowmod_init_h(const mpz_t base, const mpz_t mod, size_t bitsize);
+
+/**
+ * fixed-base

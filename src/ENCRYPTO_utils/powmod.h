@@ -47,4 +47,11 @@ void fbpowmod_h(mpz_t result, const mpz_t exp);
  * requires pre-computed product with fbdbpowmod_init
  */
 void fbdbpowmod(mpz_t ret, const mpz_t e1, const mpz_t e2);
-void fbdbpowmod_init(const mpz_t b1, const mpz_
+void fbdbpowmod_init(const mpz_t b1, const mpz_t b2, const mpz_t mod, size_t bitsize);
+
+/**
+ * double-base exponentiation ret = b1^e1*b2^e2
+ */
+void dbpowmod(mpz_t ret, const mpz_t b1, const mpz_t e1, const mpz_t b2, const mpz_t e2, const mpz_t mod);
+
+#endif

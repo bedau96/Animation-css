@@ -36,4 +36,15 @@ void fbpowmod_init_g(const mpz_t base, const mpz_t mod, size_t bitsize);
 void fbpowmod_init_h(const mpz_t base, const mpz_t mod, size_t bitsize);
 
 /**
- * fixed-base
+ * fixed-base multiplication
+ * requires pre-computed table, created with fbpowmod_init_*
+ */
+void fbpowmod_g(mpz_t result, const mpz_t exp);
+void fbpowmod_h(mpz_t result, const mpz_t exp);
+
+/**
+ * fixed-base double base encryption
+ * requires pre-computed product with fbdbpowmod_init
+ */
+void fbdbpowmod(mpz_t ret, const mpz_t e1, const mpz_t e2);
+void fbdbpowmod_init(const mpz_t b1, const mpz_

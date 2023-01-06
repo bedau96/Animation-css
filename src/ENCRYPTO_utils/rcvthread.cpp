@@ -135,3 +135,37 @@ void RcvThread::ThreadMain() {
 				//std::cout << "Got message on Admin channel, shutting down" << std::endl;
 #ifdef DEBUG_RECEIVE_THREAD
 				std::cout << "Receiver thread is being killed" << std::endl;
+#endif
+				return;//continue;
+			}
+
+			if(rcvbytelen == 0) {
+				remove_listener(channelid);
+			} else {
+				rcv_ctx* rcv_buf = (rcv_ctx*) malloc(sizeof(rcv_ctx));
+				rcv_buf->buf = (uint8_t*) malloc(rcvbytelen);
+				rcv_buf->rcvbytes = rcvbytelen;
+
+				mysock->Receive(rcv_buf->buf, rcvbytelen);
+				rcvlock->Lock();
+
+				{
+					std::lock_guard<std::mutex> lock(listeners[channelid].rcv_buf_mutex);
+					listeners[channelid].rcv_buf.push(rcv_buf);
+				}
+
+				bool cond = listeners[channelid].inuse;
+				rcvlock->Unlock();
+
+				if(cond)
+					listeners[channelid].rcv_event->Set();
+			}
+		} else {
+			// We received 0 bytes, probably due to some major error. Just return.
+			// TODO: Probably add some more elaborate error handling.
+			return;
+		}
+
+	}
+
+}

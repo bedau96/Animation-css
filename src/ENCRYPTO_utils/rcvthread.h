@@ -24,4 +24,29 @@
 #include <array>
 #include <cstdint>
 #include <memory>
-#in
+#include <mutex>
+#include <queue>
+
+class CSocket;
+
+struct rcv_ctx {
+	uint8_t *buf;
+	uint64_t rcvbytes;
+};
+
+
+
+class RcvThread: public CThread {
+public:
+	RcvThread(CSocket* sock, CLock* glock);
+	~RcvThread();
+
+	CLock* getlock() const;
+
+    void setlock(CLock *glock);
+
+	void flush_queue(uint8_t channelid);
+
+	void remove_listener(uint8_t channelid);
+
+	std::queue<rcv_ctx*>*

@@ -59,4 +59,18 @@ private:
 	struct rcv_task {
 		std::queue<rcv_ctx*> rcv_buf;
 		std::mutex rcv_buf_mutex;
-		//std::queue<uint6
+		//std::queue<uint64_t> rcvbytes;
+		CEvent* rcv_event;
+		CEvent* fin_event;
+		bool inuse;
+		bool forward_notify_fin;
+	};
+
+	CLock* rcvlock;
+	CSocket* mysock;
+	std::array<rcv_task, MAX_NUM_COMM_CHANNELS> listeners;
+};
+
+
+
+#endif /* RCV_THREAD_H_ */

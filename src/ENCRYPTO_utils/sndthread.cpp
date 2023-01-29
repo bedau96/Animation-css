@@ -51,4 +51,13 @@ void SndThread::push_task(std::unique_ptr<snd_task> task)
 	sndlock->Lock();
 	send_tasks.push(std::move(task));
 	sndlock->Unlock();
-	send->Set()
+	send->Set();
+}
+
+void SndThread::add_event_snd_task_start_len(CEvent* eventcaller, uint8_t channelid, uint64_t sndbytes, uint8_t* sndbuf, uint64_t startid, uint64_t len) {
+	assert(channelid != ADMIN_CHANNEL);
+	auto task = std::make_unique<snd_task>();
+	task->channelid = channelid;
+	task->eventcaller = eventcaller;
+	size_t bytelen = sndbytes + 2 * sizeof(uint64_t);
+	t

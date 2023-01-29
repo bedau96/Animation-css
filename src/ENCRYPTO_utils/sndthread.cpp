@@ -27,3 +27,28 @@
 SndThread::SndThread(CSocket* sock, CLock *glock)
 : mysock(sock), sndlock(glock), send(std::make_unique<CEvent>())
 {
+}
+
+void SndThread::stop() {
+	kill_task();
+}
+
+SndThread::~SndThread() {
+	kill_task();
+	this->Wait();
+}
+
+CLock* SndThread::getlock() const {
+	return sndlock;
+}
+
+void SndThread::setlock(CLock *glock) {
+	sndlock = glock;
+}
+
+void SndThread::push_task(std::unique_ptr<snd_task> task)
+{
+	sndlock->Lock();
+	send_tasks.push(std::move(task));
+	sndlock->Unlock();
+	send->Set()

@@ -60,4 +60,9 @@ void SndThread::add_event_snd_task_start_len(CEvent* eventcaller, uint8_t channe
 	task->channelid = channelid;
 	task->eventcaller = eventcaller;
 	size_t bytelen = sndbytes + 2 * sizeof(uint64_t);
-	t
+	task->snd_buf.resize(bytelen);
+	memcpy(task->snd_buf.data(), &startid, sizeof(uint64_t));
+	memcpy(task->snd_buf.data()+sizeof(uint64_t), &len, sizeof(uint64_t));
+	memcpy(task->snd_buf.data()+2*sizeof(uint64_t), sndbuf, sndbytes);
+
+	//std::cout << "Adding a new task that is supposed to send " << task->bytelen << " byte

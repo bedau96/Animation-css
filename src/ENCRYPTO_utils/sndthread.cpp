@@ -71,4 +71,16 @@ void SndThread::add_event_snd_task_start_len(CEvent* eventcaller, uint8_t channe
 
 void SndThread::add_snd_task_start_len(uint8_t channelid, uint64_t sndbytes, uint8_t* sndbuf, uint64_t startid, uint64_t len) {
 	//Call the method blocking but since callback is nullptr nobody gets notified, other functionallity is equal
-	add_event_snd_task_start_len(nullptr, channelid, sndbytes, 
+	add_event_snd_task_start_len(nullptr, channelid, sndbytes, sndbuf, startid, len);
+}
+
+
+void SndThread::add_event_snd_task(CEvent* eventcaller, uint8_t channelid, uint64_t sndbytes, uint8_t* sndbuf) {
+	assert(channelid != ADMIN_CHANNEL);
+	auto task = std::make_unique<snd_task>();
+	task->channelid = channelid;
+	task->eventcaller = eventcaller;
+	task->snd_buf.resize(sndbytes);
+	memcpy(task->snd_buf.data(), sndbuf, sndbytes);
+
+	push_ta

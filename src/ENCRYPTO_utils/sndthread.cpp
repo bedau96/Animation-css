@@ -65,4 +65,10 @@ void SndThread::add_event_snd_task_start_len(CEvent* eventcaller, uint8_t channe
 	memcpy(task->snd_buf.data()+sizeof(uint64_t), &len, sizeof(uint64_t));
 	memcpy(task->snd_buf.data()+2*sizeof(uint64_t), sndbuf, sndbytes);
 
-	//std::cout << "Adding a new task that is supposed to send " << task->bytelen << " byte
+	//std::cout << "Adding a new task that is supposed to send " << task->bytelen << " bytes on channel " << (uint32_t) channelid  << std::endl;
+	push_task(std::move(task));
+}
+
+void SndThread::add_snd_task_start_len(uint8_t channelid, uint64_t sndbytes, uint8_t* sndbuf, uint64_t startid, uint64_t len) {
+	//Call the method blocking but since callback is nullptr nobody gets notified, other functionallity is equal
+	add_event_snd_task_start_len(nullptr, channelid, sndbytes, 

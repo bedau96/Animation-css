@@ -83,4 +83,16 @@ void SndThread::add_event_snd_task(CEvent* eventcaller, uint8_t channelid, uint6
 	task->snd_buf.resize(sndbytes);
 	memcpy(task->snd_buf.data(), sndbuf, sndbytes);
 
-	push_ta
+	push_task(std::move(task));
+	//std::cout << "Event set" << std::endl;
+
+}
+
+void SndThread::add_snd_task(uint8_t channelid, uint64_t sndbytes, uint8_t* sndbuf) {
+	//Call the method blocking but since callback is nullptr nobody gets notified, other functionallity is equal
+	add_event_snd_task(nullptr, channelid, sndbytes, sndbuf);
+}
+
+void SndThread::signal_end(uint8_t channelid) {
+	add_snd_task(channelid, 0, nullptr);
+	/

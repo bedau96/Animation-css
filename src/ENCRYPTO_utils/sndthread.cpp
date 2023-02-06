@@ -95,4 +95,18 @@ void SndThread::add_snd_task(uint8_t channelid, uint64_t sndbytes, uint8_t* sndb
 
 void SndThread::signal_end(uint8_t channelid) {
 	add_snd_task(channelid, 0, nullptr);
-	/
+	//std::cout << "Signalling end on channel " << (uint32_t) channelid << std::endl;
+}
+
+void SndThread::kill_task() {
+	auto task = std::make_unique<snd_task>();
+	task->channelid = ADMIN_CHANNEL;
+	task->snd_buf = {0};
+
+	push_task(std::move(task));
+#ifdef DEBUG_SEND_THREAD
+	std::cout << "Killing channel " << (uint32_t) task->channelid << std::endl;
+#endif
+}
+
+void SndTh

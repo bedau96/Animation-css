@@ -130,4 +130,16 @@ void SndThread::ThreadMain() {
 
 		while((iters--) && run) {
 			sndlock->Lock();
-			auto task = std::m
+			auto task = std::move(send_tasks.front());
+			send_tasks.pop();
+			sndlock->Unlock();
+			channelid = task->channelid;
+			mysock->Send(&channelid, sizeof(uint8_t));
+			uint64_t bytelen = task->snd_buf.size();
+			mysock->Send(&bytelen, sizeof(bytelen));
+			if(bytelen > 0) {
+				mysock->Send(task->snd_buf.data(), task->snd_buf.size());
+			}
+
+#ifdef DEBUG_SEND_THREAD
+			s

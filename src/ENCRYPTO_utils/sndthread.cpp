@@ -109,4 +109,25 @@ void SndThread::kill_task() {
 #endif
 }
 
-void SndTh
+void SndThread::ThreadMain() {
+	uint8_t channelid;
+	uint32_t iters;
+	bool run = true;
+	bool empty = true;
+	while(run) {
+		sndlock->Lock();
+		empty = send_tasks.empty();
+		sndlock->Unlock();
+
+		if(empty){
+			send->Wait();
+		}
+		//std::cout << "Awoken" << std::endl;
+
+		sndlock->Lock();
+		iters = send_tasks.size();
+		sndlock->Unlock();
+
+		while((iters--) && run) {
+			sndlock->Lock();
+			auto task = std::m

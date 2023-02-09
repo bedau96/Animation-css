@@ -142,4 +142,17 @@ void SndThread::ThreadMain() {
 			}
 
 #ifdef DEBUG_SEND_THREAD
-			s
+			std::cout << "Sending on channel " <<  (uint32_t) channelid << " a message of " << task->bytelen << " bytes length" << std::endl;
+#endif
+
+			if(channelid == ADMIN_CHANNEL) {
+				//delete sndlock;
+				run = false;
+			}
+			if(task->eventcaller != nullptr) {
+				task->eventcaller->Set();
+			}
+		}
+	}
+}
+;

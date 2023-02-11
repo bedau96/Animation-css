@@ -68,3 +68,7 @@ private:
 	std::unique_ptr<CEvent> send;
 	std::queue<std::unique_ptr<snd_task>> send_tasks;
 };
+
+
+
+#endif /* SND_THREAD_H_ */

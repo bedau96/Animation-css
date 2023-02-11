@@ -13,4 +13,30 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
- \brief		Socket Impleme
+ \brief		Socket Implementation
+ */
+
+#ifndef __SOCKET_H__BY_SGCHOI
+#define __SOCKET_H__BY_SGCHOI
+
+#include <cstdint>
+#include <memory>
+#include <mutex>
+#include <string>
+
+
+class CSocket {
+public:
+	CSocket(bool verbose=false);
+	~CSocket();
+
+	uint64_t getSndCnt() const;
+	uint64_t getRcvCnt() const;
+	void ResetSndCnt();
+	void ResetRcvCnt();
+
+	bool Socket();
+
+	void Close();
+
+	std::strin

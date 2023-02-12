@@ -39,4 +39,22 @@ public:
 
 	void Close();
 
-	std::strin
+	std::string GetIP() const;
+
+	uint16_t GetPort() const;
+
+	bool Bind(const std::string& address = "", uint16_t port = 0);
+
+	bool Listen(int nQLen = 5);
+
+	std::unique_ptr<CSocket> Accept();
+
+	bool Connect(const std::string& host, uint16_t port);
+
+	size_t Receive(void* buf, size_t bytes);
+
+	size_t Send(const void* buf, size_t bytes);
+
+private:
+	struct CSocketImpl;
+	std::unique_

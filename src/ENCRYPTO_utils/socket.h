@@ -57,4 +57,12 @@ public:
 
 private:
 	struct CSocketImpl;
-	std::unique_
+	std::unique_ptr<CSocketImpl> impl_;
+	uint64_t send_count_, recv_count_;
+	mutable std::mutex send_count_mutex_;
+	mutable std::mutex recv_count_mutex_;
+	bool verbose_;
+};
+
+#endif //SOCKET_H__BY_SGCHOI
+

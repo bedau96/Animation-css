@@ -29,4 +29,31 @@ CThread::~CThread() {
 }
 
 bool CThread::Start() {
-	thread_ = st
+	thread_ = std::thread([this] { ThreadMain(); });
+	m_bRunning = true;
+	return true;
+}
+
+bool CThread::Wait() {
+	if (!m_bRunning)
+		return true;
+	m_bRunning = false;
+	thread_.join();
+	return true;
+}
+
+bool CThread::IsRunning() const {
+	return m_bRunning;
+}
+
+void CLock::Lock() {
+	mutex_.lock();
+}
+void CLock::Unlock() {
+	mutex_.unlock();
+}
+
+void CLock::lock() {
+	Lock();
+}
+void CLock::unlock() 

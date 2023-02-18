@@ -12,4 +12,21 @@
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
-    
+            along with this program. If not, see <http://www.gnu.org/licenses/>.
+ \brief		Receiver Thread Implementation
+ */
+
+#include "thread.h"
+#include <cassert>
+#include <condition_variable>
+#include <mutex>
+#include <thread>
+
+CThread::CThread() : m_bRunning(false) {
+}
+CThread::~CThread() {
+	assert(!m_bRunning);
+}
+
+bool CThread::Start() {
+	thread_ = st

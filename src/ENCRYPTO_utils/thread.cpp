@@ -56,4 +56,27 @@ void CLock::Unlock() {
 void CLock::lock() {
 	Lock();
 }
-void CLock::unlock() 
+void CLock::unlock() {
+	Unlock();
+}
+
+
+CEvent::CEvent(bool bManualReset, bool bInitialSet)
+: m_bManual(bManualReset), m_bSet(bInitialSet)
+{
+}
+
+bool CEvent::Set() {
+	std::unique_lock<std::mutex> lock(mutex_);
+	if (m_bSet)
+		return true;
+
+	m_bSet = true;
+	lock.unlock();
+	cv_.notify_one();
+	return true;
+}
+
+bool CEvent::Wait() {
+	std::unique_lock<std::mutex> lock(mutex_);
+	cv_.wait(lock, [this]{ return

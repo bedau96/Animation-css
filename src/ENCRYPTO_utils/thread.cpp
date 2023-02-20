@@ -79,4 +79,20 @@ bool CEvent::Set() {
 
 bool CEvent::Wait() {
 	std::unique_lock<std::mutex> lock(mutex_);
-	cv_.wait(lock, [this]{ return
+	cv_.wait(lock, [this]{ return m_bSet; });
+
+	if (!m_bManual)
+		m_bSet = false;
+	return true;
+}
+
+bool CEvent::IsSet() const {
+	std::lock_guard<std::mutex> lock(mutex_);
+	return m_bSet;
+}
+
+bool CEvent::Reset() {
+	std::lock_guard<std::mutex> lock(mutex_);
+	m_bSet = false;
+	return true;
+}

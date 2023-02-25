@@ -58,4 +58,18 @@ private:
 class CEvent {
 public:
 	CEvent(bool bManualReset=false, bool bInitialSet=false);
-	~CEv
+	~CEvent() = default;
+
+	bool Set();
+	bool Wait();
+	bool IsSet() const;
+	bool Reset();
+
+private:
+	std::condition_variable cv_;
+	mutable std::mutex mutex_;
+	bool m_bManual;
+	bool m_bSet;
+};
+
+#endif //__THREAD_H__BY_SGCHOI

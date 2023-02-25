@@ -33,4 +33,29 @@ public:
 	bool IsRunning() const;
 
 protected:
-	virtual vo
+	virtual void ThreadMain() = 0;
+
+	bool m_bRunning;
+	std::thread thread_;
+};
+
+class CLock {
+public:
+	CLock() = default;
+	~CLock() = default;
+
+	void Lock();
+	void Unlock();
+
+	// make CLock `BasicLockable`
+	void lock();
+	void unlock();
+
+private:
+	std::mutex mutex_;
+};
+
+class CEvent {
+public:
+	CEvent(bool bManualReset=false, bool bInitialSet=false);
+	~CEv

@@ -12,4 +12,25 @@
             MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
             GNU Lesser General Public License for more details.
             You should have received a copy of the GNU Lesser General Public License
-            along with this
+            along with this program. If not, see <http://www.gnu.org/licenses/>.
+ \brief		Receiver Thread Implementation
+ */
+
+#ifndef __THREAD_H__BY_SGCHOI
+#define __THREAD_H__BY_SGCHOI
+
+#include <condition_variable>
+#include <mutex>
+#include <thread>
+
+class CThread {
+public:
+	CThread();
+	virtual ~CThread();
+
+	bool Start();
+	bool Wait();
+	bool IsRunning() const;
+
+protected:
+	virtual vo

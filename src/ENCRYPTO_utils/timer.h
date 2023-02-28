@@ -42,3 +42,67 @@ struct aby_timings {
 // Structure for counting communication
 struct aby_comm {
 	uint64_t totalcomm;
+	uint64_t cbegin;
+	uint64_t cend;
+};
+
+extern aby_timings m_tTimes[P_LAST - P_FIRST + 1];
+extern aby_comm m_tSend[P_LAST - P_FIRST + 1];
+extern aby_comm m_tRecv[P_LAST - P_FIRST + 1];
+
+/**
+ * Return time difference in milliseconds
+ */
+double getMillies(timespec timestart, timespec timeend);
+
+/**
+ * Start measuring runtime for a given phase
+ * @param msg - a message for debugging
+ * @param phase - the ABY phase to measure
+ */
+void StartWatch(const std::string& msg, ABYPHASE phase);
+
+/**
+ * Stop measuring runtime
+ * Called after StartWatch() with identical phase parameter
+ * @param msg - a message for debugging
+ * @param phase - the ABY phase to measure
+ */
+void StopWatch(const std::string& msg, ABYPHASE phase);
+
+/**
+ * Start measuring both runtime and communication
+ * @param msg - a message for debugging
+ * @param phase - the ABY phase to measure
+ * @param sock - a vector of sockets
+ */
+void StartRecording(const std::string& msg, ABYPHASE phase,
+		const std::vector<std::unique_ptr<CSocket>>& sock);
+
+/**
+ * Stop measuring both runtime and communication
+ * Called after StartRecording() with identical phase parameter
+ * @param msg - a message for debugging
+ * @param phase - the ABY phase to measure
+ * @param sock - a vector of sockets
+ */
+void StopRecording(const std::string& msg, ABYPHASE phase,
+		const std::vector<std::unique_ptr<CSocket>>& sock);
+
+void PrintTimings();
+
+void PrintCommunication();
+
+inline double GetTimeForPhase(ABYPHASE phase) {
+	return m_tTimes[phase].timing;
+}
+
+inline uint64_t GetSentDataForPhase(ABYPHASE phase) {
+	return m_tSend[phase].totalcomm;
+}
+
+inline uint64_t GetReceivedDataForPhase(ABYPHASE phase) {
+	return m_tRecv[phase].totalcomm;
+}
+
+#endif /* TIMER_H_ */

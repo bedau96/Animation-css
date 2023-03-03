@@ -16,4 +16,24 @@
  \brief		Typedefs Implementation
  */
 
-#ifnde
+#ifndef __TYPEDEFS_H__
+#define __TYPEDEFS_H__
+
+#include <cstdint>
+
+typedef int BOOL;
+typedef unsigned char BYTE;
+
+typedef uint64_t UGATE_T;
+typedef uint64_t REGISTER_SIZE;
+
+typedef struct SECURITYLEVELS {
+	uint32_t statbits;
+	uint32_t symbits;
+	uint32_t ifcbits;
+	//ECCLVL depends on CMAKE settings
+} seclvl;
+
+//ECCLVL depends on CMAKE settings
+
+#define GATE_T_BITS 

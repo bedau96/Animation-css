@@ -36,4 +36,20 @@ typedef struct SECURITYLEVELS {
 
 //ECCLVL depends on CMAKE settings
 
-#define GATE_T_BITS 
+#define GATE_T_BITS (sizeof(UGATE_T) * 8)
+
+typedef REGISTER_SIZE REGSIZE;
+#define LOG2_REGISTER_SIZE		ceil_log2(sizeof(REGISTER_SIZE) << 3)
+
+#define FILL_BYTES				AES_BYTES
+#define FILL_BITS				AES_BITS
+
+#define RETRY_CONNECT		1000
+#define CONNECT_TIMEO_MILISEC	10000
+
+#define SNDVALS 2
+
+#define OTEXT_BLOCK_SIZE_BITS	AES_BITS
+#define OTEXT_BLOCK_SIZE_BYTES	AES_BYTES
+
+#define VECTOR_INTERNA

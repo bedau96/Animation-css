@@ -52,4 +52,24 @@ typedef REGISTER_SIZE REGSIZE;
 #define OTEXT_BLOCK_SIZE_BITS	AES_BITS
 #define OTEXT_BLOCK_SIZE_BYTES	AES_BYTES
 
-#define VECTOR_INTERNA
+#define VECTOR_INTERNAL_SIZE 8
+
+#define	SERVER_ID	0
+#define	CLIENT_ID	1
+
+template<class T>
+T rem(T a, T b) {
+	return ((a) > 0) ? (a) % (b) : (a) % (b) + ((b) > 0 ? (b) : (b) * -1);
+}
+template<class T>
+T sub(T a, T b, T m) {
+	return ((b) > (a)) ? (a) + (m) - (b) : (a) - (b);
+}
+#ifndef FALSE
+#define FALSE 0
+#endif
+#ifndef TRUE
+#define TRUE 1
+#endif
+#define ZERO_BYTE 0
+#define MAX_BYTE 0xFF

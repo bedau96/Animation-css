@@ -73,3 +73,5 @@ T sub(T a, T b, T m) {
 #endif
 #define ZERO_BYTE 0
 #define MAX_BYTE 0xFF
+
+#endif //__TYPEDEFS_H__

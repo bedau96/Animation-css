@@ -33,4 +33,12 @@
 
 #define pad_to_power_of_two(e) ( ((uint64_t) 1) << (ceil_log2(e)) )
 
-/*compute (a-b) mod (m+1) as: b > a ? (m)
+/*compute (a-b) mod (m+1) as: b > a ? (m) - (b-1) + a : a - b	*/
+#define MOD_SUB(a, b, m) (( ((b) > (a))? (m) - ((b) -1 ) + a : a - b))
+
+#define ceil_divide(x, y)			(( ((x) + (y)-1)/(y)))
+#define bits_in_bytes(bits) (ceil_divide((bits), 8))
+#define pad_to_multiple(x, y) 		( ceil_divide(x, y) * (y))
+
+#define PadToRegisterSize(x) 		(PadToMultiple(x, OTEXT_BLOCK_SIZE_BITS))
+#define Pa

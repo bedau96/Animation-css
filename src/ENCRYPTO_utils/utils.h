@@ -53,4 +53,14 @@ uint32_t ceil_log2_real(int bits);
 uint32_t floor_log2(int bits);
 
 /**
- * returns a 4-byte va
+ * returns a 4-byte value from dev/random
+ */
+uint32_t aby_rand();
+
+/**
+ * returns a random mpz_t with bitlen len generated from dev/urandom
+ */
+void aby_prng(mpz_t rnd, mp_bitcnt_t len);
+
+
+#endif // _UTILS_H__
